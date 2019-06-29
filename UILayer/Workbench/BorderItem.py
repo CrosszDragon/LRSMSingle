@@ -29,8 +29,8 @@ class BorderItem(QGraphicsObject):
         # 线条的长度
         self._dashes = 4
         # 空白长度
-        self._spaces = 4
-        self._dash_pattern = [self._line_len] * 30
+        self._spaces = 10
+        self._dash_pattern = [self._line_len] * 20
         self._timer = QTimer()
         self._timer.timeout.connect(self.update_value)
 
@@ -44,9 +44,11 @@ class BorderItem(QGraphicsObject):
         return self._item_path
 
     def set_item_path(self, **kwargs):
-        if tuple(kwargs.keys()) == ("width", "height"):
+        keys = tuple(kwargs.keys())
+        if 'width' in keys and 'height' in keys:
             self._item_path = QPainterPath(QPoint(0, 0))
             self._item_path.addRect(QRectF(0, 0, kwargs["width"], kwargs["height"]))
+            print("item path: ", self._item_path)
             self.update(self.boundingRect())
         elif tuple(kwargs.keys()) == ("path", ):
             self._item_path = kwargs["path"]
@@ -80,16 +82,21 @@ class BorderItem(QGraphicsObject):
     def combine_area(self, path: QPainterPath):
         """TODO"""
 
+    def shape(self):
+        return self._item_path
+
     # 继承QGraphicsItem类必须实现 boundingRect() paint()两个方法
     # 返回本item的 包围和矩形 QRectF 用于item的点击等判断
     def boundingRect(self):
         return self._item_path.boundingRect().adjusted(0, 0, 2, 2)
 
     def paint(self, painter: QPainter, option, widget=None) -> None:
+
         self._pen.setColor(Qt.white)
         self._pen.setStyle(Qt.SolidLine)
         painter.setPen(self._pen)
         painter.drawPath(self._item_path)
+        # painter.drawRect(self._item_path.boundingRect())
 
         self._pen.setColor(Qt.black)
         self._pen.setDashPattern(self._dash_pattern)

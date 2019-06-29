@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QImage, QPixmap, QPen, QPolygonF, QColor
 from PyQt5.QtCore import Qt, QRect
 
-from .GraphicsView import GraphicsViewTest
+from .GraphicsView import GraphicsViewTest, GraphicsView
 from .BorderItem import *
 from CONST.CONST import *
 from .ImageItem import ImageItem
@@ -48,6 +48,7 @@ class WorkbenchWidget(QWidget):
         # 水平镜像
         self.mirrored_horizontally = False
         # 创建视图
+        # self.workbench_view = GraphicsView()
         self.workbench_view = GraphicsViewTest(gadget, toolbar_gadget, parent=self)
         self.workbench_view.setObjectName("workbench_view")
         self.workbench_view.setBackgroundBrush(QColor(147, 147, 147))
@@ -104,7 +105,7 @@ class WorkbenchWidget(QWidget):
 
     def _load_image(self):
         image = QImage(self.file_name)
-        # print(self.file_name + "    ", image.format())
+        print(self.file_name + "    ", image.format())
 
         self.workbench_scene.setSceneRect(0, 0, image.width(), image.height())
         if image.isNull():
@@ -160,6 +161,23 @@ class WorkbenchWidget(QWidget):
 
             self.workbench_view.set_gadget(current_gadget)
 
+    def get_sub_image_in(self, item: SelectionItem) -> QImage:
+        shape = item.get_shape()
+        rect = item.rectangle()
+        print(shape)
+        rect_sub_image = self.image.copy(rect)
+        if shape == GadgetDockWidgetState.RECTANGLE_SELECT_TOOL:
+            return rect_sub_image
+        elif shape == GadgetDockWidgetState.ELLIPSE_SELECT_TOOL:
+            polygon_path = item.get_path()
+            polygon_sub_image = rect_sub_image
+            for row in range(0, rect.width()):
+                for clo in range(0, rect.height()):
+                    point = QPoint(row, clo)
+                    if not polygon_path.contains(point):
+                        polygon_sub_image.setPixel(point, 0)
+            return polygon_sub_image
+
     def detect_outline(self, detect_policy):
         """
         将选中的选区对应的部分图片copy出来，然后转为ndarray类型
@@ -168,19 +186,19 @@ class WorkbenchWidget(QWidget):
         :return: None
         """
         selected_items = self.workbench_scene.selectedItems()
+        print("detect outline: ", selected_items)
         if selected_items and isinstance(selected_items[0], SelectionItem):
-            rect = selected_items[0].rectangle()
-            sub_img = self.image.copy(rect)
-            res = qimage2numpy(sub_img)
 
+            sub_img = self.get_sub_image_in(selected_items[0])
+            res = qimage2numpy(sub_img)
             outline1, outline2 = detect_outline(detect_policy, res, drop_area=80)
 
             pen = QPen()
             pen.setWidth(1)
             pen.setColor(Qt.yellow)
-
+            outline = outline1 if outline1 else outline2
             try:
-                for array in outline1:
+                for array in outline:
                     polygon = QPolygonF()
                     for point in array[0]:
                         point = selected_items[0].mapToScene(point[0][0], point[0][1])

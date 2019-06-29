@@ -52,6 +52,7 @@ class GraphicsViewTest(QGraphicsView):
         self.has_moving_mouse = False
         self.is_creating_border = False
         self.last_cursor_pos = QPoint()
+        self.polygon_points = []
 
         self.click_signal.connect(self.left_mouse_click)
         # self.border_created.connect(self.created_border)
@@ -72,11 +73,9 @@ class GraphicsViewTest(QGraphicsView):
         :param event:
         :return:
         """
+        print("left_mouse_press_and_moving")
         mouse_point = event.pos()
-        if self.gadget in [
-            GadgetDockWidgetState.RECTANGLE_SELECT_TOOL,
-            GadgetDockWidgetState.ELLIPSE_SELECT_TOOL
-        ]:
+        if self.gadget == GadgetDockWidgetState.RECTANGLE_SELECT_TOOL:
             self.creating_item(mouse_point, event.modifiers() & Qt.ShiftModifier)
         elif self.gadget == GadgetDockWidgetState.GRIP_TONGS_TOOL:
             self.browser_by_mouse_move(mouse_point)
@@ -93,13 +92,15 @@ class GraphicsViewTest(QGraphicsView):
         except Exception as e:
             print("creating item error: ", e)
             return
-
+        print("creating item rect ")
         point1 = self.mapToScene(mouse_point)
         point2 = self.mapToScene(self.last_cursor_pos)
         point, width, height = self.counter_size(point1, point2, mouse_point, is_same)
         try:
             self.border.setPos(self.mapToScene(point))
             self.border.set_item_path(width=abs(width), height=abs(height))
+
+            print("creating item rect: ", self.border.get_path().boundingRect(), width, height)
         except Exception as e:
             print("set item error: ", e)
 
@@ -252,7 +253,7 @@ class GraphicsViewTest(QGraphicsView):
             item.setSelected(True)
             item.setFocus()
 
-    def is_ignore_items(self, position: QPoint):
+    def is_ignore_items(self, position, left):
         """
         flag1: 是否按在底层图片上
         flag2: 是否选中快速选择工具
@@ -267,7 +268,7 @@ class GraphicsViewTest(QGraphicsView):
         flag1 = isinstance(item, QGraphicsPixmapItem)
         flag2 = (self.gadget == GadgetDockWidgetState.RECTANGLE_SELECT_TOOL or
                  self.gadget == GadgetDockWidgetState.ELLIPSE_SELECT_TOOL)
-        if flag1 and flag2 and self.border is not None:
+        if left and flag1 and flag2 and not self.is_creating_border and self.border is not None:
             self.scene().removeItem(self.border)
             self.border = None
         return flag1 and flag2 or (not flag2), flag2
@@ -292,18 +293,81 @@ class GraphicsViewTest(QGraphicsView):
         print("view scene point: ", flag1)
         print("*******************************")
 
+    def counter_polygon_path(self, pos=None):
+        new_path = QPainterPath(QPoint(0, 0))
+        for point in self.polygon_points:
+            new_path.lineTo(point)
+        if pos:
+            new_path.lineTo(self.border.mapFromScene(self.mapToScene(pos)))
+        return new_path
+
+    def auto_detect_polygon_path_close(self) -> bool:
+        start_pos = self.polygon_points[0]
+        end_pos = self.polygon_points[-1]
+        d_pos = start_pos - end_pos
+        if len(self.polygon_points) > 1 and abs(d_pos.x()) < 6 and abs(d_pos.y()) < 18:
+            # 两个点很接近 自动闭合
+            self.polygon_points[-1] = start_pos
+            return True
+        return False
+
+    def created_polygon(self):
+        path = self.counter_polygon_path()
+        self.polygon_points = []
+        self.is_creating_border = False
+        path.closeSubpath()
+
+        self.scene().removeItem(self.border)
+        self.border = SelectionItem(
+            self.border.scenePos().toPoint(),
+            scene=self.scene(),
+            view_scale=self.transform().m11(),
+            shape=self.border.get_shape(),
+            path=path
+        )
+        self.border.setSelected(True)
+        print("selected items: ", self.scene().selectedItems())
+
+    def creating_polygon(self, pos: QPoint):
+        try:
+            if self.is_creating_border and self.border:
+                self.polygon_points.append(self.border.mapFromScene(self.mapToScene(pos)))
+                if self.auto_detect_polygon_path_close():
+                    self.created_polygon()
+                else:
+                    path = self.counter_polygon_path()
+                    self.border.set_item_path(path=path)
+            else:
+                self.is_creating_border = True
+                self.border = SelectionItem(self.mapToScene(pos), self.scene(), self.transform().m11(), shape=self.gadget)
+        except Exception as e:
+            print(e)
+
     def mousePressEvent(self, event: QMouseEvent) -> None:
         """
         :param event:
         :return:
         """
         is_left_mouse_press = (event.button() == Qt.LeftButton)
-        is_ignore_items, is_item_move = self.is_ignore_items(event.pos())
+        is_ignore_items, is_item_move = self.is_ignore_items(event.pos(), is_left_mouse_press)
+
         if is_left_mouse_press and is_ignore_items:
-            self.is_mouse_pressed = True
-            self.clicked_time = time.time()
-            self.last_cursor_pos = event.pos()
-            event.accept()
+
+            if self.gadget == GadgetDockWidgetState.ELLIPSE_SELECT_TOOL:
+                self.creating_polygon(event.pos())
+            else:
+                self.is_mouse_pressed = True
+                self.clicked_time = time.time()
+                self.last_cursor_pos = event.pos()
+        elif event.button() == Qt.RightButton:
+            if self.is_creating_border:
+                self.scene().removeItem(self.border)
+                self.border = None
+                self.is_creating_border = False
+                self.polygon_points = []
+            else:
+                QGraphicsView.mousePressEvent(self, event)
+
         elif is_item_move:
             # 要移动选中或选区，交给内部处理
             QGraphicsView.mousePressEvent(self, event)
@@ -314,13 +378,25 @@ class GraphicsViewTest(QGraphicsView):
         :param event:
         :return:
         """
+        flag = True
+        if self.gadget == GadgetDockWidgetState.ELLIPSE_SELECT_TOOL and self.is_creating_border:
+            try:
+                path = self.counter_polygon_path(event.pos())
+                self.border.set_item_path(path=path)
+                event.accept()
+                flag = False
+            except Exception as e:
+                print(e)
 
         if self.is_mouse_pressed:
+            print("moving to create rect")
             self.is_dragging = True
             self.has_moving_mouse = True
             self.dragging_signal.emit(event)
             event.accept()
-        else:
+            flag = False
+
+        if flag:
             QGraphicsView.mouseMoveEvent(self, event)
 
     def mouseReleaseEvent(self, event: QMouseEvent) -> None:
@@ -366,6 +442,12 @@ class GraphicsViewTest(QGraphicsView):
             self.gadget = OptionTool.GRIP_TONGS
             self.parent().setCursor(Qt.OpenHandCursor)
 
+        if event.key() == Qt.Key_Shift and self.is_creating_border:
+            try:
+                self.created_polygon()
+            except Exception as e:
+                print(e)
+
     def keyReleaseEvent(self, event: QKeyEvent) -> None:
         if event.key() == Qt.Key_Space:
             self.parent().setCursor(self.temp_cursor)
@@ -377,3 +459,12 @@ class GraphicsViewTest(QGraphicsView):
     #         BorderItem(self.mapToScene(event.pos()), self.scene())
     #     except Exception as e:
     #         print(e)
+
+
+class GraphicsView(QGraphicsView):
+
+    def __init__(self, parent=None):
+        super(GraphicsView, self).__init__(parent)
+
+    def mouseMoveEvent(self, event: QMouseEvent):
+        print("mouse move")
