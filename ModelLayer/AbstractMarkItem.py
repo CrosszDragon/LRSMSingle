@@ -11,16 +11,21 @@ class AbstractMarkItem(object):
     """ 描述 """
 
     def __init__(self, name):
-        self._name = name
+        self._id_name = name   #markitem的一个标识id
         self._has_band = False
 
-    def set_name(self, name):
+    def set_id_name(self, name):
         self._name = name
 
-    def get_name(self):
+    def get_id_name(self):
         return self._name
 
     def has_band(self, hans_band=None):
+        """
+
+        :param hans_band:
+        :return:
+        """
         if hans_band is None:
             return self._has_band
         else:
