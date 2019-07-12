@@ -6,12 +6,16 @@ from PyQt5.QtWidgets import *
 
 from CONST.CONST import *
 from CommonHelper.CommonHelper import *
-from ModelLayer.Selection import Selection
+
+from Document.MarkData import MarkItem
+from UILayer.MainWindow.MainToolBar import ToolsToolBar
+from Manager.ActionManager import ActionManager
+from Manager.Id import Id
 
 
 class BorderItem(QGraphicsObject):
 
-    def __init__(self, position, scene, view_scale, shape, transform=QTransform(), parent=None):
+    def __init__(self, scene, view_scale, shape, transform=QTransform(), parent=None):
         super(BorderItem, self).__init__(parent)
         self.setTransform(transform)
 
@@ -29,32 +33,44 @@ class BorderItem(QGraphicsObject):
         # 线条的长度
         self._dashes = 4
         # 空白长度
-        self._spaces = 4
-        self._dash_pattern = [self._line_len] * 30
+        self._spaces = 10
+        self._dash_pattern = [self._line_len] * 20
         self._timer = QTimer()
         self._timer.timeout.connect(self.update_value)
 
-        scene.clearSelection()
-        scene.addItem(self)
-        self.setPos(position)
+        if scene:
+            scene.clearSelection()
+            scene.addItem(self)
+
         self.setZValue(10.)
-        self.setSelected(True)
 
     def get_path(self):
         return self._item_path
 
+    def get_scene_path(self):
+        return self.mapToScene(self.get_path())
+
     def set_item_path(self, **kwargs):
-        if tuple(kwargs.keys()) == ("width", "height"):
+        keys = tuple(kwargs.keys())
+        if 'width' in keys and 'height' in keys:
             self._item_path = QPainterPath(QPoint(0, 0))
             self._item_path.addRect(QRectF(0, 0, kwargs["width"], kwargs["height"]))
+            print("item path: ", self._item_path)
             self.update(self.boundingRect())
         elif tuple(kwargs.keys()) == ("path", ):
             self._item_path = kwargs["path"]
 
+    def set_item_path_by_size(self, width=0, height=0):
+        self._item_path = QPainterPath(QPoint(0, 0))
+        self._item_path.addRect(QRectF(0, 0, width, height))
+        self.update(self.boundingRect())
+
+    def set_item_path_by_path(self, path):
+        self._item_path = path
+
     def set_pen_width(self, width: [int, float]):
         pen_width = adjust_pen_width(PEN_STANDARD_WIDTH, width)
         self._pen.setWidthF(pen_width)
-        self.update(self.boundingRect())
 
     def update_value(self):
         """"""
@@ -68,7 +84,6 @@ class BorderItem(QGraphicsObject):
 
         self._dash_pattern[0] = self._dashes
         self._dash_pattern[1] = self._spaces
-
         self.update(self.boundingRect())
 
     def add_area(self, path: QPainterPath):
@@ -80,12 +95,21 @@ class BorderItem(QGraphicsObject):
     def combine_area(self, path: QPainterPath):
         """TODO"""
 
+    def intersects(self, other) -> bool:
+        p1 = self.mapToScene(self.get_path())
+        p2 = other.mapToScene(other.get_path())
+        return p1.intersects(p2)
+
+    def shape(self):
+        return self._item_path
+
     # 继承QGraphicsItem类必须实现 boundingRect() paint()两个方法
     # 返回本item的 包围和矩形 QRectF 用于item的点击等判断
     def boundingRect(self):
         return self._item_path.boundingRect().adjusted(0, 0, 2, 2)
 
     def paint(self, painter: QPainter, option, widget=None) -> None:
+
         self._pen.setColor(Qt.white)
         self._pen.setStyle(Qt.SolidLine)
         painter.setPen(self._pen)
@@ -102,7 +126,10 @@ class BorderItem(QGraphicsObject):
         :param other:
         :return: self
         """
-        self._item_path += other.get_path()
+        p1 = self.mapToScene(self._item_path)
+        p2 = other.mapToScene(other.get_path())
+        new_path = self.mapFromScene(p1 + p2)
+        self._item_path = new_path
         return self
 
     def __iadd__(self, other):
@@ -111,7 +138,11 @@ class BorderItem(QGraphicsObject):
         :param other:
         :return: self
         """
-        self._item_path += other.get_path()
+        p1 = self.mapToScene(self._item_path)
+        p2 = other.mapToScene(other.get_path())
+        new_path = self.mapFromScene(p1 + p2)
+        new_path.closeSubpath()
+        self._item_path = new_path
         return self
 
     def __sub__(self, other):
@@ -120,7 +151,12 @@ class BorderItem(QGraphicsObject):
         :param other:
         :return: self
         """
-        self._item_path -= other.get_path()
+        p1 = self.mapToScene(self._item_path)
+        p2 = other.mapToScene(other.get_path())
+        new_path = self.mapFromScene(p1 - p2)
+        new_path.closeSubpath()
+        self._item_path = new_path
+        self.update()
         return self
 
     def __isub__(self, other):
@@ -129,7 +165,12 @@ class BorderItem(QGraphicsObject):
         :param other:
         :return: self
         """
-        self._item_path -= other.get_path()
+        p1 = self.mapToScene(self._item_path)
+        p2 = other.mapToScene(other.get_path())
+        new_path = self.mapFromScene(p1 - p2)
+        new_path.closeSubpath()
+        self._item_path = new_path
+        self.update()
         return self
 
     def __and__(self, other):
@@ -138,7 +179,12 @@ class BorderItem(QGraphicsObject):
         :param other:
         :return: self
         """
-        self._item_path &= other.get_path()
+        p1 = self.mapToScene(self._item_path)
+        p2 = other.mapToScene(other.get_path())
+        new_path = self.mapFromScene(p1 & p2)
+        new_path.closeSubpath()
+        self._item_path = new_path
+        self.update()
         return self
 
     def __iand__(self, other):
@@ -147,7 +193,11 @@ class BorderItem(QGraphicsObject):
         :param other:
         :return: self
         """
-        self._item_path &= other.get_path()
+        p1 = self.mapToScene(self._item_path)
+        p2 = other.mapToScene(other.get_path())
+        self._item_path = self.mapFromScene(p1 & p2)
+        self._item_path.closeSubpath()
+        self.update()
         return self
 
 
@@ -156,14 +206,21 @@ class SelectionItem(BorderItem):
     选区
     """
     item_moved_signal = pyqtSignal()
+    cancel_selection_signal = pyqtSignal()
+    as_mark_item_signal = pyqtSignal()
+    reverse_select_signal = pyqtSignal()
 
-    def __init__(self, position, scene, view_scale, path: QPainterPath = None,
-                 shape=GadgetDockWidgetState.RECTANGLE_SELECT_TOOL, transform=QTransform(), parent=None):
-        super(SelectionItem, self).__init__(position, scene, view_scale, shape, transform, parent)
+    def __init__(self, position, scene=None, view_scale=None, path: QPainterPath = None,
+                 shape=ToolsToolBar.RectangleTool, transform=QTransform(), parent=None):
+        super(SelectionItem, self).__init__(scene, view_scale, shape, transform, parent)
         self.setFlags(QGraphicsItem.ItemIsSelectable | QGraphicsItem.ItemIsMovable | QGraphicsItem.ItemIsFocusable)
+
+        self.setFlag(QGraphicsItem.ItemIsSelectable, True)
+        self.setFlag(QGraphicsItem.ItemIsMovable, True)
 
         self._selection = None
         self._item_path = path if path else self._item_path
+        self._reverse_path = QPainterPath()
 
         self._item_has_move = False
         self.old_position = self.pos()
@@ -173,34 +230,55 @@ class SelectionItem(BorderItem):
         self.context_menu = self._create_context_menu()
         self._timer.start(self._line_speed)
 
+        self.setPos(position)
+        self.setSelected(True)
+
+    def set_reverser_path(self, path: QPainterPath):
+        self._reverse_path = path
+        self.reverse_select_action.setEnabled(True)
+
+    def get_reverse_path(self):
+        return self._reverse_path
+
     def _create_context_menu(self) -> QMenu:
         menu = QMenu(self.parentWidget())
 
         self.cancel_select_action = create_action(menu, "取消选择")
-        self.selection_name_action = create_action(menu, "选区名称...")
-        self.new_mark_file_action = create_action(menu, "新建标注文件")
-        self.new_mark_item_action = create_action(menu, "新建标注项")
+        self.reverse_select_action = create_action(menu, "选择反向")
+        self.as_mark_item_action = ActionManager.action(Id("AsOutline"))
 
-        add_actions(menu, (self.cancel_select_action, None,
-                           self.selection_name_action, None,
-                           self.new_mark_file_action, self.new_mark_item_action, None))
+        self.cancel_select_action.triggered.connect(self.cancel_selection_signal)
+        self.as_mark_item_action.triggered.connect(self.as_mark_item_signal)
+        self.reverse_select_action.triggered.connect(self.reverse_select_signal)
+        self.reverse_select_action.setEnabled(False)
+
+        add_actions(menu, (self.cancel_select_action, self.reverse_select_action, None,
+                           self.as_mark_item_action, None))
 
         mark_menu = menu.addMenu("标注")
-        self.origin_outline_action = create_action(mark_menu, "原始轮廓(O)", "Ctrl+A+O")
-        self.convex_outline_action = create_action(mark_menu, "凸性缺陷轮廓(C)", "Ctrl+A+C")
-        self.polygon_outline_action = create_action(mark_menu, "多边形轮廓(P)", "Ctrl+A+P")
+        self.origin_outline_action = ActionManager.action(Id("OriginOutline"))
+        self.convex_outline_action = ActionManager.action(Id("ConvexOutline"))
+        self.polygon_outline_action = ActionManager.action(Id("PolygonOutline"))
         outline_actions = (self.origin_outline_action, self.convex_outline_action, self.polygon_outline_action)
         add_actions(mark_menu, outline_actions)
 
+        correction_menu = menu.addMenu("轮廓微调")
+        correction_actions = (ActionManager.action(Id("AddOutlineCorrection")),
+                              ActionManager.action(Id("RemoveOutlineCorrection")))
+        add_actions(correction_menu, correction_actions)
+
         menu.aboutToShow.connect(self._update_context_menu)
         return menu
+
+    def as_mark_item(self):
+        self.as_mark_item_signal.emit(self._item_path)
 
     def _update_context_menu(self):
         try:
             if self._selection is not None:
                 self.selection_name_action.setText(self._selection.get_name())
         except Exception as e:
-            print(e)
+            print("update context menu error: ", e)
 
     def rectangle(self):
         rect = self._item_path.boundingRect()
@@ -218,11 +296,7 @@ class SelectionItem(BorderItem):
         return temp
 
     def create_selection(self):
-        try:
-            if self._selection is None:
-                self._selection = Selection(self.rectangle(), self.shape)
-        except Exception as e:
-            print(e)
+        """TODO"""
 
     def get_pix_dots(self) -> tuple:
         pass
@@ -232,8 +306,6 @@ class SelectionItem(BorderItem):
         return self.scene().views()[0]
 
     def itemChange(self, change, variant):
-        # 非选择状态的变化 要设置dirty标志
-        # print("item change: ", change, "  variant: ", variant)
         if change == QGraphicsItem.ItemPositionChange:
             return variant
         if change != QGraphicsItem.ItemSelectedChange:
@@ -241,23 +313,19 @@ class SelectionItem(BorderItem):
         return QGraphicsItem.itemChange(self, change, variant)
 
     def contextMenuEvent(self, event):
-
-        if self.isSelected() and \
-                self.shape in (OptionTool.RECT_QUICK_SELECT_TOOL, OptionTool.ELLIPSE_QUICK_SELECT_TOOL):
-            self.context_menu.exec_(event.screenPos())
+        self.context_menu.exec_(event.screenPos())
 
     def mousePressEvent(self, event: 'QGraphicsSceneMouseEvent') -> None:
         """
         :param event:
         :return:
         """
+        self.scene().clearSelection()
+        self.setSelected(True)
         if event.button() == Qt.LeftButton:
-            self.scene().clearSelection()
-            self.setSelected(True)
             self.is_left_mouse_press = True
             self.old_position = self.pos()
-        else:
-            QGraphicsItem.mousePressEvent(self, event)
+        QGraphicsItem.mousePressEvent(self, event)
 
     def mouseMoveEvent(self, event: 'QGraphicsSceneMouseEvent') -> None:
         """
@@ -277,3 +345,89 @@ class SelectionItem(BorderItem):
             self.item_moved_signal.emit()
             self.is_left_mouse_move = self.is_left_mouse_press = False
         QGraphicsItem.mouseReleaseEvent(self, event)
+
+
+class OutlineItem(BorderItem):
+
+    def __init__(self, mark_item: MarkItem, scene, view_scale, transform=QTransform(), parent=None):
+        super(OutlineItem, self).__init__(scene=scene, shape=None, view_scale=view_scale,
+                                          transform=transform, parent=parent)
+        self.setFlag(QGraphicsItem.ItemIsSelectable, True)
+
+        self._is_browser_result = False
+        self._pen.setColor(mark_item.color)
+        self._mark_item = mark_item
+        self._mark_item.visible_changed.connect(self.visible_changed)
+        self._mark_item.fill_changed.connect(self.update)
+        self._mark_item.mark_item_color_changed.connect(self.update)
+        self.setSelected(True)
+        self._selected = False
+
+    def __del__(self):
+        del self._mark_item
+
+    @property
+    def selected(self):
+        return self._selected
+
+    @selected.setter
+    def selected(self, select: bool):
+        self._selected = select
+        if self._selected:
+            self._timer.start(self._line_speed)
+        elif self._timer.isActive():
+            self._timer.stop()
+
+    def mark_item(self) -> MarkItem:
+        return self._mark_item
+
+    def locked(self):
+        return self._mark_item.locked
+
+    def is_browser_result(self, br: bool):
+        self._is_browser_result = br
+
+    def visible_changed(self, visible):
+        self.setVisible(visible)
+
+    def get_path(self) -> QPainterPath:
+        return self._mark_item.get_outline()
+
+    def __isub__(self, other):
+        p1 = self.mapToScene(self.get_path())
+        p2 = other.mapToScene(other.get_path())
+        self._mark_item.set_outline(self.mapFromScene(p1 - p2))
+        self.update()
+        return self
+
+    def __iadd__(self, other):
+        p1 = self.mapToScene(self.get_path())
+        p2 = other.mapToScene(other.get_path())
+        self._mark_item.set_outline(self.mapFromScene(p1 + p2))
+        self.update()
+        return self
+
+    def shape(self):
+        return self._mark_item.get_outline()
+
+    def boundingRect(self):
+        return self._mark_item.get_outline().boundingRect()
+
+    def paint(self, painter: QPainter, option, widget=None) -> None:
+
+        if self._mark_item.fill or self._is_browser_result:
+
+            brush = QBrush(self._mark_item.color)
+            painter.fillPath(self._mark_item.get_outline(), brush)
+        else:
+            self._pen.setColor(self._mark_item.color)
+            painter.setPen(self._pen)
+            painter.drawPath(self._mark_item.get_outline())
+        if self._selected:
+            pen = QPen(self._pen)
+            pen.setWidth(self._pen.widthF() + 0.8)
+
+            pen.setColor(Qt.white)
+            pen.setDashPattern(self._dash_pattern)
+            painter.setPen(pen)
+            painter.drawPath(self._mark_item.get_outline())

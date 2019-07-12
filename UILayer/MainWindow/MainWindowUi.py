@@ -8,6 +8,7 @@ from Application.App import BASE_DIR
 from CommonHelper.CommonHelper import *
 from UILayer.CustomWidget.GadgetDockWidget import GadgetDockWidget
 from UILayer.CustomWidget.ProjectTreeDockWidget import ProjectDockWidget
+from UILayer.CustomWidget.UndoWidget import UndoDock
 
 __version__ = "1.0.0"
 
@@ -16,32 +17,22 @@ class MainWindowUI(object):
 
     def _init_ui(self, main_window: QMainWindow):
 
-        # 窗体的中心 使用 QTabWidget # 中心部件
-        self.center_tab_widget = QTabWidget(main_window)
-        self.center_tab_widget.setMovable(True)
-        self.center_tab_widget.setTabsClosable(True)
-        # self.center_tab_widget.tabCloseRequested.connect(self.close_file)
-
-        self.center_tab_widget.setContextMenuPolicy(Qt.ActionsContextMenu)
-        main_window.setCentralWidget(self.center_tab_widget)  # 设置此label为窗口的
-
         # 设置MenuBar
         self.menubar = main_window.menuBar()
         self._init_menubar(main_window)
-        # # 设置ToolBar
-        self._init_select_toolbar(main_window)
-        self._init_zoom_toolbar(main_window)
 
         # 创建 main window的停靠窗口
         dock_widget_limit = Qt.LeftDockWidgetArea | Qt.RightDockWidgetArea
-        self.gadget_dock_widget = GadgetDockWidget(parent=self)
-        self.gadget_dock_widget.setMaximumSize(36, 1026)
-        main_window.addDockWidget(Qt.LeftDockWidgetArea, self.gadget_dock_widget)
 
         # 创建项目目录树 停靠窗口
         self.project_dock_widget = ProjectDockWidget(parent=self)
         self.project_dock_widget.setAllowedAreas(dock_widget_limit)
         main_window.addDockWidget(Qt.RightDockWidgetArea, self.project_dock_widget)
+
+        # 创建历史停靠窗口
+        self._undo_widget = UndoDock(self)
+        self._undo_widget.setAllowedAreas(dock_widget_limit)
+        main_window.addDockWidget(Qt.RightDockWidgetArea, self._undo_widget)
 
         # 状态栏相关
         self.size_label = QLabel()
@@ -61,6 +52,7 @@ class MainWindowUI(object):
         # 创建一级菜单
         self.file_menu = add_menu("文件(F)", self.menubar, "file_menu")
         self.edit_menu = add_menu("编辑(E)", self.menubar, "edit_menu")
+        self.view_menu = add_menu("视图(V)", self.menubar, "view_menu")
         self.project_menu = add_menu("项目(P)", self.menubar, "project_menu")
         self.graph_menu = add_menu("图像(I)", self.menubar, "graph_menu")
         self.mark_menu = add_menu("标注(M)", self.menubar, "mark_menu")
@@ -99,9 +91,9 @@ class MainWindowUI(object):
         ]
 
         # 创建编辑菜单的二级菜单/动作
-        self.revert_action = create_action(main_window, "还原(O)", "Shift+Ctrl+Z")
-        self.undo_action = create_action(main_window, "后退一步(K)", "Ctrl+Z")
-        self.redo_action = create_action(main_window, "前进一步(W)",  "Alt+Ctrl+Z")
+        # self.revert_action = create_action(main_window, "还原(O)", "Shift+Ctrl+Z")
+        # self.undo_action = create_action(main_window, "后退一步(K)", "Ctrl+Z")
+        # self.redo_action = create_action(main_window, "前进一步(W)",  "Alt+Ctrl+Z")
         self.reference_action = create_action(main_window, "首选项(N)...")
         # 创建 编辑菜单 的二级菜单 查找并替换 的二级菜单
         self.find_replace_menu = self.edit_menu.addMenu("查找和替换(F)")
@@ -112,12 +104,12 @@ class MainWindowUI(object):
         add_actions(self.find_replace_menu, (self.quick_find_action, self.quick_replace_action,
                                              self.quick_find_in_file_action, self.quick_replace_in_file_action))
         # 将这些动作加入到 编辑菜单中
-        add_actions(self.edit_menu, (None, self.revert_action, self.redo_action,
-                                     self.undo_action, None, self.reference_action))
+        add_actions(self.edit_menu, (None, self.reference_action))
 
         # 创建 项目 菜单的二级菜单
         self.new_mark_action = create_action(main_window, "添加标注文件(N)", shortcut="Shift+Ctrl+N")
         self.new_mark_from_action = create_action(main_window, "添加现有标注文件", shortcut="Alt+Ctrl+N")
+        self.delete_mark_item_action = create_action(main_window, "删除")
         add_actions(self.project_menu, (self.new_mark_action, self.new_mark_from_action))
 
         # 创建图像菜单的二级菜单/动作
@@ -153,26 +145,46 @@ class MainWindowUI(object):
         # 创建 标注 菜单的二级菜单/动作
         self.quick_select_menu = add_menu("选择工具", self.mark_menu, "quick_select_menu")
         self.mark_menu.addSeparator()
+        self.ai_detect_menu = add_menu("智能轮廓检测", self.mark_menu, "ai_detect_menu")
         self.outline_detect_menu = add_menu("轮廓检测(D)", self.mark_menu, "outline_detect_menu")
+        self.outline_correction_menu = add_menu("轮廓微调", self.mark_menu, "outline_correction_menu")
 
         # 创建 标注菜单 的二级菜单 快速选择工具 的二级动作
         self.rectangle_action = create_action(main_window, "矩形选择框", checkable=True)
-        self.oval_action = create_action(main_window, "椭圆选择框", checkable=True)
-        join_group(QActionGroup(main_window), (self.rectangle_action, self.oval_action))
-        add_actions(self.quick_select_menu, (self.rectangle_action, self.oval_action))
+        self.polygon_action = create_action(main_window, "多边形选择框", checkable=True)
+        join_group(QActionGroup(main_window), (self.rectangle_action, self.polygon_action))
+        add_actions(self.quick_select_menu, (self.rectangle_action, self.polygon_action))
+
+        self.woodland_outline_action = create_action(main_window, "林地")
+        self.woodland_outline_action.setData(5)
+        self.grassland_outline_action = create_action(main_window, "草地")
+        self.grassland_outline_action.setData(6)
+        add_actions(self.ai_detect_menu, (self.woodland_outline_action, self.grassland_outline_action))
 
         # 创建 标注菜单 的二级菜单 轮廓检测 的二级动作
-        self.origin_outline_action = create_action(main_window, "原始轮廓(O)", "Ctrl+A+O")
-        self.convex_outline_action = create_action(main_window, "凸性缺陷轮廓(C)", "Ctrl+A+C")
-        self.polygon_outline_action = create_action(main_window, "多边形轮廓(P)", "Ctrl+A+P")
+        self.origin_outline_action = create_action(main_window, "原始轮廓(O)", shortcut="Ctrl+A+O")
+        self.origin_outline_action.setData(1)
+        self.convex_outline_action = create_action(main_window, "凸性缺陷轮廓(C)", shortcut="Ctrl+A+C")
+        self.convex_outline_action.setData(2)
+        self.polygon_outline_action = create_action(main_window, "多边形轮廓(P)", shortcut="Ctrl+A+P")
+        self.polygon_outline_action.setData(3)
+        self.as_outline_action = create_action(main_window, "作为轮廓(S)", shortcut="Ctrl+A+S")
+        self.as_outline_action.setData(4)
 
-        outline_actions = (self.origin_outline_action, self.convex_outline_action, self.polygon_outline_action)
+        outline_actions = (self.origin_outline_action, self.convex_outline_action,
+                           self.polygon_outline_action, self.as_outline_action)
         # join_group(QActionGroup(main_window), outline_actions)
         add_actions(self.outline_detect_menu, outline_actions)
 
+        self.add_outline_correction = create_action(main_window, "添加", shortcut="Ctrl+Shift+-")
+        self.add_outline_correction.setData(1)
+        self.remove_outline_correction = create_action(main_window, "消除", shortcut="Ctrl+Shift+-")
+        self.remove_outline_correction.setData(2)
+        add_actions(self.outline_correction_menu, (self.add_outline_correction, self.remove_outline_correction))
+
         # 创建 计算 菜单的二级菜单/动作
-        self.erosion_area_action = create_action(main_window, "总面积(E)...")
-        self.girth_area_action = create_action(main_window, "总周长(C)...")
+        self.erosion_area_action = create_action(main_window, "面积(E)...")
+        self.girth_area_action = create_action(main_window, "周长(C)...")
         add_actions(self.count_menu, (self.erosion_area_action, self.girth_area_action))
         self.connected_graph_menu = add_menu("连通图", self.count_menu, "connected_graph_menu")
         self.connected_graph_menu.setEnabled(False)

@@ -19,9 +19,9 @@ def get_contours(img_data):
     return contours, contours_inv
 
 
-def original_contour(img_data, drop_area=10):
+def original_contour(img_data, drop_area=0):
     '''
-    原始轮廓检测
+    原始
     获得部分区域图像值
     正向反向标注出轮廓区域后，将小于“舍弃轮廓区域（area值：用户输入）”的轮廓区域删除
     :return:各个区域轮廓坐标
@@ -37,14 +37,14 @@ def original_contour(img_data, drop_area=10):
             cv2.drawContours(img_data, con_inv, -1, (0, 0, 255), 1)
             area2.append(con_inv)
 
-    # cv2.imshow('all_contour', img_data)
-    # cv2.waitKey(0)
+    cv2.imshow('all_contour', img_data)
+    cv2.waitKey(0)
     return area1, area2
 
 
 def approx_poly(img_data, drop_area=0, epsilon_user=0.001):
     """
-    凸性轮廓检测
+    多边形
     获得部分区域图像值
     根据用户输入epsilon获取轮廓区域后，将小于“舍弃轮廓区域（area值：用户输入）”的轮廓区域删除
     :param img_data:
@@ -75,7 +75,7 @@ def approx_poly(img_data, drop_area=0, epsilon_user=0.001):
 
 def hull_contour(img_data, drop_area=100):
     '''
-    多边形检测
+    凸性检测
     获得部分区域图像值
     用convexHull()标识轮廓，将小于“舍弃轮廓区域（area值：用户输入）”的轮廓区域删除
     :return: 各个区域轮廓坐标
@@ -94,8 +94,8 @@ def hull_contour(img_data, drop_area=100):
             cv2.drawContours(img_data, [hull], -1, (0, 0, 255), 1)
             area2.append([hull])
 
-    #cv2.imshow('all_contour', img_data)
-    #cv2.waitKey(0)
+    cv2.imshow('all_contour', img_data)
+    cv2.waitKey(0)
     return area1, area2
 
 
@@ -122,13 +122,13 @@ def drawContour(img):  # 根据输入图，利用大津算法确认阈值然后�
 
 def detect_outline(outline_type, img_data, drop_area=0, epsilon_user=0.001):
     res1, res2 = [], []
-    if outline_type == 1:
-        res1, res2 = original_contour(img_data, drop_area)
-        #print(res1,res2)
-    elif outline_type == 2:
-        res1, res2 = hull_contour(img_data, drop_area)
-    else:
-        res1, res2 = approx_poly(img_data, drop_area, epsilon_user)
+    # if outline_type == 1:
+    #     res1, res2 = original_contour(img_data, drop_area)
+    #     #print(res1,res2)
+    # elif outline_type == 2:
+    #     res1, res2 = hull_contour(img_data, drop_area)
+    # else:
+    res1, res2 = approx_poly(img_data, drop_area, epsilon_user)
     return res1, res2
 
 

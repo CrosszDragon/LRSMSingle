@@ -21,27 +21,33 @@ class NewProjectDialog(QDialog):
         self.grid_layout.setSpacing(20)
         self.grid_layout.setObjectName("newProjectDialogGridLayout")
 
+        person_name_label = QLabel("标注人(P)：")
+        self.person_name_edit = QLineEdit()
+        person_name_label.setBuddy(self.person_name_edit)
+        self.grid_layout.addWidget(person_name_label, 0, 0)
+        self.grid_layout.addWidget(self.person_name_edit, 0, 1)
+
         project_name_label = QLabel("项目名称(N)：")
         self.project_name_edit = QLineEdit()
         project_name_label.setBuddy(self.project_name_edit)
-        self.grid_layout.addWidget(project_name_label, 0, 0)
-        self.grid_layout.addWidget(self.project_name_edit, 0, 1)
+        self.grid_layout.addWidget(project_name_label, 1, 0)
+        self.grid_layout.addWidget(self.project_name_edit, 1, 1)
 
         project_location_label = QLabel("项目位置(L)：")
         self.project_location_edit = QLineEdit()
         self.select_pro_location_btn = QPushButton("浏览(B)...")
         project_location_label.setBuddy(self.project_location_edit)
-        self.grid_layout.addWidget(project_location_label, 1, 0)
-        self.grid_layout.addWidget(self.project_location_edit, 1, 1)
-        self.grid_layout.addWidget(self.select_pro_location_btn, 1, 2)
+        self.grid_layout.addWidget(project_location_label, 2, 0)
+        self.grid_layout.addWidget(self.project_location_edit, 2, 1)
+        self.grid_layout.addWidget(self.select_pro_location_btn, 2, 2)
 
         image_location_label = QLabel("原始图片(I)：")
         self.image_location_edit = QLineEdit()
         self.select_img_location_btn = QPushButton("浏览(S)...")
         image_location_label.setBuddy(self.image_location_edit)
-        self.grid_layout.addWidget(image_location_label, 2, 0)
-        self.grid_layout.addWidget(self.image_location_edit, 2, 1)
-        self.grid_layout.addWidget(self.select_img_location_btn, 2, 2)
+        self.grid_layout.addWidget(image_location_label, 3, 0)
+        self.grid_layout.addWidget(self.image_location_edit, 3, 1)
+        self.grid_layout.addWidget(self.select_img_location_btn, 3, 2)
 
         self.buttonBox = QDialogButtonBox(self)
         self.buttonBox.setOrientation(Qt.Horizontal)
@@ -50,7 +56,7 @@ class NewProjectDialog(QDialog):
         self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(False)
         self.buttonBox.button(QDialogButtonBox.Cancel).setText("取消")
         self.buttonBox.setObjectName("buttonBox")
-        self.grid_layout.addWidget(self.buttonBox, 3, 1, 1, 2)
+        self.grid_layout.addWidget(self.buttonBox, 4, 1, 1, 2)
 
         self.buttonBox.accepted.connect(self.accept)
         self.buttonBox.rejected.connect(self.reject)
@@ -81,16 +87,18 @@ class NewProjectDialog(QDialog):
         project_directory = self.project_location_edit.text()
         image_file = self.image_location_edit.text()
         project_name = self.project_name_edit.text()
+        person_name = self.person_name_edit.text()
 
-        if all([project_directory, image_file, project_name]):
+        if all([project_directory, image_file, project_name, person_name]):
             self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(True)
         else:
             self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(False)
 
     def new_project_info(self):
-        return self.project_name_edit.text(), \
+        return self.project_name_edit.text() + ".mfb", \
                self.project_location_edit.text(),\
-               self.image_location_edit.text()
+               self.image_location_edit.text(), \
+               self.person_name_edit.text()
 
     def accept(self):
 

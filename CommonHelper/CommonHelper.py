@@ -136,3 +136,10 @@ def qimage2numpy(qimage: QImage):
     if qimage.format() == QImage.Format_RGB32 and dtype == np.uint8:
         result = result[..., :3]
     return result
+
+
+def string_list_to_int(data: str):
+    return list(map(int, data[1:-1].split(",")))
+
+# def create_name(num_counter, pre_name)->str:
+

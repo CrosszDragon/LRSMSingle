@@ -8,12 +8,31 @@
 
 from PyQt5.QtWidgets import QUndoCommand, QGraphicsScene
 from PyQt5.QtCore import QPointF
-from UILayer.Workbench.BorderItem import SelectionItem
+from UILayer.Workbench.BorderItem import BorderItem, SelectionItem
+
+
+class AddSelectionItem(QUndoCommand):
+
+    def __init__(self, scene: QGraphicsScene, item: SelectionItem, parent=None):
+        super(AddSelectionItem, self).__init__(parent)
+        self.scene = scene
+        self.item = item
+        self.init_pos = item.pos()
+        self.setText("创建选区")
+
+    def redo(self) -> None:
+        self.scene.addItem(self.item)
+        self.scene.clearSelection()
+        self.item.setSelected(True)
+        self.setText("创建选区")
+
+    def undo(self) -> None:
+        self.scene.removeItem(self.item)
 
 
 class AddItemCommand(QUndoCommand):
 
-    def __init__(self, scene: QGraphicsScene, item: SelectionItem, parent=None):
+    def __init__(self, scene: QGraphicsScene, item: BorderItem, parent=None):
 
         super(AddItemCommand, self).__init__(parent)
 
@@ -35,7 +54,7 @@ class AddItemCommand(QUndoCommand):
 
 class MoveItemCommand(QUndoCommand):
 
-    def __init__(self, item: SelectionItem, parent=None):
+    def __init__(self, item: BorderItem, parent=None):
         super(MoveItemCommand, self).__init__(parent)
 
         self.item = item
@@ -49,3 +68,5 @@ class MoveItemCommand(QUndoCommand):
     def undo(self) -> None:
         self.item.setPos(self.old_pos)
         # self.item.scene().update()
+
+

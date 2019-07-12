@@ -47,4 +47,4 @@ def counter(start_at=0):
             count_num += 1
 
 
-PEN_STANDARD_WIDTH = 1.2
+PEN_STANDARD_WIDTH = 1.4

@@ -1,12 +1,16 @@
 import os
+from abc import abstractmethod
 from enum import IntEnum
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QContextMenuEvent
-from PyQt5.QtWidgets import QTreeWidget, QTreeWidgetItem, QDockWidget, QInputDialog
+from PyQt5.QtWidgets import QTreeWidget, QTreeWidgetItem, QDockWidget, QInputDialog, QWidget, QVBoxLayout
 
 from Application.App import BASE_DIR
 from CommonHelper.CommonHelper import *
-from ModelLayer.MarkProject import MarkProject
+from Document.MarkData import MarkItem, Project
+from lib.libqt5.pyqtcore import QMap
+from lib.QtProperty.qttreepropertybrowser import QtTreePropertyBrowser
+from Manager.ActionManager import ActionManager
 
 
 class ProjectDockWidget(QDockWidget):
@@ -14,11 +18,19 @@ class ProjectDockWidget(QDockWidget):
     FOLDER = "folder"
     MAKE_FILE = "mark_file"
     MAKE_ITEM = "mark_item"
+    OriginImage = "image"
+
+    current_item_changed_signal = pyqtSignal(QtTreePropertyBrowser)
+    delete_mark_item_signal = pyqtSignal(Project, MarkItem)
+    double_click_mark_item = pyqtSignal(Project, MarkItem)
 
     def __init__(self, parent=None):
         super(ProjectDockWidget, self).__init__("标注项目", parent)
 
         self.setObjectName("projectTreeDockWidget")
+
+        self._item_to_project = {}
+        self._project_to_root_index = {}
 
         self.project_tree = QTreeWidget(self)
         self.project_tree.setColumnCount(1)
@@ -30,7 +42,14 @@ class ProjectDockWidget(QDockWidget):
         self.project_tree_folder_context_menu = self._create_folder_child_context_menu()
         self.project_tree_mark_file_context_menu = self._create_mark_file_child_context_menu()
         self.project_tree_mark_item_context_menu = self._create_mark_item_child_context_menu()
-        self.setWidget(self.project_tree)
+        self.project_tree.currentItemChanged.connect(self.current_item_changed)
+        self.project_tree.doubleClicked.connect(self.mouse_double_clicked)
+
+        self._widget = QWidget(self)
+        self._layout = QVBoxLayout(self._widget)
+        self._layout.setStretch(0, 0)
+        self._layout.addWidget(self.project_tree)
+        self.setWidget(self._widget)
 
     def _create_project_root_context_menu(self):
         menu = QMenu(self.project_tree)
@@ -40,17 +59,17 @@ class ProjectDockWidget(QDockWidget):
         remove_all_mark_file = create_action(menu, "删除所有标注文件", slot=self.delete_all_mark_file)
         remove_all_mark_item = create_action(menu, "删除所有标注项", slot=self.delete_all_mark_item)
         rename_action = create_action(menu, "重命名", slot=self.rename)
-        close_project_action = create_action(menu, "关闭项目", slot=self.close_project)
+        # close_project_action = create_action(menu, "关闭项目", slot=self.close_project)
         property_setting = create_action(menu, "属性", slot=self.property_setting)
         add_actions(menu, (None, remove_all_file, remove_all_mark_file, remove_all_mark_item, None,
-                           close_project_action, None, rename_action, None, property_setting))
+                            None, rename_action, None, property_setting))
         return menu
 
     def _create_folder_child_context_menu(self):
         menu = QMenu(self.project_tree)
         self._create_new_menu(menu)
 
-        remove_self_action = create_action(menu, "删除", slot=self.delete_self)
+        remove_self_action = create_action(menu, "删除")
         remove_all_file = create_action(menu, "删除所有文件", slot=self.delete_all_file)
         remove_all_mark_file = create_action(menu, "删除所有标注文件", slot=self.delete_all_mark_file)
         remove_all_mark_item = create_action(menu, "删除所有标注项", slot=self.delete_all_mark_item)
@@ -67,7 +86,7 @@ class ProjectDockWidget(QDockWidget):
         new_empty_mark_item.setData(NewFileType.NEW_MARK_ITEM_FROM_MARK_FILE)
 
         setting_selection_action = create_action(menu, "设置选区...", slot=self.setting_selection)
-        remove_self_action = create_action(menu, "删除", slot=self.delete_self)
+        remove_self_action = create_action(menu, "删除")
         remove_all_mark_item = create_action(menu, "删除所有标注项", slot=self.delete_all_mark_item)
         rename_action = create_action(menu, "重命名...", slot=self.rename)
 
@@ -78,16 +97,10 @@ class ProjectDockWidget(QDockWidget):
     def _create_mark_item_child_context_menu(self):
         menu = QMenu(self.project_tree)
 
-        mark_menu = menu.addMenu("标注")
-        origin_outline_action = create_action(menu, "原始轮廓(O)", "Ctrl+A+O", slot=self.outline_detect)
-        convex_outline_action = create_action(menu, "凸性缺陷轮廓(C)", "Ctrl+A+C", slot=self.outline_detect)
-        polygon_outline_action = create_action(menu, "多边形轮廓(P)", "Ctrl+A+P", slot=self.outline_detect)
-        add_actions(mark_menu, (origin_outline_action, convex_outline_action, polygon_outline_action))
-
-        setting_selection_action = create_action(menu, "设置选区...", slot=self.setting_selection)
-        remove_self_action = create_action(menu, "删除", slot=self.delete_self)
+        remove_self_action = menu.addAction("删除")  # create_action(menu, "删除", slot=self.delete_self)
+        remove_self_action.triggered.connect(self.delete_self)
         rename_action = create_action(menu, "重命名...", slot=self.rename)
-        add_actions(menu, (None, setting_selection_action, None, remove_self_action, None, rename_action))
+        add_actions(menu, (remove_self_action, None, rename_action))
 
         return menu
 
@@ -111,19 +124,29 @@ class ProjectDockWidget(QDockWidget):
         ))
         return new_menu
 
-    def create_project(self, project_info):
-        root = QTreeWidgetItem(self.project_tree)
-        root.setText(0, project_info["project_name"])
-        root.setIcon(0, QIcon(os.path.join(BASE_DIR, "sources/images/file.png")))
+    def create_project(self, project):
+        if project in self._project_to_root_index:
+            return
+
+        root = TopLevelTreeItem(project, self.project_tree)
+        root.setSelected(True)
 
         # 原始图片
         original_img_child = QTreeWidgetItem()
-        original_img_child.setText(0, project_info["org_img_name"])
-        original_img_child.setIcon(0, QIcon(os.path.join(BASE_DIR, "sources/images/img_icon.png")))
+        original_img_child.setText(0, os.path.basename(project.image_path))
+        original_img_child.setToolTip(0, project.image_path)
+        original_img_child.setIcon(0, QIcon("../../Sources/images/img_icon.png"))
+        original_img_child.setWhatsThis(0, self.OriginImage)
         root.addChild(original_img_child)
 
-        # 项目数据
-        project_data = MarkProject(project_info["project_name"])
+        self._project_to_root_index[project] = self.project_tree.indexOfTopLevelItem(root)
+
+    def add_mark_item(self, project, mark_item: MarkItem):
+        if project not in self._project_to_root_index:
+            return
+        mark_item_child = MarkTreeItem(mark_item)
+        self._item_to_project[mark_item] = project
+        self.project_tree.topLevelItem(self._project_to_root_index[project]).addChild(mark_item_child)
 
     def project_tree_item_context_menu(self, point):
         point = self.project_tree.mapToGlobal(point)
@@ -143,8 +166,24 @@ class ProjectDockWidget(QDockWidget):
     def rename(self):
         current_item = self.project_tree.currentItem()
         new_name, ok = QInputDialog.getText(self, "重命名", "请输入新的名字：", text=current_item.text(0))
-        if ok:
-            current_item.setText(0, new_name)
+        if ok and current_item.text(0) != new_name:
+            if isinstance(current_item, MarkTreeItem):
+                current_item.get_mark_item().item_name = new_name
+
+    def mouse_double_clicked(self) -> None:
+        """"""
+        current_item = self.project_tree.currentItem()
+        if isinstance(current_item, MarkTreeItem):
+            item = current_item.get_mark_item()
+            if item in self._item_to_project:
+                self.double_click_mark_item.emit(self._item_to_project[item], item)
+        elif isinstance(current_item, TopLevelTreeItem):
+            project = current_item.get_project()
+            self.double_click_mark_item.emit(project, None)
+
+    def current_item_changed(self, current_item, p):
+        if isinstance(current_item, AbstractProjectTreeItem):
+            self.current_item_changed_signal.emit(current_item.get_item_browser())
 
     def create_mark_file(self):
         mark_file_name, ok = QInputDialog.getText(self, "新建标注文件", "请输入标注文件名：")
@@ -182,11 +221,22 @@ class ProjectDockWidget(QDockWidget):
     def delete_all_mark_item(self):
         """"""
 
-    def close_project(self):
-        """"""
+    def close_project(self, project):
+        if project not in self._project_to_root_index:
+            return
+        self.project_tree.takeTopLevelItem(self._project_to_root_index[project])
 
     def delete_self(self):
-        """"""
+
+        current_item = self.project_tree.currentItem()
+        if isinstance(current_item, MarkTreeItem):
+            project = self._item_to_project[current_item.get_mark_item()]
+            self.delete_mark_item_signal.emit(project, current_item.get_mark_item())
+
+            self.project_tree.removeItemWidget(current_item, 0)
+            if current_item.get_mark_item() in self._item_to_project:
+                del self._item_to_project[current_item.get_mark_item()]
+            del current_item
 
     def setting_selection(self):
         """"""
@@ -199,21 +249,82 @@ class ProjectDockWidget(QDockWidget):
         pass
 
 
-class ProjectTreeWidget(QTreeWidget):
+class AbstractProjectTreeItem(QTreeWidgetItem):
 
     def __init__(self, parent=None):
-        super(ProjectTreeWidget, self).__init__(parent)
+        super(AbstractProjectTreeItem, self).__init__(parent)
 
-    def contextMenuEvent(self, event: QContextMenuEvent) -> None:
-        if self.topLevelItemCount():
-            current_item = self.currentItem()
-            print(current_item.text(0))
+    @abstractmethod
+    def get_item_browser(self) -> QtTreePropertyBrowser:
+        """TODO"""
 
 
-class ProjectTreeItem(QTreeWidgetItem):
+class TopLevelTreeItem(AbstractProjectTreeItem):
 
-    def __init__(self, parent=None):
-        super(ProjectTreeItem, self).__init__()
+    def __init__(self, project: Project, parent= None):
+        super(TopLevelTreeItem, self).__init__(parent)
+        self._project = project
+
+        self.setText(0, self._project.project_name)
+        self.setWhatsThis(0, ProjectDockWidget.FOLDER)
+        self.setIcon(0, QIcon("../../Sources/images/file.png"))
+
+        self.setToolTip(0, self._project.project_full_path())
+        self._project.project_name_changed.connect(self._name_changed)
+
+    def get_project(self):
+        return self._project
+
+    def _name_changed(self):
+        self.setText(0, self._project.project_name)
+
+    def get_item_browser(self) -> QtTreePropertyBrowser:
+        return self._project.browser
+
+    def set_project(self, project: Project):
+        if self._project == project:
+            return
+        self._project.project_name_changed.disconnect(self._name_changed)
+        self._project = project
+        self._project.project_name_changed.connect(self._name_changed)
+
+
+class MarkTreeItem(AbstractProjectTreeItem):
+
+    def __init__(self, mark_item: MarkItem, parent=None):
+        super(MarkTreeItem, self).__init__(parent)
+        self._mark_item = mark_item
+        self.setText(0, mark_item.item_name)
+        self.setWhatsThis(0, ProjectDockWidget.MAKE_ITEM)
+        self.setIcon(0, QIcon("../../Sources/images/mark_item.jpg"))
+        self._mark_item.mark_item_name_changed.connect(self._name_changed)
+
+    def _name_changed(self):
+        self.setText(0, self._mark_item.item_name)
+
+    def get_mark_item(self):
+        return self._mark_item
+
+    def get_item_browser(self):
+        return self._mark_item.browser
+
+    def set_mark_item(self, mark_item):
+        if self._mark_item == mark_item:
+            return
+        self._mark_item.mark_item_name_changed.disconnect(self._name_changed)
+        self._mark_item = mark_item
+        self._mark_item.mark_item_name_changed.connect(self._name_changed)
+
+
+# class ProjectTreeWidget(QTreeWidget):
+#
+#     def __init__(self, parent=None):
+#         super(ProjectTreeWidget, self).__init__(parent)
+#
+#     def contextMenuEvent(self, event: QContextMenuEvent) -> None:
+#         if self.topLevelItemCount():
+#             current_item = self.currentItem()
+#             print(current_item.text(0))
 
 
 class NewFileType(IntEnum):
