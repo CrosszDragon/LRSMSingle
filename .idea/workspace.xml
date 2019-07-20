@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0562d30-6635-4c9b-a37c-ed1821e05bcd" name="Default Changelist" comment="" />
+    <list default="true" id="b0562d30-6635-4c9b-a37c-ed1821e05bcd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/LSRMSingleVersion3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/LSRMSingle.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,7 +18,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UILayer/MainWindowPk/MainWindow.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3421">
+            <state relative-caret-position="11780">
               <caret line="642" column="38" selection-start-line="642" selection-start-column="38" selection-end-line="642" selection-end-column="38" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -25,7 +30,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UILayer/CustomWidget/PreferncesWidget/PreferencesDialog.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
+            <state relative-caret-position="703">
               <caret line="41" column="49" selection-start-line="41" selection-start-column="49" selection-end-line="41" selection-end-column="49" />
               <folding>
                 <element signature="e#189#224#0" expanded="true" />
@@ -37,8 +42,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/UILayer/CustomWidget/PreferncesWidget/ColorButton.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="60" column="46" selection-start-line="60" selection-start-column="46" selection-end-line="60" selection-end-column="46" />
+            <state relative-caret-position="89">
+              <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
               <folding>
                 <element signature="e#183#244#0" expanded="true" />
               </folding>
@@ -58,7 +63,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/IOFomat/MarkFile.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="320">
+            <state relative-caret-position="3116">
               <caret line="168" column="27" selection-start-line="168" selection-start-column="27" selection-end-line="168" selection-end-column="27" />
               <folding>
                 <element signature="e#179#205#0" expanded="true" />
@@ -70,7 +75,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UILayer/MainWindowPk/MainWindowUi.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
+            <state relative-caret-position="1672">
               <caret line="95" column="23" selection-start-line="95" selection-start-column="23" selection-end-line="95" selection-end-column="23" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -82,7 +87,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/WindowStyle/Preferences.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
+            <state relative-caret-position="1786">
               <caret line="97" column="60" selection-start-line="97" selection-start-column="60" selection-end-line="97" selection-end-column="60" />
               <folding>
                 <element signature="e#183#204#0" expanded="true" />
@@ -94,11 +99,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UILayer/CustomWidget/PreferncesWidget/prefrencesUi.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
+            <state relative-caret-position="2090">
               <caret line="111" column="13" selection-start-line="111" selection-start-column="13" selection-end-line="111" selection-end-column="13" />
-              <folding>
-                <element signature="e#201#243#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -154,6 +156,9 @@
       <dir>C:\Users\h2958\Desktop\LSRMSingalVersion3</dir>
       <dir>C:\Users\h2958\Desktop\LSRMSingalVersion3\UILayer\MainWindow</dir>
     </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -213,36 +218,32 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="251" />
-    <option name="y" value="51" />
-    <option name="width" value="1317" />
-    <option name="height" value="1044" />
+    <option name="x" value="141" />
+    <option name="y" value="50" />
+    <option name="width" value="1372" />
+    <option name="height" value="908" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="LSRMSingleVersion3" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LSRMSingleVersion3" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="LSRMSingleVersion3" type="b2602c69:ProjectViewProjectNode" />
-              <item name="LSRMSingleVersion3" type="462c0819:PsiDirectoryNode" />
-              <item name="IOFomat" type="462c0819:PsiDirectoryNode" />
+              <item name="LSRMSingle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LRSMSingle" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/Algorithm/AIAlgorithm" />
     <property name="node.js.detected.package.eslint" value="true" />
@@ -280,7 +281,7 @@
   </component>
   <component name="RunManager" selected="Python.App">
     <configuration default="true" type="DjangoTestsConfigurationType">
-      <module name="LSRMSingleVersion3" />
+      <module name="LSRMSingle" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -300,7 +301,7 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
-      <module name="LSRMSingleVersion3" />
+      <module name="LSRMSingle" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
@@ -313,7 +314,7 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="PyLettuceRunConfigurationType" factoryName="Lettuce">
-      <module name="LSRMSingleVersion3" />
+      <module name="LSRMSingle" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
@@ -326,7 +327,7 @@
       <method v="2" />
     </configuration>
     <configuration name="App" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="LSRMSingleVersion3" />
+      <module name="LSRMSingle" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -348,7 +349,7 @@
       <method v="2" />
     </configuration>
     <configuration name="LrsmProxyStyle" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="LSRMSingleVersion3" />
+      <module name="LSRMSingle" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -370,7 +371,7 @@
       <method v="2" />
     </configuration>
     <configuration name="MainWindow (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="LSRMSingleVersion3" />
+      <module name="LSRMSingle" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -392,7 +393,7 @@
       <method v="2" />
     </configuration>
     <configuration name="Preferences" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="LSRMSingleVersion3" />
+      <module name="LSRMSingle" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -414,7 +415,7 @@
       <method v="2" />
     </configuration>
     <configuration name="StyleHelper" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="LSRMSingleVersion3" />
+      <module name="LSRMSingle" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -436,7 +437,7 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <module name="LSRMSingleVersion3" />
+      <module name="LSRMSingle" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -458,7 +459,7 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="Python.FlaskServer">
-      <module name="LSRMSingleVersion3" />
+      <module name="LSRMSingle" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
@@ -471,7 +472,7 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="Tox" factoryName="Tox">
-      <module name="LSRMSingleVersion3" />
+      <module name="LSRMSingle" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
@@ -483,7 +484,7 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="tests" factoryName="Doctests">
-      <module name="LSRMSingleVersion3" />
+      <module name="LSRMSingle" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
@@ -502,7 +503,7 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
-      <module name="LSRMSingleVersion3" />
+      <module name="LSRMSingle" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
@@ -544,11 +545,12 @@
       <workItem from="1563016525684" duration="15163000" />
       <workItem from="1563336144690" duration="30993000" />
       <workItem from="1563594684633" duration="21652000" />
+      <workItem from="1563634953209" duration="371000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="495681000" />
+    <option name="totallyTimeSpent" value="496052000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -560,16 +562,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="201" y="41" width="857" height="835" extended-state="0" />
-    <editor active="true" />
+    <frame x="113" y="40" width="1097" height="726" extended-state="1" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4990403" weight="0.13139932" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4990403" weight="0.1655438" />
       <window_info id="Structure" order="1" sideWeight="0.5009597" side_tool="true" weight="0.3752363" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.42728636" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.042613637" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.8914209" visible="true" weight="0.042613637" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.8914209" visible="true" weight="0.05050505" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32956153" />
@@ -620,6 +621,7 @@
     <SUITE FILE_PATH="coverage/LSRMSingleVersion3$MainWindow__1_.coverage" NAME="MainWindow (1) Coverage Results" MODIFIED="1563628104987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/UILayer/MainWindowPk" />
     <SUITE FILE_PATH="coverage/LSRMSingalVersion3$ProjectStream.coverage" NAME="ProjectStream Coverage Results" MODIFIED="1562397801143" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:/学习文件/python_learning/用于集成/侯" />
     <SUITE FILE_PATH="coverage/LSRMSingalVersion3$MainWindow.coverage" NAME="MainWindow Coverage Results" MODIFIED="1563189511105" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/UILayer/MainWindow" />
+    <SUITE FILE_PATH="coverage/LSRMSingle$App.coverage" NAME="App Coverage Results" MODIFIED="1563635080903" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Application" />
     <SUITE FILE_PATH="coverage/LSRMSingalVersion3$AiDetect.coverage" NAME="AiDetect Coverage Results" MODIFIED="1562684081676" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Algorithm/AIAlgorithm" />
     <SUITE FILE_PATH="coverage/LSRMSingleVersion3$App.coverage" NAME="App Coverage Results" MODIFIED="1563632324436" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Application" />
     <SUITE FILE_PATH="coverage/LSRMSingalVersion3$MainToolBar.coverage" NAME="MainToolBar Coverage Results" MODIFIED="1562144865906" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/UILayer/MainWindow" />
@@ -902,27 +904,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UILayer/CustomWidget/PreferncesWidget/prefrences.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/UILayer/CustomWidget/PreferncesWidget/prefrences.py" />
     <entry file="file://$USER_HOME$/.PyCharm2019.1/system/python_stubs/-965805770/PyQt5/QtWidgets/QColorDialog.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="235">
           <caret line="111" column="39" lean-forward="true" selection-start-line="111" selection-start-column="39" selection-end-line="111" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UILayer/MainWindowPk/MainWindowUi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="95" column="23" selection-start-line="95" selection-start-column="23" selection-end-line="95" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -975,40 +961,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UILayer/CustomWidget/PreferncesWidget/prefrencesUi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="111" column="13" selection-start-line="111" selection-start-column="13" selection-end-line="111" selection-end-column="13" />
-          <folding>
-            <element signature="e#201#243#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/IOFomat/MarkFile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="168" column="27" selection-start-line="168" selection-start-column="27" selection-end-line="168" selection-end-column="27" />
-          <folding>
-            <element signature="e#179#205#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/WindowStyle/Preferences.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="97" column="60" selection-start-line="97" selection-start-column="60" selection-end-line="97" selection-end-column="60" />
-          <folding>
-            <element signature="e#183#204#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharm2019.1/system/python_stubs/-965805770/PyQt5/QtGui/QPainter.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
           <caret line="14" column="21" lean-forward="true" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UILayer/MainWindowPk/MainWindow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11780">
+          <caret line="642" column="38" selection-start-line="642" selection-start-column="38" selection-end-line="642" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UILayer/CustomWidget/PreferncesWidget/PreferencesDialog.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="703">
+          <caret line="41" column="49" selection-start-line="41" selection-start-column="49" selection-end-line="41" selection-end-column="49" />
+          <folding>
+            <element signature="e#189#224#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1019,30 +995,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UILayer/MainWindowPk/MainWindow.py">
+    <entry file="file://$PROJECT_DIR$/IOFomat/MarkFile.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3421">
-          <caret line="642" column="38" selection-start-line="642" selection-start-column="38" selection-end-line="642" selection-end-column="38" />
+        <state relative-caret-position="3116">
+          <caret line="168" column="27" selection-start-line="168" selection-start-column="27" selection-end-line="168" selection-end-column="27" />
+          <folding>
+            <element signature="e#179#205#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UILayer/MainWindowPk/MainWindowUi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1672">
+          <caret line="95" column="23" selection-start-line="95" selection-start-column="23" selection-end-line="95" selection-end-column="23" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UILayer/CustomWidget/PreferncesWidget/PreferencesDialog.py">
+    <entry file="file://$PROJECT_DIR$/WindowStyle/Preferences.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="41" column="49" selection-start-line="41" selection-start-column="49" selection-end-line="41" selection-end-column="49" />
+        <state relative-caret-position="1786">
+          <caret line="97" column="60" selection-start-line="97" selection-start-column="60" selection-end-line="97" selection-end-column="60" />
           <folding>
-            <element signature="e#189#224#0" expanded="true" />
+            <element signature="e#183#204#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UILayer/CustomWidget/PreferncesWidget/prefrencesUi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2090">
+          <caret line="111" column="13" selection-start-line="111" selection-start-column="13" selection-end-line="111" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/UILayer/CustomWidget/PreferncesWidget/ColorButton.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="60" column="46" selection-start-line="60" selection-start-column="46" selection-end-line="60" selection-end-column="46" />
+        <state relative-caret-position="89">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
           <folding>
             <element signature="e#183#244#0" expanded="true" />
           </folding>
