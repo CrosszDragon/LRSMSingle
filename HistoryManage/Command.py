@@ -7,7 +7,6 @@
 # @Software: PyCharm
 
 from PyQt5.QtWidgets import QUndoCommand, QGraphicsScene
-from PyQt5.QtCore import QPointF
 from UILayer.Workbench.BorderItem import BorderItem, SelectionItem
 
 

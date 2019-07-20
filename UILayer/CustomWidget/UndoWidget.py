@@ -5,24 +5,27 @@
 # @File    : UndoWidget.py
 # @Project : LSRMSingalVersion2
 # @Software: PyCharm
-from PyQt5.QtWidgets import QDockWidget, QWidget, QUndoView, QVBoxLayout, QUndoStack, QUndoGroup
+
+from PyQt5.QtWidgets import QWidget, QUndoView, QVBoxLayout, QUndoStack, QUndoGroup
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QEvent
+from UILayer.CustomWidget.DockWidget import DockWidget
 
 
-class UndoDock(QDockWidget):
+class UndoDock(DockWidget):
 
     def __init__(self, parent=None):
-        QDockWidget.__init__(self, "历史", parent)
+        DockWidget.__init__(self, "历史", parent)
         self.setObjectName("undoViewDock")
         self._undo_view = QUndoView(self)
-        self._clear_icon = QIcon("../../Sources/Icons/16x16/drive-harddisk.png")
+        self._clear_icon = QIcon("../Sources/Icons/16x16/drive-harddisk.png")
 
         self._undo_view.setCleanIcon(self._clear_icon)
         self._undo_view.setUniformItemSizes(True)
         self._widget = QWidget(self)
         self._layout = QVBoxLayout(self._widget)
         self._layout.setStretch(0, 0)
+        self._layout.setContentsMargins(0, 6, 6, 6)
         self._layout.addWidget(self._undo_view)
         self.setWidget(self._widget)
         self.retranslateUi()

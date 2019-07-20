@@ -3,30 +3,24 @@
 # @Author  : 何盛信
 # @Email   : 2958029539@qq.com
 # @File    : PropertyDock.py
-# @Project : LSRMSingalVersion3
+# @Project : LSRMSingleVersion3
 # @Software: PyCharm
 
-from PyQt5.QtWidgets import QMainWindow
-
-from lib.QtProperty.qttreepropertybrowser import *
-from lib.QtProperty.qtvariantproperty import *
-from lib.libqt5.pyqtcore import *
-from lib.QtProperty.qtpropertymanager import *
-from lib.QtProperty.qtpropertybrowser import *
-from PyQt5.QtWidgets import QDockWidget, QVBoxLayout, QStackedLayout
-from UILayer.CustomWidget.DockWidget import DockWidget
-from Document.MarkData import MarkItem, MarkItemBrowser
+from PyQt5.QtWidgets import QWidget, QVBoxLayout
 from PyQt5.QtGui import QKeyEvent
+from lib.QtProperty.qttreepropertybrowser import QtTreePropertyBrowser
+from Documents.MarkData import MarkItem, MarkItemBrowser
+from UILayer.CustomWidget.DockWidget import DockWidget
 
 
-class PropertyBrowserDock(QDockWidget):
+class PropertyBrowserDock(DockWidget):
     def __init__(self, browser: QtTreePropertyBrowser = None, parent=None):
-        QDockWidget.__init__(self, parent)
-        self.setWindowTitle("属性")
+        DockWidget.__init__(self, "属性", parent)
         self._browser = browser
 
         center_widget = QWidget(self)
         self._layout = QVBoxLayout(center_widget)
+        self._layout.setContentsMargins(6, 6, 0, 6)
         self.setWidget(center_widget)
         self._has_browser = False
 

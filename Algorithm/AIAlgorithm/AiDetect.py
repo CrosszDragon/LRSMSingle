@@ -3,7 +3,7 @@
 # @Author  : 何盛信
 # @Email   : 2958029539@qq.com
 # @File    : AiDetect.py
-# @Project : LSRMSingalVersion3
+# @Project : LSRMSingleVersion3
 # @Software: PyCharm
 
 from sys import path
@@ -13,7 +13,7 @@ import torch
 from Algorithm.AIAlgorithm.model import ModernUNet
 
 # config
-MODEL_PARAMS = 'C:/Users/h2958/Desktop/LSRMSingalVersion3/Algorithm/AIAlgorithm/params.pth'
+MODEL_PARAMS = 'C:/Users/h2958/Desktop/LSRMSingleVersion3/Algorithm/AIAlgorithm/params.pth'
 IMAGE_PATH = r'D:/1.png'
 print(IMAGE_PATH)
 # load image

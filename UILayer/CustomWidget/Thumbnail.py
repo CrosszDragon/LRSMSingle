@@ -3,17 +3,20 @@
 # @Author  : 何盛信
 # @Email   : 2958029539@qq.com
 # @File    : Thumbnail.py
-# @Project : LSRMSingalVersion3
+# @Project : LSRMSingleVersion3
 # @Software: PyCharm
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import Qt, pyqtSignal
-from PyQt5.QtWidgets import QListWidget, QAction, QToolBar, QVBoxLayout, QListWidgetItem, QCheckBox, QFileDialog
+from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtWidgets import QListWidget, QAction, QToolBar, \
+    QVBoxLayout, QListWidgetItem, QCheckBox, QFileDialog, QWidget
 from PyQt5.QtGui import QIcon
 from UILayer.CustomWidget.DockWidget import DockWidget
-from Document.HistoryProject import HistoryProjectManager
-from Document.ProjectDocument import ProjectDocument
+from Documents.HistoryProject import HistoryProjectManager
+from Documents.ProjectDocument import ProjectDocument
 from IOFomat.MarkFile import ProjectFormat
+from Algorithm.calculation import get_projects_area_data
+from DataDisplay.PolygonalChart import PolygonalChart
 
 
 class Thumbnail(DockWidget):
@@ -24,12 +27,14 @@ class Thumbnail(DockWidget):
     remove_project_signal = pyqtSignal(int)
     selected_project_changed = pyqtSignal(ProjectDocument)
     analysis_compare = pyqtSignal(int)
-    close_event_signal = pyqtSignal(bool)
 
     synchronize_changed_signal = pyqtSignal(bool)
 
     def __init__(self, history_project_manager: HistoryProjectManager, origin_project, parent=None):
         DockWidget.__init__(self, widget_title="历史项目", parent=parent)
+
+        self.content_widget = QWidget()
+        self.setWidget(self.content_widget)
 
         # 初始化窗口内组件
         self.tb = QToolBar(self)
@@ -43,7 +48,7 @@ class Thumbnail(DockWidget):
         self.__create_tool_bar(self.tb)
         self.__create_list_widget()
 
-        projects = self._history_project_manger.get_projects()
+        projects = self._history_project_manger.get_projects_document()
         for project in projects:
             self.add_project(project)
 
@@ -63,19 +68,19 @@ class Thumbnail(DockWidget):
 
     # 创建工具栏
     def __create_tool_bar(self, toolbar):
-        self.new_action = QAction(QIcon("../../Sources/Icons/22x22/add.png"), "添加", self)
+        self.new_action = QAction(QIcon("../Sources/Icons/22x22/add.png"), "添加", self)
         self.new_action.triggered.connect(self.open_new_project)
         toolbar.addAction(self.new_action)
 
-        self.delete_action = QAction(QIcon('../../Sources/Icons/22x22/remove.png'), "关闭", self)
+        self.delete_action = QAction(QIcon('../Sources/Icons/22x22/remove.png'), "关闭", self)
         self.delete_action.triggered.connect(self.remove_project)
         toolbar.addAction(self.delete_action)
 
-        self.analysis = QAction(QIcon("../../Sources/Icons/24x24/fenxi.png"), "历史数据分析", parent=self)
+        self.analysis = QAction(QIcon("../Sources/Icons/24x24/fenxi.png"), "历史数据分析", parent=self)
         self.analysis.triggered.connect(self.analysis_all_project)
         toolbar.addAction(self.analysis)
 
-        self.analysis_compare = QAction(QIcon("../../Sources/Icons/24x24//duibifenxi.png"), "数据对比", parent=self)
+        self.analysis_compare = QAction(QIcon("../Sources/Icons/24x24//duibifenxi.png"), "数据对比", parent=self)
         toolbar.addAction(self.analysis_compare)
         self.analysis_compare.triggered.connect(self.analysis_project_with)
 
@@ -87,7 +92,19 @@ class Thumbnail(DockWidget):
         toolbar.addWidget(self._is_synchronize_checked)
 
     def analysis_all_project(self):
-        """"""
+        projects = self._history_project_manger.get_projects()
+        projects.insert(0, self._origin_project.project())
+
+        years = []
+        for year in range(len(projects)):
+            years.append(2014 + year)
+
+        data = get_projects_area_data(projects, years)
+        if not data:
+            return
+
+        chart = PolygonalChart("历史数据对比", data,  self)
+        chart.show()
 
     def analysis_project_with(self):
         """"""
@@ -175,10 +192,6 @@ class Thumbnail(DockWidget):
             del self._list_item_to_project[current_project_item]
             del current_project_item
             self.list_widget.update()
-
-    def closeEvent(self, event: QtGui.QCloseEvent) -> None:
-        """"""
-        self.close_event_signal.emit(False)
 
 
 class ListWidgetItem(QListWidgetItem):

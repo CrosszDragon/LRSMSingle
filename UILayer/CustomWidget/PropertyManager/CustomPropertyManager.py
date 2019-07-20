@@ -3,10 +3,12 @@
 # @Author  : 何盛信
 # @Email   : 2958029539@qq.com
 # @File    : CustomPropertyManager.py
-# @Project : LSRMSingalVersion3
+# @Project : LSRMSingleVersion3
 # @Software: PyCharm
 
-from lib.QtProperty.qtpropertymanager import *
+from PyQt5.QtGui import QIcon, QColor, QBrush
+from PyQt5.QtCore import pyqtSignal
+from lib.QtProperty.qtpropertymanager import QMap, QtAbstractPropertyManager, QtProperty, QtPropertyBrowserUtils
 
 
 class MyColorPropertyManagerPrivate:

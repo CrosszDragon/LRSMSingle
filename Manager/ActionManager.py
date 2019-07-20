@@ -3,11 +3,11 @@
 # @Author  : 何盛信
 # @Email   : 2958029539@qq.com
 # @File    : ActionManager.py
-# @Project : LSRMSingalVersion3
+# @Project : LSRMSingleVersion3
 # @Software: PyCharm
 
-from PyQt5.QtWidgets import QAction, QMessageBox, QMenu
-from PyQt5.QtCore import QObject, pyqtSignal, QtDebugMsg, QByteArray
+from PyQt5.QtWidgets import QAction, QMenu
+from PyQt5.QtCore import QObject, pyqtSignal
 from PyQt5.QtGui import QKeySequence
 from Manager.Id import Id
 
@@ -45,7 +45,7 @@ class ActionManager(QObject):
             # ActionManager.read_custom_shortcuts()
             ActionManager._instance = self
         else:
-            raise SyntaxError("ActionManger是单例类， 已经实例化， 可以通过静态函数instance获取其实力")
+            raise SyntaxError("ActionManger是单例类，请通过静态函数instance获取其实力")
 
     @staticmethod
     def instance(parent=None):
@@ -92,7 +92,7 @@ class ActionManager(QObject):
         #         QMessageBox.warning(action.parentWidget(), title="action change 警告", text=str(e))
 
         try:
-            assert not action_id in ActionManager._d.id_to_action_dict
+            assert action_id not in ActionManager._d.id_to_action_dict
             ActionManager._d.id_to_action_dict[action_id] = action
             ActionManager._d.last_known_shortcuts[action_id] = action.shortcut()
             # action.changed.connect(action_changed)

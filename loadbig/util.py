@@ -10,10 +10,13 @@ import numpy as np
 from PIL import Image
 import cv2
 import openslide
+from PyQt5.QtCore import QFileInfo
+
 
 def cv_read(path):
     cv_img = cv2.imdecode(np.fromfile(path, dtype=np.uint8), -1)
     return cv_img
+
 
 def slice_rect(slide_w, slide_h, tile_size):
     '''
@@ -61,18 +64,21 @@ def joint_two_image(png1: Image, png2: Image, flag='horizontal'):
 
 
 def is_img_big(path):
-    '''判断一副图像是否是大图'''
-    slide = openslide.OpenSlide(path)
-    if slide.level_dimensions[0][0] >= 3000 or slide.level_dimensions[0][1] >= 3000:  # 大于2G
+    '''判断一副图像是否是大图 分界 <=200M'''
+
+    file_info = QFileInfo(path)
+    file_m_size = file_info.size() / 1024 / 1024
+    if file_m_size > 200:  # 大于2G
         return True
     else:
         return False
+
 
 def is_img_so_big(path):
     '''判断图片是否大于2G'''
-    slide=openslide.OpenSlide(path)
-    if slide.level_dimensions[0][0] >= 25000 or slide.level_dimensions[0][1] >= 25000:   #大于2G
+    file_info = QFileInfo(path)
+    file_g_size = file_info.size() / 1024 / 1024 / 1024
+    if file_g_size >= 2:  # 大于2G
         return True
     else:
         return False
-

@@ -3,17 +3,17 @@
 # @Author  : 何盛信
 # @Email   : 2958029539@qq.com
 # @File    : calculation.py
-# @Project : LSRMSingalVersion3
+# @Project : LSRMSingleVersion3
 # @Software: PyCharm
 
 import cv2
 import numpy as np
 from PyQt5.QtGui import QPainterPath
-from Document.MarkData import Project, MarkItem
+from Documents.MarkData import Project, MarkItem
 from UILayer.CustomWidget.PropertyManager.PropertyBrowser import MarkItemBrowser
 
 
-def count_earea(outline_path: QPainterPath, ratio: int = 1) -> float:
+def count_area(outline_path: QPainterPath, ratio: int = 1) -> float:
     """
     :param outline_path: 轮廓的像素的矩阵
     :param ratio: 图像的分辨率 以米为单位
@@ -56,7 +56,7 @@ def count_perimeter(outline_path: QPainterPath, ratio: int = 1) -> float:
 
 
 def count_mark_item_area(mark_item: MarkItem):
-    area_counted = count_earea(mark_item.get_outline())
+    area_counted = count_area(mark_item.get_outline())
     type = mark_item.mark_type
     type_list = MarkItemBrowser.my_list
     type_0_2 = MarkItemBrowser.my_list_2
@@ -118,3 +118,29 @@ def count_project_data_perimeter(project: Project):
         else:
             perimeter.append(mark_item_area)
     return tuple(perimeter)
+
+
+def get_projects_area_data(projects: [Project], years: list):
+    """"""
+    project_data = []
+    data_dict = {}
+    for project in projects:
+        project_data.append(count_project_data_area(project))
+
+    for data in project_data:
+        for mark_data in data:
+            if mark_data[0] in data_dict:
+                data_dict[mark_data[0]][0].append(mark_data[1])
+            else:
+                data_dict[mark_data[0]] = [[mark_data[1]], years, mark_data[2]]
+
+    result = []
+    for key in data_dict.keys():
+        if len(data_dict[key][0]) < len(years):
+            data_dict[key][0].extend([0] * (len(years) - len(data_dict[key][0])))
+        print(key, ":  ", data_dict[key])
+        result.append([key, data_dict[key][0], years, data_dict[key][2]])
+
+    return result
+
+

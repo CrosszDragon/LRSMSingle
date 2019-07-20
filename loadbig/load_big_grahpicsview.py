@@ -23,8 +23,8 @@ class LoadIMGraphicsView(GraphicsViewTest):
     '''
     SCALE_FACTOR = 1.0  # 缩放因子，当scene放置的是大图时，将原始图像的SCALE_FACTOR置为1；缩放时记录缩放因子
 
-    def __init__(self, gadget, toolbar_gadget, eraser_size, img_path, scene: QGraphicsScene, parent=None):
-        super(LoadIMGraphicsView, self).__init__(gadget, toolbar_gadget, eraser_size, parent)
+    def __init__(self, item_manager, gadget, toolbar_gadget, eraser_size, img_path, scene: QGraphicsScene, parent=None):
+        super(LoadIMGraphicsView, self).__init__(item_manager, gadget, toolbar_gadget, eraser_size, parent)
         # self.scene_pyr = QGraphicsScene()  # 放置缩略图的场景
         self.setBackgroundBrush(QColor(147, 147, 147))
         self.scene_big = scene  # 放置原始大图的场景
@@ -85,17 +85,16 @@ class LoadIMGraphicsView(GraphicsViewTest):
         else:
             GraphicsViewTest.wheelEvent(self, event)
 
+
     def tilesgroup_put_in_scene(self):
         '''切换放缩略图的scene，view的scene设置为装载大图片的全部切片tiles的场景'''
         self.scene_big.removeItem(self.pyr_item)
         self.scene_big.addItem(self.tile_items_group)
-        # self.centerOn(self.tile_items_group)
 
     def pyr_put_in_scene(self):
         '''当前处于大图片scene,切换为缩略图场景'''
         self.scene().removeItem(self.tile_items_group)
         self.scene().addItem(self.pyr_item)
-        self.centerOn(self.pyr_item)
 
     def get_tiles_group(self) -> QGraphicsItemGroup:
         '''传入一个level总像素以及一个tile的size,返回一个铺满level的tile_rec的list'''

@@ -25,7 +25,7 @@ import cv2
 class ImgFromRect:
     '''从指定rect区域中提取部分图片'''
 
-    def __init__(self, ori_rec: QRect,slide_helper: SlideHelper, tile_size: int = 1000):
+    def __init__(self, ori_rec: QRect, slide_helper: SlideHelper, tile_size: int = 1000, ):
         '''最终从根据rect获取到area_img'''
         self.tile_size = tile_size
         self.ori_rec = ori_rec  # 传入的矩形框rec信息

@@ -3,21 +3,20 @@
 # @Author  : 何盛信
 # @Email   : 2958029539@qq.com
 # @File    : PropertyBrowser.py
-# @Project : LSRMSingalVersion3
+# @Project : LSRMSingleVersion3
 # @Software: PyCharm
 
-from lib.QtProperty.qttreepropertybrowser import *
-# from lib.QtProperty.qtvariantproperty import *
-from lib.libqt5.pyqtcore import *
-from lib.QtProperty.qtpropertymanager import *
-from lib.QtProperty.qtpropertybrowser import *
-from lib.QtProperty.qteditorfactory import *
+from PyQt5.QtCore import QDate, Qt
+from PyQt5.QtGui import QColor
+from lib.QtProperty.qttreepropertybrowser import QtTreePropertyBrowser
+from lib.QtProperty.qtpropertymanager import QtStringPropertyManager, QtGroupPropertyManager, \
+    QtBoolPropertyManager, QtDatePropertyManager, QtProperty
+from lib.QtProperty.qteditorfactory import QtEnumEditorFactory, QtEnumPropertyManager, \
+    QList, QtLineEditFactory, QtCheckBoxFactory
 from PyQt5.QtWidgets import QDockWidget
-from PyQt5.QtGui import QKeyEvent
 
 from UILayer.CustomWidget.PropertyManager.CustomColorEditorFactory import CustomColorEditorFactory
 from UILayer.CustomWidget.PropertyManager.CustomPropertyManager import CustomColorPropertyManager
-from UILayer.CustomWidget.DockWidget import DockWidget
 
 
 class MarkItemBrowser(QtTreePropertyBrowser):
@@ -613,10 +612,3 @@ class PropertyBrowser(QDockWidget):
         self.setWindowTitle("属性")
         self.setWidget(browser)
         browser.show()
-
-
-if __name__ == '__main__':
-    import sys
-    from PyQt5.QtWidgets import QApplication
-
-    # MarkItemBrowser

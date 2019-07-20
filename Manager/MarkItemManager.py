@@ -3,17 +3,17 @@
 # @Author  : 何盛信
 # @Email   : 2958029539@qq.com
 # @File    : MarkItemManager.py
-# @Project : LSRMSingalVersion3
+# @Project : LSRMSingleVersion3
 # @Software: PyCharm
 from PyQt5.QtCore import QObject, pyqtSignal
-from Document.MarkData import MarkItem, Project
-from CommonHelper.CommonHelper import counter
+from Documents.MarkData import MarkItem
+from CommonHelpers.CommonHelper import counter
 from UILayer.Workbench.BorderItem import OutlineItem
 
 
 class MarkItemManager(QObject):
 
-    selected_item_changed = pyqtSignal(OutlineItem)
+    selected_item_changed = pyqtSignal(MarkItem)
 
     class MarkItemManagerPrivate:
 
@@ -28,6 +28,8 @@ class MarkItemManager(QObject):
         return self._d.selected_mark_item
 
     def set_selected_item(self, item: OutlineItem):
+        if not isinstance(item, OutlineItem):
+            return
         if isinstance(self._d.selected_mark_item, OutlineItem):
             if self._d.selected_mark_item == item:
                 return
@@ -35,6 +37,7 @@ class MarkItemManager(QObject):
                 self._d.selected_mark_item.selected = False
 
         self._d.selected_mark_item = item
+        self.selected_item_changed.emit(item.mark_item())
         if self._d.selected_mark_item:
             self._d.selected_mark_item.selected = True
 

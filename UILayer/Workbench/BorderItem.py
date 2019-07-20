@@ -1,14 +1,12 @@
-import functools
+from PyQt5.QtCore import Qt, QPoint, QTimer, QRectF, pyqtSignal, QRect
+from PyQt5.QtGui import QPainterPath, QPen, QPainter, QBrush, QTransform
+from PyQt5.QtWidgets import QGraphicsObject, QGraphicsItem, QMenu
 
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
+from CONSTs.CONST import PEN_STANDARD_WIDTH
+from CommonHelpers.CommonHelper import adjust_pen_width, add_actions, create_action
 
-from CONST.CONST import *
-from CommonHelper.CommonHelper import *
-
-from Document.MarkData import MarkItem
-from UILayer.MainWindow.MainToolBar import ToolsToolBar
+from Documents.MarkData import MarkItem
+from UILayer.MainWindowPk.MainToolBar import ToolsToolBar
 from Manager.ActionManager import ActionManager
 from Manager.Id import Id
 
@@ -41,8 +39,6 @@ class BorderItem(QGraphicsObject):
         if scene:
             scene.clearSelection()
             scene.addItem(self)
-
-        self.setZValue(10.)
 
     def get_path(self):
         return self._item_path
@@ -231,6 +227,7 @@ class SelectionItem(BorderItem):
         self._timer.start(self._line_speed)
 
         self.setPos(position)
+        self.setZValue(10.)
         self.setSelected(True)
 
     def set_reverser_path(self, path: QPainterPath):
@@ -282,7 +279,8 @@ class SelectionItem(BorderItem):
 
     def rectangle(self):
         rect = self._item_path.boundingRect()
-        return QRect(self.scenePos().x(), self.scenePos().y(), rect.width(), rect.height())
+        pos = self.mapToScene(QPoint(rect.x(), rect.y()))
+        return QRect(pos.x(), pos.y(), rect.width(), rect.height())
 
     def get_shape(self):
         return self.shape

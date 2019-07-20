@@ -1,13 +1,13 @@
 import time
-import math
 
-from PyQt5.QtCore import pyqtSignal, QPoint, QEvent, Qt
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
+from PyQt5.QtCore import pyqtSignal, QPoint, Qt
+from PyQt5.QtGui import QTransform, QPainter, QMouseEvent, QKeyEvent, \
+    QWheelEvent, QImage, QPixmap, QCursor, QPainterPath
+from PyQt5.QtWidgets import QGraphicsView
 
-from CONST.CONST import *
-from UILayer.Workbench.BorderItem import SelectionItem, BorderItem
-from UILayer.MainWindow.MainToolBar import ToolsToolBar
+from UILayer.Workbench.BorderItem import SelectionItem, BorderItem, OutlineItem
+from UILayer.MainWindowPk.MainToolBar import ToolsToolBar
+from Manager.MarkItemManager import MarkItemManager
 
 
 class GraphicsView(QGraphicsView):
@@ -190,7 +190,7 @@ class GraphicsViewTest(GraphicsView):
     current_tool_changed_signal = pyqtSignal()
     eraser_action_signal = pyqtSignal(BorderItem)
 
-    def __init__(self, gadget=None, toolbar_gadget=None, eraser_size=3, parent=None):
+    def __init__(self, item_manager: MarkItemManager, gadget=None, toolbar_gadget=None, eraser_size=3, parent=None):
         super(GraphicsViewTest, self).__init__(parent)
         # 设置拖拽描述 橡皮筋？
 
@@ -204,6 +204,7 @@ class GraphicsViewTest(GraphicsView):
         self.temp_gadget = self.gadget
         self.temp_cursor = self.cursor()
 
+        self._mark_item_manager = item_manager
         self._eraser_size = eraser_size
 
         # 上一次鼠标触发的位置
@@ -215,8 +216,7 @@ class GraphicsViewTest(GraphicsView):
         self.last_cursor_pos = QPoint()
         self.polygon_points = []
 
-        self._eraser_cursor_img = QPixmap(QImage("../../Sources/Icons/circle-cursor.png"))
-        # self._eraser_cursor_img = self._eraser_cursor_img.scaled(self.)
+        self._eraser_cursor_img = QPixmap(QImage("../Sources/Icons/circle-cursor.png"))
 
         self.click_signal.connect(self.left_mouse_click)
         self.dragging_signal.connect(self.left_mouse_press_and_moving)
@@ -416,6 +416,9 @@ class GraphicsViewTest(GraphicsView):
             QGraphicsView.mousePressEvent(self, event)
             return
 
+        if isinstance(pressed_item, OutlineItem):
+            self._mark_item_manager.set_selected_item(pressed_item)
+
         if self.gadget == ToolsToolBar.MoveImageTool:
             self.is_mouse_pressed = True
             event.accept()
@@ -490,24 +493,6 @@ class GraphicsViewTest(GraphicsView):
             event.accept()
         else:
             QGraphicsView.mouseReleaseEvent(self, event)
-
-    # def wheelEvent(self, event: QWheelEvent) -> None:
-    #     """"""
-    #     d_value = event.angleDelta().y() / 120
-    #     d_value = -4 * d_value
-    #     if event.modifiers() & Qt.ShiftModifier:
-    #         horizontal_scrollbar = self.horizontalScrollBar()
-    #         if horizontal_scrollbar.isVisible():
-    #             value = horizontal_scrollbar.value()
-    #             horizontal_scrollbar.setValue(value + d_value)
-    #     elif event.modifiers() & Qt.ControlModifier:
-    #         factor = 1.09 if d_value < 0 else 0.91
-    #         self.zoom_by_given_factor(factor, factor)
-    #     else:
-    #         vertical_scrollbar = self.verticalScrollBar()
-    #         if vertical_scrollbar.isVisible():
-    #             value = vertical_scrollbar.value()
-    #             vertical_scrollbar.setValue(value + d_value)
 
     def keyPressEvent(self, event: QKeyEvent) -> None:
 

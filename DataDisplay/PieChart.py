@@ -3,11 +3,11 @@
 # @Author  : 何盛信
 # @Email   : 2958029539@qq.com
 # @File    : PieChart.py
-# @Project : LSRMSingalVersion3
+# @Project : LSRMSingleVersion3
 # @Software: PyCharm
 
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QDialog, QVBoxLayout
+from PyQt5.QtWidgets import QDialog, QVBoxLayout
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont, QPen, QPainter
 from PyQt5.QtChart import QPieSeries, QChartView

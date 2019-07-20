@@ -2,8 +2,7 @@ import os
 import sys
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDialog, QGridLayout, \
-    QWidget, QApplication, \
-    QLineEdit, QFileDialog, QMessageBox, \
+    QApplication,  QLineEdit, QFileDialog, QMessageBox, \
     QLabel, QPushButton, QDialogButtonBox
 
 

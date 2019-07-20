@@ -365,7 +365,6 @@ class QtPropertyEditorView(QTreeWidget):
             painter.drawLine(opt.rect.x(), opt.rect.bottom(), opt.rect.right(), opt.rect.bottom())
             painter.restore()
         except OverflowError:
-            print(color)
             color = 100
             painter.setPen(QPen(QColor(color)))
             painter.drawLine(opt.rect.x(), opt.rect.bottom(), opt.rect.right(), opt.rect.bottom())

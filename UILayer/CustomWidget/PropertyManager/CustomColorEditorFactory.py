@@ -3,11 +3,14 @@
 # @Author  : 何盛信
 # @Email   : 2958029539@qq.com
 # @File    : CustomColorEditorFactory.py
-# @Project : LSRMSingalVersion3
+# @Project : LSRMSingleVersion3
 # @Software: PyCharm
 
-from lib.QtProperty.qttreepropertybrowser import *
-from lib.QtProperty.qteditorfactory import *
+from PyQt5.QtWidgets import QWidget, QLabel
+from PyQt5.QtGui import QColor, QBrush
+from PyQt5.QtCore import pyqtSignal
+from lib.QtProperty.qteditorfactory import EditorFactoryPrivate, QtPropertyBrowserUtils, \
+    registerEditorFactory, QtAbstractEditorFactory
 
 
 class MyColorEditWidget(QWidget):

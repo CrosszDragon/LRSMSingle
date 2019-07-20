@@ -3,7 +3,7 @@
 # @Author  : 何盛信
 # @Email   : 2958029539@qq.com
 # @File    : Id.py
-# @Project : LSRMSingalVersion3
+# @Project : LSRMSingleVersion3
 # @Software: PyCharm
 
 
