@@ -17,12 +17,37 @@ class Stream(QDataStream):
     MAGIC_NUMBER = 0x3051E
     FILE_VERSION = 100
 
+    _support_format = (".mfb",)
+    _support_image_format = (".png", ".jpg", ".tif")
+
     def __init__(self, file: QFile):
         super(QDataStream, self).__init__(file)
 
     @staticmethod
     def formats():
-        return "*.mfb *.mib"
+        result = ""
+        for _format in Stream._support_format:
+            result += ("*" + _format + " ")
+        result = "(" + result[:-1] + ")"
+        return result
+
+    @staticmethod
+    def support_format_with(test_format: str):
+        b = test_format in Stream._support_format
+        return test_format in Stream._support_format
+
+    @staticmethod
+    def support_image_formats():
+        result = ""
+        for _format in Stream._support_image_format:
+            result += ("*" + _format + " ")
+        result = "(" + result[:-1] + ")"
+        return result
+
+    @staticmethod
+    def support_image_format_with(test_format):
+        b = test_format in Stream._support_image_format
+        return test_format in Stream._support_image_format
 
     def __lshift__(self, other):
         if isinstance(other, str):

@@ -295,6 +295,10 @@ class Project(ProjectObject):
     def image_path(self):
         return self._image_path
 
+    @image_path.setter
+    def image_path(self, new_path):
+        self._image_path = new_path
+
     @property
     def file_name(self):
         return self._file_name

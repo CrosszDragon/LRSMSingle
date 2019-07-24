@@ -14,7 +14,7 @@ from PyQt5.QtGui import QIcon
 from UILayer.CustomWidget.DockWidget import DockWidget
 from Documents.HistoryProject import HistoryProjectManager
 from Documents.ProjectDocument import ProjectDocument
-from IOFomat.MarkFile import ProjectFormat
+from IOFormat.MarkFile import ProjectFormat
 from Algorithm.calculation import get_projects_area_data
 from DataDisplay.PolygonalChart import PolygonalChart
 
@@ -86,7 +86,6 @@ class Thumbnail(DockWidget):
 
         self._is_synchronize_checked = QCheckBox("同步", self)
         self._is_synchronize_checked.setChecked(True)
-        # self._is_synchronize_checked.to
         self._is_synchronize_checked.toggled.connect(self.synchronize_changed_signal)
         toolbar.addSeparator()
         toolbar.addWidget(self._is_synchronize_checked)

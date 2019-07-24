@@ -59,5 +59,5 @@ class Ui_NoEditorWidget(object):
         NoEditorWidget.setWindowTitle(_translate("NoEditorWidget", "Form"))
         self.title.setText(_translate("NoEditorWidget", "没有打开的文件"))
         self.open_project_btn.setText(_translate("NoEditorWidget", "打开项目..."))
-        self.open_image_btn.setText(_translate("NoEditorWidget", "打开图片..."))
+        self.open_image_btn.setText(_translate("NoEditorWidget", "打开项目为..."))
         self.new_project_button.setText(_translate("NoEditorWidget", "新建项目"))

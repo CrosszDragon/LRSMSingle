@@ -63,6 +63,7 @@ class MainWindowUI(object):
         # 由于要显示最近打开的文件 我们要动态的显示这个菜单
         self.new_project_action = create_action(main_window, "新建项目(N)...", "Ctrl+N")
         self.open_project_action = create_action(main_window, "打开项目(O)...", "Ctrl+O")
+        self.open_project_as_action = create_action(main_window, "打开项目为...", "Shift+O")
         self.open_original_image_action = create_action(main_window, "打开原始图片...", "Shift+Ctrl+O")
 
         self.save_project_action = create_action(main_window, "保存项目(S)", "Ctrl+S")
@@ -83,7 +84,8 @@ class MainWindowUI(object):
         self.close_project_action.setEnabled(False)
         # 先这些动作组织保存起来 等文件菜单aboutToShow时用
         self.file_menu_actions = [
-            self.new_project_action, self.open_project_action, self.open_original_image_action, None,
+            self.new_project_action, self.open_project_action, self.open_project_as_action,
+            self.open_original_image_action, None,
             self.close_project_action, self.close_action, self.close_all_action, None,
             self.save_project_action, self.save_project_as_action, self.save_all_action, None,
             self.import_action, self.export_action, None, self.project_info_action, None, self.quit_action

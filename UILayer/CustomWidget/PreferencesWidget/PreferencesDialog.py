@@ -10,14 +10,13 @@ from PyQt5.QtWidgets import QDialog
 from PyQt5.QtCore import Qt, QEvent
 
 from WindowStyle.Preferences import ApplicationStyle, Preferences
-from UILayer.CustomWidget.PreferncesWidget.prefrencesUi import UiPreferencesDialog
+from UILayer.CustomWidget.PreferencesWidget.preferencesUi import UiPreferencesDialog
 
 
 class PreferencesDialog(QDialog, UiPreferencesDialog):
 
     def __init__(self, parent=None):
         QDialog.__init__(self, parent)
-        # UiPreferencesDialog.__init__(self)
 
         self._setupUi(self)
         self.setWindowTitle("首选项")

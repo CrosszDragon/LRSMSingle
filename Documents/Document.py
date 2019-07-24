@@ -20,7 +20,7 @@ from CommonHelpers.MatToImg import mat_to_img
 from Algorithm.doubleArea_distinguish import detect_outline
 from HistoryManage.Command import AddItemCommand, MoveItemCommand, AddSelectionItem
 
-from IOFomat.MarkFile import ProjectFormat
+from IOFormat.MarkFile import ProjectFormat
 from UILayer.Workbench.GraphicsView import GraphicsViewTest, QPainterPath
 from UILayer.Workbench.BorderItem import SelectionItem, OutlineItem
 from Documents.HistoryProject import HistoryProjectManager
@@ -42,7 +42,7 @@ class Document(QWidget, ProjectDocument):
     selected_mark_item_changed = pyqtSignal(MarkItem)
 
     def __init__(self, gadget, toolbar_gadget, file_name=None, project_name=None,
-                 image_path=None, person_name=None, parent=None, eraser_size=3, project=None):
+                 image_path=None, person_name=None, parent=None, eraser_size=3):
         super(Document, self).__init__(parent)
         ProjectDocument.__init__(self, parent=parent)
 
@@ -54,6 +54,7 @@ class Document(QWidget, ProjectDocument):
         self._modifier = False
 
         self._project = Project(image_path, file_name, project_name, person_name)
+        self._image_path = image_path if image_path else self._project.image_path
 
         self._current_tool = gadget
         self._selection_option = toolbar_gadget
@@ -174,8 +175,10 @@ class Document(QWidget, ProjectDocument):
 
     def set_project(self, project: Project):
         self._project = project
+        if not self._image_path:
+            self._image_path = project.image_path
         if not self._is_big_img:
-            self.load_document()
+            self.load_document(self._image_path)
         for mark_item in self._project.get_mark_items():
             self.add_mark_item(mark_item)
 

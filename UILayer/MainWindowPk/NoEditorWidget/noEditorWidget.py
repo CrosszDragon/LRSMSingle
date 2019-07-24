@@ -20,9 +20,7 @@ class NoEditorWidget(QtWidgets.QWidget, Ui_NoEditorWidget):
 
         self.new_project_button.clicked.connect(ActionManager.action(Id("NewProject")).trigger)
         self.open_project_btn.clicked.connect(ActionManager.action(Id("OpenProject")).trigger)
-        # self.open_image_btn.clicked.connect(ActionManager.action(Id("OpenOriginalImage")).trigger)
-
-        self.open_image_btn.setEnabled(False)
+        self.open_image_btn.clicked.connect(ActionManager.action(Id("OpenProjectAs")).trigger)
 
 
 if __name__ == '__main__':

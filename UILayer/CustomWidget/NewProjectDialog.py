@@ -74,7 +74,7 @@ class NewProjectDialog(QDialog):
         self.project_location_edit.setText(project_directory)
 
     def _get_image_location(self):
-        file_format = "Image files (*.png *.jpg *.ico *tif)"
+        file_format = "Image files (*.png *.jpg *tif)"
         image_file = QFileDialog.getOpenFileName(
             self, "选择原始图片",
             self.img_last_dir,

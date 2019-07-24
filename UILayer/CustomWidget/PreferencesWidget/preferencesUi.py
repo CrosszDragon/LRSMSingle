@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtWidgets
-from ..PreferncesWidget.ColorButton import ColorButton
+from ..PreferencesWidget.ColorButton import ColorButton
 
 
 class UiPreferencesDialog(QtCore.QObject):

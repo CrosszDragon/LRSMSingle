@@ -38,7 +38,7 @@ class Id:
 
 
 if __name__ == '__main__':
-    from IOFomat.MarkFile import ProjectFormat
+    from IOFormat.MarkFile import ProjectFormat
     reader_format = ProjectFormat()
 
     project = reader_format.read_project("D:/海秀镇轮廓标注.mfb")

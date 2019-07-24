@@ -30,7 +30,7 @@ class ProjectDocument(QObject):
 
     def set_project(self, project: Project):
         self._project = project
-        self.load_document()
+        self.load_document(project.image_path)
         self.load_mark_items()
 
     def project(self) -> Project:
@@ -59,14 +59,13 @@ class ProjectDocument(QObject):
         if self._project:
             return self._project.project_full_path()
 
-    def load_document(self):
-        image = QImage(self._project.image_path)
-        print(self._project.image_path + "    ", image.format())
+    def load_document(self, image_path):
+        image = QImage(image_path)
 
         self._workbench_scene.setSceneRect(0, 0, image.width(), image.height())
         if image.isNull():
             del self
-            raise FileOpenFailException(self._project.image_path)
+            raise FileOpenFailException(image_path)
         else:
             self._image = image
             self._pixmap = QPixmap.fromImage(self._image)

@@ -2,10 +2,10 @@ import os
 import sys
 
 from PyQt5.QtCore import Qt, pyqtSignal, QFile, QSettings, QTimer, QVariant
-from PyQt5.QtGui import QPalette, QColor, QPixmapCache
+from PyQt5.QtGui import QPalette, QColor, QPixmapCache, QIcon
 from PyQt5.QtWidgets import QMainWindow, QTabWidget, QFileDialog, QMessageBox, QUndoGroup, QApplication, QAction
 
-from IOFomat.MarkFile import ProjectFormat
+from IOFormat.MarkFile import ProjectFormat, Stream
 from CommonHelpers.CommonHelper import create_action, add_actions
 from CONSTs.CONST import GadgetDockWidgetState, ToolbarState
 from UILayer.CustomWidget.NewProjectDialog import NewProjectDialog
@@ -20,7 +20,8 @@ from UILayer.ProgressBar.Progress import Progress
 from Documents.MarkData import Project, MarkItem
 from DataDisplay.PieChart import PieChart
 from Algorithm.calculation import count_project_data_area, count_project_data_perimeter
-from UILayer.CustomWidget.PreferncesWidget.PreferencesDialog import PreferencesDialog
+from UILayer.CustomWidget.PreferencesWidget.PreferencesDialog import PreferencesDialog
+from UILayer.CustomWidget.OpenProjectAsWidget.OpenProjectAsDialog import OpenProjectAsDialog
 
 
 class WindowStateData(object):
@@ -37,6 +38,7 @@ class MainWindow(QMainWindow, MainWindowUI):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
         super(MainWindow, self)._init_ui(self)
+        self.setWindowIcon(QIcon("../Sources/Icons/app-icon.png"))
 
         self._action_manager = ActionManager.instance(self)
         self._undo_group = QUndoGroup(self)
@@ -179,6 +181,7 @@ class MainWindow(QMainWindow, MainWindowUI):
         ActionManager.register_action(self.new_project_action, Id("NewProject"))
         ActionManager.register_action(self.open_project_action, Id("OpenProject"))
         ActionManager.register_action(self.open_original_image_action, Id("OpenOriginalImage"))
+        ActionManager.register_action(self.open_project_as_action, Id("OpenProjectAs"))
         ActionManager.register_action(self.save_project_action, Id("SaveProject"))
         ActionManager.register_action(self.save_project_as_action, Id("SaveProjectAs"))
         ActionManager.register_action(self.save_all_action, Id("SaveAll"))
@@ -254,6 +257,7 @@ class MainWindow(QMainWindow, MainWindowUI):
         self.file_menu.aboutToShow.connect(self.update_file_menu)
         self.new_project_action.triggered.connect(self.create_new_project)
         self.open_original_image_action.triggered.connect(self.open_file)
+        self.open_project_as_action.triggered.connect(self.open_project_as)
         self.save_project_action.triggered.connect(self.save_project)
         self.open_project_action.triggered.connect(self.open_project)
         self.close_all_action.triggered.connect(self.close_all_file)
@@ -328,17 +332,33 @@ class MainWindow(QMainWindow, MainWindowUI):
     def open_project(self):
         dir_ = os.path.dirname(self.window_state_data.recent_files[0]) \
             if self.window_state_data.recent_files else os.path.dirname(".")
-        file_format = "IProject files (*.mfb)"
+        file_format = "IProject files " + Stream.formats()
         file_name = QFileDialog.getOpenFileName(self, "选择标注项目", dir_, file_format)[0]
 
         if file_name:
             is_open, index = self.is_open_this(file_name)
             if not is_open:
-                message = self.open_document(file_name)
+                message = self.create_document_by_project_path(file_name)
             else:
-                message = "文件 %s 已经打开" % file_name
+                message = "项目 %s 已经打开" % file_name
                 self.center_tab_widget.setCurrentIndex(index)
             self.statusBar().showMessage(message, 5000)
+
+    def open_project_as(self):
+        image_last_dir = os.path.dirname(self.window_state_data.recent_files[0]) \
+            if self.window_state_data.recent_files else os.path.dirname(".")
+
+        message = "   "
+        open_project_as_dialog = OpenProjectAsDialog(img_last_dir=image_last_dir, parent=self)
+        if open_project_as_dialog.exec_():
+            project_path, image_path, is_changed_img_path = open_project_as_dialog.get_project_info()
+            is_open, index = self.is_open_this(project_path)
+            if not is_open:
+                message = self.create_document_by_other_img_path(project_path, image_path, is_changed_img_path)
+            else:
+                message = "项目 %s 已经打开" % project_path
+                self.center_tab_widget.setCurrentIndex(index)
+        self.statusBar().showMessage(message, 5000)
 
     def closeEvent(self, event):
         if self._has_editor:
@@ -453,7 +473,7 @@ class MainWindow(QMainWindow, MainWindowUI):
             dir_ = os.path.dirname(self.window_state_data.recent_files[0]) \
                 if self.window_state_data.recent_files else os.path.dirname(".")
             # 打开一个 文件选择对口框
-            file_format = "Image files (*.png *.jpg *.ico *tif)"
+            file_format = "Image files " + Stream.support_image_formats()
             file_name = QFileDialog.getOpenFileName(self, "选择遥感图片", dir_, file_format)[0]
 
         if file_name:
@@ -494,7 +514,7 @@ class MainWindow(QMainWindow, MainWindowUI):
                 return
             is_open, index = self.is_open_this(file_name)
             if not is_open:
-                self.open_document(file_name)
+                self.create_document_by_project_path(file_name)
             else:
                 self.center_tab_widget.setCurrentIndex(index)
 
@@ -664,46 +684,65 @@ class MainWindow(QMainWindow, MainWindowUI):
 
     def update_close_button_enabled(self):
         is_tab_empty = self.center_tab_widget.count() != 0
-        self.file_menu_actions[4].setEnabled(is_tab_empty)
         self.file_menu_actions[5].setEnabled(is_tab_empty)
         self.file_menu_actions[6].setEnabled(is_tab_empty)
+        self.file_menu_actions[7].setEnabled(is_tab_empty)
 
-    def open_document(self, file_name):
-        self.setCursor(Qt.WaitCursor)
+    def create_document_by_project_path(self, project_path):
 
         reader_format = ProjectFormat()
-        project = reader_format.read_project(file_name)
+        project = reader_format.read_project(project_path)
 
         if not project:
-            return
+            return ""
         if not os.path.exists(project.image_path):
-            QMessageBox.critical(self, "打开最近文件", "找不到原始图片：" + file_name)
-            return
+            QMessageBox.critical(self, "打开最近文件", "找不到原始图片：" + project_path)
+            return ""
 
         new_doc = Document(
             image_path=project.image_path,
             gadget=self._tools_toolbar.current_tools(),
             toolbar_gadget=self._selection_toolbar.current_selection_option(),
             eraser_size=self._eraser_toolbar.current_eraser_size(),
-            project=project
         )
         new_doc.reader_format = reader_format
+        return self.open_document(project, new_doc)
+
+    def create_document_by_other_img_path(self, project_path, image_path, is_change_img_path):
+        reader_format = ProjectFormat()
+        project = reader_format.read_project(project_path)
+
+        if not project:
+            return " "
+
+        if is_change_img_path:
+            project.image_path = image_path
+            reader_format.save_project(project)
+
+        new_doc = Document(
+            image_path=image_path,
+            gadget=self._tools_toolbar.current_tools(),
+            toolbar_gadget=self._selection_toolbar.current_selection_option(),
+            eraser_size=self._eraser_toolbar.current_eraser_size(),
+        )
+        new_doc.reader_format = reader_format
+        return self.open_document(project, new_doc)
+
+    def open_document(self, project:Project, new_doc: Document):
+
+        if not self._has_editor:
+            self._show_document_widget()
 
         self.project_dock_widget.create_project(project)
         new_doc.added_mark_item.connect(self.project_dock_widget.add_mark_item)
         new_doc.selected_mark_item_changed.connect(self.project_dock_widget.selected_mark_changed)
         new_doc.set_project(project)
 
-        if not self._has_editor:
-            self._show_document_widget()
-
         self._tools_toolbar.tools_changed.connect(new_doc.change_gadget)
         self._selection_toolbar.selection_option_changed.connect(new_doc.change_toolbar_gadget)
         self._eraser_toolbar.eraser_size_changed.connect(new_doc.eraser_size_changed)
         self.add_document(new_doc)
-
-        self.setCursor(Qt.ArrowCursor)
-        return ""
+        return " "
 
     def create_document(self, project_name, file_mame, image_path, person):
         try:
