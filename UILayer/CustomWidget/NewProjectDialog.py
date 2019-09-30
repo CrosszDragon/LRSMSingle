@@ -67,6 +67,10 @@ class NewProjectDialog(QDialog):
         self.select_pro_location_btn.clicked.connect(self._get_project_location)
         self.select_img_location_btn.clicked.connect(self._get_image_location)
 
+        self.project_name_edit.setText("test1")
+        self.person_name_edit.setText("test")
+        self.project_location_edit.setText("F:/")
+
     def _get_project_location(self):
         project_directory = QFileDialog.getExistingDirectory(
             self, "项目位置",
@@ -111,8 +115,8 @@ class NewProjectDialog(QDialog):
             pass
 
         project_directory = self.project_location_edit.text()
-        image_file = self.image_location_edit.text()
-        project_name = self.project_name_edit.text()
+        # image_file = self.image_location_edit.text()
+        # project_name = self.project_name_edit.text()
 
         try:
             if not os.path.exists(project_directory[:3]):
@@ -121,6 +125,11 @@ class NewProjectDialog(QDialog):
             QMessageBox.critical(self, "新建项目", "项目位置无效，请输入正确的项目位置！")
             return
         QDialog.accept(self)
+
+    def __str__(self):
+        return "project name: " + self.project_name_edit.text() + "\n" \
+               + "project location: " + self.project_location_edit.text() + "\n" \
+               + "image path: " + self.image_location_edit.text()
 
 
 if __name__ == '__main__':

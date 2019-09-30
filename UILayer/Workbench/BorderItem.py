@@ -1,3 +1,5 @@
+import copy
+
 from PyQt5.QtCore import Qt, QPoint, QTimer, QRectF, pyqtSignal, QRect
 from PyQt5.QtGui import QPainterPath, QPen, QPainter, QBrush, QTransform
 from PyQt5.QtWidgets import QGraphicsObject, QGraphicsItem, QMenu
@@ -40,21 +42,27 @@ class BorderItem(QGraphicsObject):
             scene.clearSelection()
             scene.addItem(self)
 
+    def is_empty(self):
+        return self._item_path.isEmpty()
+
     def get_path(self):
         return self._item_path
 
     def get_scene_path(self):
         return self.mapToScene(self.get_path())
 
-    def set_item_path(self, **kwargs):
-        keys = tuple(kwargs.keys())
-        if 'width' in keys and 'height' in keys:
-            self._item_path = QPainterPath(QPoint(0, 0))
-            self._item_path.addRect(QRectF(0, 0, kwargs["width"], kwargs["height"]))
-            print("item path: ", self._item_path)
-            self.update(self.boundingRect())
-        elif tuple(kwargs.keys()) == ("path", ):
-            self._item_path = kwargs["path"]
+    def copy(self):
+        new_item = SelectionItem(
+            position=self.scenePos(),
+            scene=None,
+            view_scale=1,
+            path=self._item_path,
+            shape=self.get_shape(),
+            transform=self.transform(),
+            parent=self.parent()
+        )
+        new_item.pen = self.pen
+        return new_item
 
     def set_item_path_by_size(self, width=0, height=0):
         self._item_path = QPainterPath(QPoint(0, 0))
@@ -64,9 +72,23 @@ class BorderItem(QGraphicsObject):
     def set_item_path_by_path(self, path):
         self._item_path = path
 
-    def set_pen_width(self, width: [int, float]):
+    def set_pen_width_by_scale(self, width: [int, float]):
         pen_width = adjust_pen_width(PEN_STANDARD_WIDTH, width)
         self._pen.setWidthF(pen_width)
+
+    def set_pen_width_by_width(self, width: [int, float]):
+        if isinstance(width, int):
+            self._pen.setWidth(width)
+        elif isinstance(width, float):
+            self._pen.setWidthF(width)
+
+    @property
+    def pen(self):
+        return self._pen
+
+    @pen.setter
+    def pen(self, new_pen: QPen):
+        self._pen = new_pen
 
     def update_value(self):
         """"""
@@ -125,8 +147,10 @@ class BorderItem(QGraphicsObject):
         p1 = self.mapToScene(self._item_path)
         p2 = other.mapToScene(other.get_path())
         new_path = self.mapFromScene(p1 + p2)
-        self._item_path = new_path
-        return self
+
+        new_item = self.copy()
+        new_item.set_item_path_by_path(new_path)
+        return new_item
 
     def __iadd__(self, other):
         """
@@ -151,9 +175,10 @@ class BorderItem(QGraphicsObject):
         p2 = other.mapToScene(other.get_path())
         new_path = self.mapFromScene(p1 - p2)
         new_path.closeSubpath()
-        self._item_path = new_path
-        self.update()
-        return self
+
+        new_item = self.copy()
+        new_item.set_item_path_by_path(new_path)
+        return new_item
 
     def __isub__(self, other):
         """
@@ -179,9 +204,10 @@ class BorderItem(QGraphicsObject):
         p2 = other.mapToScene(other.get_path())
         new_path = self.mapFromScene(p1 & p2)
         new_path.closeSubpath()
-        self._item_path = new_path
-        self.update()
-        return self
+
+        new_item = self.copy()
+        new_item.set_item_path_by_path(new_path)
+        return new_item
 
     def __iand__(self, other):
         """
@@ -301,7 +327,10 @@ class SelectionItem(BorderItem):
 
     def parentWidget(self):
         # 返回场景的第一个视图
-        return self.scene().views()[0]
+        scene = self.scene()
+        if scene:
+            return scene.views()[0]
+        return None
 
     def itemChange(self, change, variant):
         if change == QGraphicsItem.ItemPositionChange:
@@ -391,14 +420,14 @@ class OutlineItem(BorderItem):
     def get_path(self) -> QPainterPath:
         return self._mark_item.get_outline()
 
-    def __isub__(self, other):
+    def __isub__(self, other: BorderItem):
         p1 = self.mapToScene(self.get_path())
         p2 = other.mapToScene(other.get_path())
         self._mark_item.set_outline(self.mapFromScene(p1 - p2))
         self.update()
         return self
 
-    def __iadd__(self, other):
+    def __iadd__(self, other: BorderItem):
         p1 = self.mapToScene(self.get_path())
         p2 = other.mapToScene(other.get_path())
         self._mark_item.set_outline(self.mapFromScene(p1 + p2))
@@ -423,7 +452,7 @@ class OutlineItem(BorderItem):
             painter.drawPath(self._mark_item.get_outline())
         if self._selected:
             pen = QPen(self._pen)
-            pen.setWidth(self._pen.widthF() + 0.8)
+            pen.setWidthF(self._pen.widthF() + 0.8)
 
             pen.setColor(Qt.white)
             pen.setDashPattern(self._dash_pattern)

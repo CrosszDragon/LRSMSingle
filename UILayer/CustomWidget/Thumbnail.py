@@ -68,19 +68,19 @@ class Thumbnail(DockWidget):
 
     # 创建工具栏
     def __create_tool_bar(self, toolbar):
-        self.new_action = QAction(QIcon("../Sources/Icons/22x22/add.png"), "添加", self)
+        self.new_action = QAction(QIcon(":/add.png"), "添加", self)
         self.new_action.triggered.connect(self.open_new_project)
         toolbar.addAction(self.new_action)
 
-        self.delete_action = QAction(QIcon('../Sources/Icons/22x22/remove.png'), "关闭", self)
+        self.delete_action = QAction(QIcon(':/remove.png'), "关闭", self)
         self.delete_action.triggered.connect(self.remove_project)
         toolbar.addAction(self.delete_action)
 
-        self.analysis = QAction(QIcon("../Sources/Icons/24x24/fenxi.png"), "历史数据分析", parent=self)
+        self.analysis = QAction(QIcon(":/fenxi.png"), "历史数据分析", parent=self)
         self.analysis.triggered.connect(self.analysis_all_project)
         toolbar.addAction(self.analysis)
 
-        self.analysis_compare = QAction(QIcon("../Sources/Icons/24x24//duibifenxi.png"), "数据对比", parent=self)
+        self.analysis_compare = QAction(QIcon("://duibifenxi.png"), "数据对比", parent=self)
         toolbar.addAction(self.analysis_compare)
         self.analysis_compare.triggered.connect(self.analysis_project_with)
 

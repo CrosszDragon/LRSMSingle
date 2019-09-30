@@ -156,6 +156,7 @@ class MainWindowUI(object):
         self.quick_select_menu = add_menu("选择工具", self.mark_menu, "quick_select_menu")
         self.mark_menu.addSeparator()
         self.ai_detect_menu = add_menu("智能轮廓检测", self.mark_menu, "ai_detect_menu")
+        self.ai_detect_menu.setEnabled(False)
         self.outline_detect_menu = add_menu("轮廓检测(D)", self.mark_menu, "outline_detect_menu")
         self.outline_correction_menu = add_menu("轮廓微调", self.mark_menu, "outline_correction_menu")
 

@@ -38,7 +38,7 @@ class MainWindow(QMainWindow, MainWindowUI):
     def __init__(self, parent=None):
         super(MainWindow, self).__init__(parent)
         super(MainWindow, self)._init_ui(self)
-        self.setWindowIcon(QIcon("../Sources/Icons/app-icon.png"))
+        self.setWindowIcon(QIcon(":/app-icon.png"))
 
         self._action_manager = ActionManager.instance(self)
         self._undo_group = QUndoGroup(self)
@@ -430,10 +430,10 @@ class MainWindow(QMainWindow, MainWindowUI):
         recent_project_menu = self.file_menu.addMenu("打开最近的项目(P)...")
         if self.window_state_data.recent_projects:
             for i, project_name in enumerate(self.window_state_data.recent_projects):
-                dir_file_name = os.path.basename(project_name)
+                # dir_file_name = os.path.basename(project_name)
                 action = create_action(
                     parent=recent_project_menu,
-                    text=str(i + 1) + " " + dir_file_name,
+                    text=str(i + 1) + " " + project_name,
                     slot=self._open_project_from_recent)
                 action.setData(QVariant(project_name))
                 recent_project_menu.addAction(action)
@@ -639,16 +639,6 @@ class MainWindow(QMainWindow, MainWindowUI):
             self._undo_group.setActiveStack(current_doc.undo_stack())
             self.update_actions(index)
 
-    def undo(self):
-        """"""
-        # current_tab = self.center_tab_widget.currentWidget()
-        # current_tab.undo()
-
-    def redo(self):
-        """"""
-        # current_tab = self.center_tab_widget.currentWidget()
-        # current_tab.redo()
-
     def export_result(self):
         current_doc = self.center_tab_widget.currentWidget()
         if current_doc and isinstance(current_doc, Document):
@@ -656,9 +646,12 @@ class MainWindow(QMainWindow, MainWindowUI):
                 self, "导出tif", current_doc.get_project_name(),
                 "Images (*.tif)", self.window_state_data.recent_projects[0]
             )
-            _progress = Progress()
-            _progress.setHidden(True)
-            current_doc.export_result(path, _progress)
+            print("---------- dir name: ", os.path.dirname(path))
+            print("---------- base name: ", os.path.basename(path))
+            if os.path.exists(os.path.dirname(path)) and os.path.basename(path):
+                _progress = Progress()
+                _progress.setHidden(True)
+                current_doc.export_result(path, _progress)
 
     def open_preferences_dialog(self):
 
@@ -741,6 +734,7 @@ class MainWindow(QMainWindow, MainWindowUI):
         self._tools_toolbar.tools_changed.connect(new_doc.change_gadget)
         self._selection_toolbar.selection_option_changed.connect(new_doc.change_toolbar_gadget)
         self._eraser_toolbar.eraser_size_changed.connect(new_doc.eraser_size_changed)
+        self._eraser_toolbar.selection_option_changed.connect(new_doc.change_eraser_option)
         self.add_document(new_doc)
         return " "
 
@@ -754,7 +748,7 @@ class MainWindow(QMainWindow, MainWindowUI):
                 project_name=project_name,
                 image_path=image_path,
                 person_name=person
-            )
+            )  # type: Document
             project = new_doc.project()
             self.project_dock_widget.create_project(project)
             new_doc.added_mark_item.connect(self.project_dock_widget.add_mark_item)
@@ -766,6 +760,7 @@ class MainWindow(QMainWindow, MainWindowUI):
             self._tools_toolbar.tools_changed.connect(new_doc.change_gadget)
             self._eraser_toolbar.eraser_size_changed.connect(new_doc.eraser_size_changed)
             self._selection_toolbar.selection_option_changed.connect(new_doc.change_toolbar_gadget)
+            self._eraser_toolbar.selection_option_changed.connect(new_doc.change_eraser_option)
 
             self.add_document(new_doc)
             return "打开文件\"" + file_mame + "\"成功"
@@ -774,10 +769,11 @@ class MainWindow(QMainWindow, MainWindowUI):
             print(e.message)
             return e.message
         except AttributeError as e:
-            QMessageBox.critical(self, "创建项目", "创建项目失败：" + e.__str__())
+            QMessageBox.critical(self, "创建项目", "创建项目失败1：" + e.__str__())
             return " "
         except Exception as e:
-            QMessageBox.critical(self, "创建项目", "创建项目失败：" + e.__str__())
+            print(e)
+            QMessageBox.critical(self, "创建项目", "创建项目失败2：" + e.__str__())
             return " "
 
     def add_document(self, document: Document):

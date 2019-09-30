@@ -18,7 +18,7 @@ class UndoDock(DockWidget):
         DockWidget.__init__(self, "历史", parent)
         self.setObjectName("undoViewDock")
         self._undo_view = QUndoView(self)
-        self._clear_icon = QIcon("../Sources/Icons/16x16/drive-harddisk.png")
+        self._clear_icon = QIcon(":/drive-harddisk.png")
 
         self._undo_view.setCleanIcon(self._clear_icon)
         self._undo_view.setUniformItemSizes(True)

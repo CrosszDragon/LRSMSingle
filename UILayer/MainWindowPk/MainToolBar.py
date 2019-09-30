@@ -46,18 +46,18 @@ class MainToolBar(QToolBar):
         self.setWindowTitle("Main Toolbar")
         self.setToolButtonStyle(Qt.ToolButtonFollowStyle)
 
-        new_icon = QIcon("../Sources/Icons/24x24/document-new.png")
-        open_icon = QIcon("../Sources/Icons/24x24/document-open.png")
-        save_icon = QIcon("../Sources/Icons/24x24/document-save.png")
-        export_icon = QIcon("../Sources/Icons/24x24/daochu.png")
-        undo_icon = QIcon("../Sources/Icons/24x24/edit-undo.png")
-        redo_icon = QIcon("../Sources/Icons/24x24/edit-redo.png")
+        new_icon = QIcon(":/document-new.png")
+        open_icon = QIcon(":/document-open.png")
+        save_icon = QIcon(":/document-save.png")
+        export_icon = QIcon(":/daochu.png")
+        undo_icon = QIcon(":/edit-undo.png")
+        redo_icon = QIcon(":/edit-redo.png")
 
-        new_icon.addFile("../Sources/Icons/16x16/document-new.png")
-        open_icon.addFile("../Sources/Icons/16x16/document-open.png")
-        save_icon.addFile("../Sources/Icons/16x16/document-save.png")
-        undo_icon.addFile("../Sources/Icons/16x16/edit-undo.png")
-        redo_icon.addFile("../Sources/Icons/16x16/edit-redo.png")
+        # new_icon.addFile(":/document-new.png")
+        # open_icon.addFile(":/document-open.png")
+        # save_icon.addFile(":/document-save.png")
+        # undo_icon.addFile(":/edit-undo.png")
+        # redo_icon.addFile(":/edit-redo.png")
 
         self._new_button.setIcon(new_icon)
         self._new_button.setToolTip("新建")
@@ -132,23 +132,23 @@ class SelectionOptionToolBar(QToolBar):
         self._intersect = QAction(self)
         self._action_group = QActionGroup(self)
 
-        self._replace.setIcon(QIcon("../Sources/Icons/16x16/selection-replace.png"))
+        self._replace.setIcon(QIcon(":/selection-replace.png"))
         self._replace.setCheckable(True)
         self._replace.setChecked(True)
         self._replace.setToolTip("新建选区")
         self._replace.setData(SelectionOptionToolBar.Replace)
 
-        self._add.setIcon(QIcon("../Sources/Icons/16x16/selection-add.png"))
+        self._add.setIcon(QIcon(":/selection-add.png"))
         self._add.setCheckable(True)
         self._add.setToolTip("添加到选区")
         self._add.setData(SelectionOptionToolBar.Add)
 
-        self._subtract.setIcon(QIcon("../Sources/Icons/16x16/selection-subtract.png"))
+        self._subtract.setIcon(QIcon(":/selection-subtract.png"))
         self._subtract.setCheckable(True)
         self._subtract.setToolTip("从选区中减去")
         self._subtract.setData(SelectionOptionToolBar.Subtract)
 
-        self._intersect.setIcon(QIcon("../Sources/Icons/16x16/selection-intersect.png"))
+        self._intersect.setIcon(QIcon(":/selection-intersect.png"))
         self._intersect.setCheckable(True)
         self._intersect.setToolTip("与选区相交")
         self._intersect.setData(SelectionOptionToolBar.Intersect)
@@ -179,9 +179,32 @@ class SelectionOptionToolBar(QToolBar):
 class EraserOptionToolBar(QToolBar):
 
     eraser_size_changed = pyqtSignal(int)
+    selection_option_changed = pyqtSignal(QAction)
 
     def __init__(self, parent=None):
         super(EraserOptionToolBar, self).__init__(parent)
+
+        self._add_action = QAction(self)
+        self._eraser_action = QAction(self)
+
+        self._add_action.setIcon(QIcon(":/selection-add.png"))
+        self._add_action.setCheckable(True)
+        self._add_action.setToolTip("扩展轮廓")
+        self._add_action.setData(SelectionOptionToolBar.Add)
+
+        self._eraser_action.setIcon(QIcon(":/selection-subtract.png"))
+        self._eraser_action.setCheckable(True)
+        self._eraser_action.setChecked(True)
+        self._eraser_action.setToolTip("擦除轮廓")
+        self._eraser_action.setData(SelectionOptionToolBar.Subtract)
+
+        self._action_group = QActionGroup(self)
+        self._action_group.addAction(self._add_action)
+        self._action_group.addAction(self._eraser_action)
+
+        self.addAction(self._add_action)
+        self.addAction(self._eraser_action)
+        self.addSeparator()
 
         self._spin_box = QSpinBox(self)
         self._spin_box.setMinimum(3)
@@ -189,9 +212,13 @@ class EraserOptionToolBar(QToolBar):
         self.addWidget(self._spin_box)
 
         self._spin_box.valueChanged.connect(self.eraser_size_changed)
+        self._action_group.triggered.connect(self.selection_option_changed)
 
     def current_eraser_size(self):
         return self._spin_box.value()
+
+    def current_option(self):
+        return self._action_group.checkedAction().data()
 
 
 class ToolsToolBar(QToolBar):
@@ -216,6 +243,7 @@ class ToolsToolBar(QToolBar):
 
     selection_option_changed = pyqtSignal(QAction)
     eraser_size_changed = pyqtSignal(int)
+    eraser_option_changed = pyqtSignal(QAction)
 
     def __init__(self, parent=None):
         super(ToolsToolBar, self).__init__(parent)
@@ -231,28 +259,28 @@ class ToolsToolBar(QToolBar):
         self._polygon_tool = ActionManager.action(Id("Polygon"))
         self._magic_tool = QAction()
 
-        self._browser_result_tool.setIcon(QIcon("../Sources/Icons/22x22/plugin.png"))
+        self._browser_result_tool.setIcon(QIcon(":/plugin.png"))
         self._browser_result_tool.setCheckable(True)
         self._browser_result_tool.setToolTip("预览结果")
         self._browser_result_tool.setData(ToolsToolBar.BrowserImageTool)
 
-        self._eraser_tool.setIcon(QIcon("../Sources/Icons/22x22/stock-tool-eraser.png"))
+        self._eraser_tool.setIcon(QIcon(":/stock-tool-eraser.png"))
         self._eraser_tool.setCheckable(True)
         self._eraser_tool.setToolTip("橡皮擦")
         self._eraser_tool.setData(ToolsToolBar.EraserTool)
 
-        self._rectangle_tool.setIcon(QIcon("../Sources/Icons/22x22/stock-tool-rect-select.png"))
+        self._rectangle_tool.setIcon(QIcon(":/stock-tool-rect-select.png"))
         self._rectangle_tool.setCheckable(True)
         self._rectangle_tool.setChecked(True)
         self._rectangle_tool.setToolTip("矩形选择框")
         self._rectangle_tool.setData(ToolsToolBar.RectangleTool)
 
-        self._polygon_tool.setIcon(QIcon("../Sources/Icons/24x24/tool-edit-polygons.png"))
+        self._polygon_tool.setIcon(QIcon(":/tool-edit-polygons.png"))
         self._polygon_tool.setCheckable(True)
         self._polygon_tool.setToolTip("多边形选择框")
         self._polygon_tool.setData(ToolsToolBar.PolygonTool)
 
-        self._magic_tool.setIcon(QIcon("../Sources/Icons/22x22/stock-tool-fuzzy-select-22.png"))
+        self._magic_tool.setIcon(QIcon(":/stock-tool-fuzzy-select-22.png"))
         self._magic_tool.setCheckable(True)
         self._magic_tool.setToolTip("魔法棒")
         self._magic_tool.setData(ToolsToolBar.MagicTool)
@@ -345,20 +373,20 @@ class ToolPopuplAction(QAction):
         self._intersect = QAction(self)
         self._action_group = QActionGroup(self)
 
-        self._replace.setIcon(QIcon("../Sources/Icons/16x16/selection-replace.png"))
+        self._replace.setIcon(QIcon(":/selection-replace.png"))
         self._replace.setCheckable(True)
         self._replace.setChecked(True)
         self._replace.setToolTip("新建选区")
 
-        self._add.setIcon(QIcon("../Sources/Icons/16x16/selection-add.png"))
+        self._add.setIcon(QIcon(":/selection-add.png"))
         self._add.setCheckable(True)
         self._add.setToolTip("添加到选区")
 
-        self._subtract.setIcon(QIcon("../Sources/Icons/16x16/selection-subtract.png"))
+        self._subtract.setIcon(QIcon(":/selection-subtract.png"))
         self._subtract.setCheckable(True)
         self._subtract.setToolTip("从选区中减去")
 
-        self._intersect.setIcon(QIcon("../Sources/Icons/16x16/selection-intersect.png"))
+        self._intersect.setIcon(QIcon(":/selection-intersect.png"))
         self._intersect.setCheckable(True)
         self._intersect.setToolTip("与选区相交")
 
@@ -386,7 +414,7 @@ if __name__ == '__main__':
     import os
     app = QApplication(sys.argv)
     print(os.getcwd())
-    icon = QIcon("../Sources/Icons/24x24/document-new.png")
+    icon = QIcon(":/document-new.png")
     print(icon.isNull())
     w = QMainWindow()
     w.setWindowIcon(icon)

@@ -9,6 +9,7 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QDialog
 from UILayer.ProgressBar.ProgressDialog import Ui_Dialog
+from PyQt5.QtWidgets import QApplication
 
 
 class Progress(QDialog, Ui_Dialog):
@@ -38,7 +39,6 @@ class Progress(QDialog, Ui_Dialog):
 
 
 if __name__ == '__main__':
-    from PyQt5.QtWidgets import QApplication
     import sys
 
     app = QApplication(sys.argv)

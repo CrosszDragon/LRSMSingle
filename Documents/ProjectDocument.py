@@ -25,6 +25,8 @@ class ProjectDocument(QObject):
         if project and isinstance(project, Project):
             self.set_project(project)
 
+        print(self._workbench_scene.sceneRect())
+
     def get_scene(self):
         return self._workbench_scene
 

@@ -8,7 +8,7 @@
 
 from PyQt5.QtWidgets import QProxyStyle, QStyle, QStyleOption, QStyleOptionComplex, QWidget
 from PyQt5.QtGui import QPainter
-from PyQt5.QtCore import QSize
+from PyQt5.QtCore import QSize, QLibrary, QLibraryInfo
 
 from WindowStyle.FunsionStyleHelper import *
 
@@ -24,8 +24,8 @@ class LRSMProxyStyle(QProxyStyle):
 
         self._palette = palette
         self._is_dark = palette.window().color().value() <= 128
-        self._dock_close_icon_path = "../Sources/Images/dock-close.png"
-        self._dock_restore_icon_path = "../Sources/Images/dock-restore.png"
+        self._dock_close_icon_path = ":/dock-close.png"
+        self._dock_restore_icon_path = ":/dock-restore.png"
 
         self.setObjectName("lrsm")
 
@@ -88,7 +88,6 @@ if __name__ == '__main__':
     from PyQt5.QtWidgets import QWidget, QApplication
 
     app = QApplication(sys.argv)
-
     frame = QWidget()
     frame.setWindowTitle("test")
 

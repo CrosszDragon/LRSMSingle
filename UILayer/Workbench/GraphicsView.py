@@ -216,7 +216,7 @@ class GraphicsViewTest(GraphicsView):
         self.last_cursor_pos = QPoint()
         self.polygon_points = []
 
-        self._eraser_cursor_img = QPixmap(QImage("../Sources/Icons/circle-cursor.png"))
+        self._eraser_cursor_img = QPixmap(QImage(":/circle-cursor.png"))
 
         self.click_signal.connect(self.left_mouse_click)
         self.dragging_signal.connect(self.left_mouse_press_and_moving)
@@ -366,7 +366,7 @@ class GraphicsViewTest(GraphicsView):
         path = self.counter_polygon_path()
         self.polygon_points = []
         path.closeSubpath()
-        self.border.set_item_path(path=path)
+        self.border.set_item_path_by_path(path=path)
         self.created_border()
 
     def creating_polygon(self, pos: QPoint):
@@ -377,7 +377,7 @@ class GraphicsViewTest(GraphicsView):
                     self.created_polygon()
                 else:
                     path = self.counter_polygon_path()
-                    self.border.set_item_path(path=path)
+                    self.border.set_item_path_by_path(path=path)
             else:
                 self.is_creating_polygon = True
                 self.border = SelectionItem(self.mapToScene(pos), self.scene(), self.transform().m11(),

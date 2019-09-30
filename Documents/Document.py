@@ -7,10 +7,9 @@
 # @Software: PyCharm
 import numpy as np
 
-
 from PyQt5.QtGui import QColor, QImage, QPolygonF, QPen
 from PyQt5.QtWidgets import QWidget, QUndoStack, \
-     QAction, QGraphicsItem, QMessageBox, QVBoxLayout, QSplitter
+    QAction, QGraphicsItem, QMessageBox, QVBoxLayout, QSplitter
 from PyQt5.QtCore import Qt, QPoint, pyqtSignal, QRect, QRectF
 from Documents.MarkData import Project, MarkItem
 from UILayer.MainWindowPk.MainToolBar import ToolsToolBar, SelectionOptionToolBar
@@ -28,21 +27,20 @@ from UILayer.CustomWidget.Thumbnail import Thumbnail
 from Documents.ProjectDocument import ProjectDocument
 from Manager.MarkItemManager import MarkItemManager
 from Algorithm.AIAlgorithm.AiDetect import detect_one
-from loadbig.load_big_grahpicsview import LoadIMGraphicsView
+from loadbig.load_big_graphicsview import LoadIMGraphicsView
 from loadbig.util import is_img_big
 from loadbig.slide_helper import SlideHelper
 from loadbig.img_from_rect import ImgFromRect
 
 
 class Document(QWidget, ProjectDocument):
-
     mark_item_created = pyqtSignal(MarkItem)
     added_mark_item = pyqtSignal(Project, MarkItem)
     browser_result_signal = pyqtSignal(bool)
     selected_mark_item_changed = pyqtSignal(MarkItem)
 
-    def __init__(self, gadget, toolbar_gadget, file_name=None, project_name=None,
-                 image_path=None, person_name=None, parent=None, eraser_size=3):
+    def __init__(self, gadget, toolbar_gadget, file_name=None, project_name=None, image_path=None, person_name=None,
+                 parent=None, eraser_size=3, eraser_option=SelectionOptionToolBar.Subtract):
         super(Document, self).__init__(parent)
         ProjectDocument.__init__(self, parent=parent)
 
@@ -59,6 +57,7 @@ class Document(QWidget, ProjectDocument):
         self._current_tool = gadget
         self._selection_option = toolbar_gadget
         self._eraser_size = eraser_size
+        self._eraser_option = eraser_option
 
         self.__current_index = -1
         self.__mouse_press_index = -1
@@ -85,6 +84,7 @@ class Document(QWidget, ProjectDocument):
             self.workbench_view.setScene(self._workbench_scene)
 
         self.workbench_view.setObjectName("workbench_view")
+        self.workbench_view.setContentsMargins(0, 0, 0, 0)
         self.workbench_view.setBackgroundBrush(QColor(147, 147, 147))
 
         # 布局
@@ -99,6 +99,7 @@ class Document(QWidget, ProjectDocument):
         self._splitter2.addWidget(self._splitter1)
 
         self.tab_vertical_layout.addWidget(self._splitter2)
+        self.tab_vertical_layout.setContentsMargins(0, 0, 0, 0)
 
         # 当前选择小工具
         self.change_gadget(gadget)
@@ -224,7 +225,7 @@ class Document(QWidget, ProjectDocument):
         return self.__undo_stack
 
     def create_document(self):
-        self.load_document()
+        self.load_document(self._image_path)
         self.save_project()
 
     def save_project(self):
@@ -265,13 +266,21 @@ class Document(QWidget, ProjectDocument):
             if self._selection_item:
                 self._selection_item -= border
         elif self._selection_option == SelectionOptionToolBar.Add:
-            self._selection_item = border if not self._selection_item else self._selection_item + border
+            if not self._selection_item:
+                self._selection_item = border
+            else:
+                self._selection_item += border
         elif self._selection_option == SelectionOptionToolBar.Intersect:
             if self._selection_item:
                 self._selection_item &= border
 
         if self._selection_item:
-            self.workbench_view.view_zoom_signal.connect(self._selection_item.set_pen_width)
+            if self._selection_item.is_empty():
+                self._workbench_scene.removeItem(self._selection_item)
+                self._selection_item = None
+                return
+
+            self.workbench_view.view_zoom_signal.connect(self._selection_item.set_pen_width_by_scale)
             self._selection_item.cancel_selection_signal.connect(self.cancel_selection)
             self._selection_item.as_mark_item_signal.connect(self.selection_as_mark_item)
             self._selection_item.reverse_select_signal.connect(self._select_reverser_path)
@@ -284,6 +293,9 @@ class Document(QWidget, ProjectDocument):
 
     def change_toolbar_gadget(self, toolbar_gadget: QAction):
         self._selection_option = toolbar_gadget.data()
+
+    def change_eraser_option(self, option_action: QAction):
+        self._eraser_option = option_action.data()
 
     def change_gadget(self, tool: QAction):
         if isinstance(tool, QAction):
@@ -455,7 +467,8 @@ class Document(QWidget, ProjectDocument):
             outline_path1, outline_path2 = self._get_outline_by_no_selection(numpy_array, detect_policy)
 
             if not self._selection_item:
-                self._selection_item = SelectionItem(QPoint(0, 0), self._workbench_scene, self.workbench_view.transform().m11())
+                self._selection_item = SelectionItem(QPoint(0, 0), self._workbench_scene,
+                                                     self.workbench_view.transform().m11())
                 path = QPainterPath()
                 path.addRect(QRectF(0, 0, self._image.width(), self._image.height()))
                 self._selection_item.set_item_path_by_path(path)
@@ -481,7 +494,7 @@ class Document(QWidget, ProjectDocument):
                     return
                 if isinstance(sub_img, QImage):
                     sub_img = qimage2numpy(sub_img)
-                outline_path1,  outline_path2 = self._get_outlines(sub_img, detect_policy)
+                outline_path1, outline_path2 = self._get_outlines(sub_img, detect_policy)
             self._to_create_mark_item(outline_path1, outline_path2)
 
     def correction_outline(self, option):
@@ -505,8 +518,20 @@ class Document(QWidget, ProjectDocument):
         self._selection_item = None
 
     def eraser_action(self, eraser_area: SelectionItem):
+        if self._selection_item:
+            eraser_area &= self._selection_item
+        if eraser_area.is_empty():
+            return
+
         mark_items = [item for item in self._workbench_scene
             .items(eraser_area.get_scene_path()) if isinstance(item, OutlineItem)]
+
+        # if self._eraser_option == SelectionOptionToolBar.Add:
+        #     selected_item = self._mark_item_manager.selected_mark_item()
+        #     if selected_item in mark_items:
+        #         selected_item += eraser_area
+        #     return
+
         for item in mark_items:
             if item.locked():
                 continue
@@ -530,7 +555,7 @@ class Document(QWidget, ProjectDocument):
         if flag:
             self._mark_item_to_outline_item[mark_item] = item
             self.browser_result_signal.connect(item.is_browser_result)
-            self.workbench_view.view_zoom_signal.connect(item.set_pen_width)
+            self.workbench_view.view_zoom_signal.connect(item.set_pen_width_by_scale)
             self._mark_item_manager.register_mark_item(item, mark_item.item_name)
 
             self.added_mark_item.emit(self._project, mark_item)
@@ -590,4 +615,3 @@ class Document(QWidget, ProjectDocument):
     @export_format.setter
     def export_format(self, new_export_format):
         self._export_format = new_export_format
-

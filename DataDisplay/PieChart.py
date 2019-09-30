@@ -79,3 +79,8 @@ if __name__ == '__main__':
     areas5 = [555, 213, 482, 641, 954, 100]
     areas_ = [areas1, areas2, areas3, areas4, areas5]
     types_ = ["mountain", "woods", "lake", "building area", "傻逼"]
+
+    def test():
+        m = 2
+        n = 3
+        return m + n

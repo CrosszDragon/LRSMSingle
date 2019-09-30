@@ -1,0 +1,24 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea
+__pycache__
+*.pyd
+*.spec
+
+cv2
+cycler-0.10.0.dist-info
+dateutil
+kiwisolver-1.1.0.dist-info
+matplotlib
+matplotlib-3.1.1.dist-info
+pyparsing-2.4.0.dist-info
+PyQt5
+PyQt5_stubs-5.12.1.0-py3.6.egg-info
+PyQt5-5.12.1.dist-info
+PyQt5-stubs
+six-1.12.0.dist-info
+
+cycler.py
+cython.py
+matplotlib-3.1.1-py3.6-nspkg.pth
+pyparsing.py
+six.py

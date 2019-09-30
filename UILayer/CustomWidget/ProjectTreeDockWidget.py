@@ -4,7 +4,7 @@ from enum import IntEnum
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QTreeWidget, QTreeWidgetItem, \
-    QInputDialog, QWidget, QVBoxLayout, QMenu
+    QInputDialog, QWidget, QVBoxLayout, QMenu, QAbstractItemView
 
 from CommonHelpers.CommonHelper import create_action, add_actions
 from Documents.MarkData import MarkItem, Project
@@ -34,6 +34,11 @@ class ProjectDockWidget(DockWidget):
         self.project_tree = QTreeWidget(self)
         self.project_tree.setColumnCount(1)
         self.project_tree.setHeaderHidden(True)
+        self.project_tree.setEditTriggers(QAbstractItemView.DoubleClicked)
+
+        print(type(QAbstractItemView.DoubleClicked))
+        print(QAbstractItemView.DoubleClicked)
+
         self.project_tree.setObjectName("projectTree")
         self.project_tree.setContextMenuPolicy(Qt.CustomContextMenu)
         self.project_tree.customContextMenuRequested.connect(self.project_tree_item_context_menu)
@@ -70,7 +75,7 @@ class ProjectDockWidget(DockWidget):
         original_img_child = QTreeWidgetItem()
         original_img_child.setText(0, os.path.basename(project.image_path))
         original_img_child.setToolTip(0, project.image_path)
-        original_img_child.setIcon(0, QIcon("../Sources/images/img_icon.png"))
+        original_img_child.setIcon(0, QIcon(":/img_icon.png"))
         original_img_child.setWhatsThis(0, self.OriginImage)
         root.addChild(original_img_child)
 
@@ -80,6 +85,7 @@ class ProjectDockWidget(DockWidget):
         if project not in self._project_to_root_index:
             return
         mark_item_child = MarkTreeItem(mark_item)
+        mark_item_child.setFlags(Qt.ItemIsSelectable | Qt.ItemIsEditable | Qt.ItemIsEnabled)
         self._item_to_project[mark_item] = project
         self.project_tree.topLevelItem(self._project_to_root_index[project]).addChild(mark_item_child)
 
@@ -186,7 +192,7 @@ class TopLevelTreeItem(AbstractProjectTreeItem):
 
         self.setText(0, self._project.project_name)
         self.setWhatsThis(0, ProjectDockWidget.FOLDER)
-        self.setIcon(0, QIcon("../Sources/images/file.png"))
+        self.setIcon(0, QIcon(":/file.png"))
 
         self.setToolTip(0, self._project.project_full_path())
         self._project.project_name_changed.connect(self._name_changed)
@@ -215,7 +221,7 @@ class MarkTreeItem(AbstractProjectTreeItem):
         self._mark_item = mark_item
         self.setText(0, mark_item.item_name)
         self.setWhatsThis(0, ProjectDockWidget.MAKE_ITEM)
-        self.setIcon(0, QIcon("../Sources/images/mark_item.jpg"))
+        self.setIcon(0, QIcon(":/mark_item.jpg"))
         self._mark_item.mark_item_name_changed.connect(self._name_changed)
 
     def _name_changed(self):
