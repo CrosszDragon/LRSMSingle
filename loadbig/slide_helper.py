@@ -6,7 +6,7 @@
 以及封装openslide库中read_region函数为red_region_from_big函数
 
 """
-import openslide
+# import openslide
 
 
 class SlideHelper():

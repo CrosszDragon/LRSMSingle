@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0562d30-6635-4c9b-a37c-ed1821e05bcd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/Document.py" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/Document.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/MarkData.py" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/MarkData.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UILayer/CustomWidget/PropertyManager/PropertyBrowser.py" beforeDir="false" afterPath="$PROJECT_DIR$/UILayer/CustomWidget/PropertyManager/PropertyBrowser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UILayer/Workbench/BorderItem.py" beforeDir="false" afterPath="$PROJECT_DIR$/UILayer/Workbench/BorderItem.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loadbig/slide_helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/loadbig/slide_helper.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,8 +33,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Application/LSRMSingle.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+            <state relative-caret-position="225">
+              <caret line="15" selection-start-line="15" selection-end-line="15" />
               <folding>
                 <element signature="e#182#192#0" expanded="true" />
               </folding>
@@ -39,9 +43,30 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DataDisplay/PolygonalChart.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="171">
+              <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Documents/Document.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="208">
+              <caret line="337" column="15" selection-start-line="337" selection-start-column="15" selection-end-line="337" selection-end-column="15" />
+              <folding>
+                <element signature="e#179#197#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UILayer/MainWindowPk/MainWindow.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="107">
+            <state relative-caret-position="11742">
               <caret line="641" column="28" selection-start-line="641" selection-start-column="28" selection-end-line="641" selection-end-column="28" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -53,17 +78,56 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UILayer/MainWindowPk/MainToolBar.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+            <state relative-caret-position="456">
+              <caret line="30" column="24" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
+              <folding>
+                <element signature="e#182#203#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Sources/ImagesRes.qrc">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UILayer/CustomWidget/PropertyManager/PropertyBrowser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+            <state relative-caret-position="397">
+              <caret line="410" column="29" selection-start-line="410" selection-start-column="29" selection-end-line="410" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Documents/MarkData.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="176" column="35" selection-start-line="176" selection-start-column="35" selection-end-line="176" selection-end-column="35" />
+              <folding>
+                <element signature="e#179#200#0" expanded="true" />
+                <element signature="e#455#1412#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UILayer/Workbench/BorderItem.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="442" column="68" selection-start-line="442" selection-start-column="68" selection-end-line="442" selection-end-column="68" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#567#6469#0" />
+                <element signature="e#6509#11792#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://E:/python3.6.8/Lib/tokenize.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="215">
+              <caret line="451" selection-start-line="451" selection-end-line="451" />
             </state>
           </provider>
         </entry>
@@ -145,8 +209,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/WindowStyle/FusionStyleHelper.cpp" />
-        <option value="$PROJECT_DIR$/CommonHelpers/Utils.py" />
         <option value="$PROJECT_DIR$/WindowStyle/FunsionStyleHelper.py" />
         <option value="$PROJECT_DIR$/WindowStyle/StyleHelper.py" />
         <option value="$PROJECT_DIR$/UILayer/CustomWidget/PreferncesWidget/prefrences.py" />
@@ -165,12 +227,10 @@
         <option value="$PROJECT_DIR$/IOFormat/MarkFile.py" />
         <option value="$PROJECT_DIR$/UILayer/CustomWidget/OpenProjectAsWidget/OpenProjectAsDialog.py" />
         <option value="$PROJECT_DIR$/UILayer/CustomWidget/Thumbnail.py" />
-        <option value="$PROJECT_DIR$/Documents/MarkData.py" />
         <option value="$PROJECT_DIR$/UILayer/Workbench/GraphicsView.py" />
         <option value="$PROJECT_DIR$/WindowStyle/LrsmProxyStyle.py" />
         <option value="$PROJECT_DIR$/UILayer/CustomWidget/ProjectTreeDockWidget.py" />
         <option value="$PROJECT_DIR$/UILayer/CustomWidget/ProjectTreeDockWidget.py" />
-        <option value="$PROJECT_DIR$/UILayer/Workbench/BorderItem.py" />
         <option value="$PROJECT_DIR$/Documents/ProjectDocument.py" />
         <option value="$PROJECT_DIR$/Algorithm/__init__.py" />
         <option value="$PROJECT_DIR$/DataDisplay/PieChart.py" />
@@ -191,19 +251,23 @@
         <option value="$PROJECT_DIR$/Application/ImagesRes.py" />
         <option value="$PROJECT_DIR$/UILayer/MainWindowPk/MainToolBar.py" />
         <option value="$PROJECT_DIR$/UILayer/MainWindowPk/MainToolBar.py" />
-        <option value="$PROJECT_DIR$/Documents/Document.py" />
         <option value="$PROJECT_DIR$/UILayer/MainWindowPk/MainWindow.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/Application/LSRMSingle.py" />
         <option value="$PROJECT_DIR$/Sources/ImagesRes.qrc" />
+        <option value="$PROJECT_DIR$/UILayer/CustomWidget/PropertyManager/PropertyBrowser.py" />
+        <option value="$PROJECT_DIR$/Documents/MarkData.py" />
+        <option value="$PROJECT_DIR$/UILayer/Workbench/BorderItem.py" />
+        <option value="$PROJECT_DIR$/loadbig/slide_helper.py" />
+        <option value="$PROJECT_DIR$/Documents/Document.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="306" />
-    <option name="y" value="68" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="305" />
+    <option name="y" value="67" />
     <option name="width" value="1505" />
-    <option name="height" value="919" />
+    <option name="height" value="920" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -222,6 +286,55 @@
               <item name="LSRMSingle" type="b2602c69:ProjectViewProjectNode" />
               <item name="LRSMSingle" type="462c0819:PsiDirectoryNode" />
               <item name="Application" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LSRMSingle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LRSMSingle" type="462c0819:PsiDirectoryNode" />
+              <item name="Documents" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LSRMSingle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LRSMSingle" type="462c0819:PsiDirectoryNode" />
+              <item name="UILayer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LSRMSingle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LRSMSingle" type="462c0819:PsiDirectoryNode" />
+              <item name="UILayer" type="462c0819:PsiDirectoryNode" />
+              <item name="CustomWidget" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LSRMSingle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LRSMSingle" type="462c0819:PsiDirectoryNode" />
+              <item name="UILayer" type="462c0819:PsiDirectoryNode" />
+              <item name="CustomWidget" type="462c0819:PsiDirectoryNode" />
+              <item name="OpenProjectAsWidget" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LSRMSingle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LRSMSingle" type="462c0819:PsiDirectoryNode" />
+              <item name="UILayer" type="462c0819:PsiDirectoryNode" />
+              <item name="CustomWidget" type="462c0819:PsiDirectoryNode" />
+              <item name="PreferencesWidget" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LSRMSingle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LRSMSingle" type="462c0819:PsiDirectoryNode" />
+              <item name="UILayer" type="462c0819:PsiDirectoryNode" />
+              <item name="CustomWidget" type="462c0819:PsiDirectoryNode" />
+              <item name="PropertyManager" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LSRMSingle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LRSMSingle" type="462c0819:PsiDirectoryNode" />
+              <item name="UILayer" type="462c0819:PsiDirectoryNode" />
+              <item name="MainWindowPk" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LSRMSingle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LRSMSingle" type="462c0819:PsiDirectoryNode" />
+              <item name="UILayer" type="462c0819:PsiDirectoryNode" />
+              <item name="Workbench" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -272,7 +385,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.App">
+  <component name="RunManager" selected="Python.LSRMSingle">
     <configuration name="App" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="LSRMSingle" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -287,6 +400,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="C:\Users\h2958\Desktop\LRSMSingle\Application\LSRMSingle.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="LSRMSingle" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="LSRMSingle" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Application" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Application/LSRMSingle.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -339,28 +474,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Preferences" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="LSRMSingle" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/WindowStyle" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/WindowStyle/Preferences.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="StyleHelper" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="LSRMSingle" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -385,11 +498,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.LSRMSingle" />
         <item itemvalue="Python.App" />
         <item itemvalue="Python.MainWindow (1)" />
         <item itemvalue="Python.LrsmProxyStyle" />
         <item itemvalue="Python.StyleHelper" />
-        <item itemvalue="Python.Preferences" />
       </list>
     </recent_temporary>
   </component>
@@ -446,6 +559,7 @@
       <workItem from="1569337399383" duration="608000" />
       <workItem from="1569544937039" duration="22376000" />
       <workItem from="1569814714807" duration="14770000" />
+      <workItem from="1574218261501" duration="1977000" />
     </task>
     <task id="LOCAL-00001" summary="删除一些多余的代码，添加了视图管理和首选项弹出窗口">
       <created>1563637600172</created>
@@ -479,7 +593,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="660670000" />
+    <option name="totallyTimeSpent" value="662647000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -491,22 +605,23 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="245" y="55" width="1204" height="735" extended-state="0" />
+    <frame x="-7" y="33" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" sideWeight="0.502907" side_tool="true" weight="0.20996094" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="2" sideWeight="0.49709302" visible="true" weight="0.31413612" />
+      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49709302" visible="true" weight="0.12600537" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.4250871" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.044444446" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.64659685" visible="true" weight="0.049751244" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.6461126" visible="true" weight="0.04249292" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32943144" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32943144" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.35340315" side_tool="true" visible="true" weight="0.049751244" />
+      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.3538874" side_tool="true" weight="0.41501418" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.049751244" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.5652174" />
       <window_info anchor="bottom" id="Statistic" order="13" sideWeight="0.51675606" weight="0.40697673" />
@@ -564,10 +679,11 @@
     <option name="LAST_COMMIT_MESSAGE" value="修改一些bug，把主要图标、图片资源转为QT的qrc格式使用" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/LSRMSingle$LSRMSingle.coverage" NAME="LSRMSingle Coverage Results" MODIFIED="1574220257542" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Application" />
     <SUITE FILE_PATH="coverage/LSRMSingleVersion3$MainWindow__1_.coverage" NAME="MainWindow (1) Coverage Results" MODIFIED="1563628104987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/UILayer/MainWindowPk" />
     <SUITE FILE_PATH="coverage/LSRMSingalVersion3$ProjectStream.coverage" NAME="ProjectStream Coverage Results" MODIFIED="1562397801143" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:/学习文件/python_learning/用于集成/侯" />
     <SUITE FILE_PATH="coverage/LSRMSingalVersion3$MainWindow.coverage" NAME="MainWindow Coverage Results" MODIFIED="1563189511105" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/UILayer/MainWindow" />
-    <SUITE FILE_PATH="coverage/LSRMSingle$App.coverage" NAME="App Coverage Results" MODIFIED="1569845024128" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Application" />
+    <SUITE FILE_PATH="coverage/LSRMSingle$App.coverage" NAME="App Coverage Results" MODIFIED="1574219687765" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Application" />
     <SUITE FILE_PATH="coverage/LSRMSingalVersion3$AiDetect.coverage" NAME="AiDetect Coverage Results" MODIFIED="1562684081676" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Algorithm/AIAlgorithm" />
     <SUITE FILE_PATH="coverage/LSRMSingleVersion3$App.coverage" NAME="App Coverage Results" MODIFIED="1563632324436" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Application" />
     <SUITE FILE_PATH="coverage/LSRMSingalVersion3$MainToolBar.coverage" NAME="MainToolBar Coverage Results" MODIFIED="1562144865906" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/UILayer/MainWindow" />
@@ -588,24 +704,6 @@
     <SUITE FILE_PATH="coverage/LSRMSingalVersion3$LrsmProxyStyle.coverage" NAME="LrsmProxyStyle Coverage Results" MODIFIED="1563550359320" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/WindowStyle" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/UILayer/CustomWidget/PreferencesWidget/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UILayer/CustomWidget/PropertyManager/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UILayer/MainWindowPk/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UILayer/MainWindowPk/NoEditorWidget/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UILayer/ProgressBar/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UILayer/Workbench/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/WindowStyle/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -625,18 +723,8 @@
     <entry file="file://$PROJECT_DIR$/Sources/Images/ApplicationLoadImg.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Roaming/Python/Python36/site-packages/PyQt5-stubs/QtWidgets.pyi">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="7283" column="39" lean-forward="true" selection-start-line="7283" selection-start-column="39" selection-end-line="7283" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2019.1/system/python_stubs/-965805770/sys.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9462" />
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/AppData/Roaming/Python/Python36/site-packages/PyQt5-stubs/QtWidgets.pyi" />
+    <entry file="file://$USER_HOME$/.PyCharm2019.1/system/python_stubs/-965805770/sys.py" />
     <entry file="file://$PROJECT_DIR$/DataDisplay/PieChart.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
@@ -644,16 +732,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/LRSMSingle/Application/Application.spec">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://D:/LRSMSingle/Application/App.spec">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="42" lean-forward="true" selection-start-line="14" selection-start-column="42" selection-end-line="14" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://D:/LRSMSingle/Application/Application.spec" />
+    <entry file="file://D:/LRSMSingle/Application/App.spec" />
     <entry file="file://$PROJECT_DIR$/UILayer/MainWindowPk/MainWindowUi.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="223">
@@ -699,35 +779,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../Workspace/MainWindow.spec">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-380">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../Workspace/UILayer/MainWindow/MainWindowUi.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-969">
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application/six.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../Workspace/UILayer/MainWindow/MainWindow.spec">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="13" column="12" lean-forward="true" selection-start-line="13" selection-start-column="12" selection-end-line="75" selection-end-column="68" />
-          <folding>
-            <element signature="e#40#50#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../Workspace/MainWindow.spec" />
+    <entry file="file://$PROJECT_DIR$/../Workspace/UILayer/MainWindow/MainWindowUi.py" />
+    <entry file="file://$PROJECT_DIR$/Application/six.py" />
+    <entry file="file://$PROJECT_DIR$/../Workspace/UILayer/MainWindow/MainWindow.spec" />
     <entry file="file://$PROJECT_DIR$/CommonHelpers/Utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -762,13 +817,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../Workspace/UILayer/MainWindow/LRSMSingle1.spec">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="29" column="10" lean-forward="true" selection-start-line="29" selection-start-column="10" selection-end-line="29" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../Workspace/UILayer/MainWindow/LRSMSingle1.spec" />
     <entry file="file://$PROJECT_DIR$/UILayer/CustomWidget/NewProjectDialog.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
@@ -779,35 +828,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../TestLSRM/LRSMSingle/Application/LSRMSingle.spec">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="817">
-          <caret line="101" column="8" selection-start-line="101" selection-start-column="8" selection-end-line="101" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../TestLSRM/LRSMSingle/Application/LSRMSingle.spec" />
     <entry file="file://$PROJECT_DIR$/Sources/qss/main.rc">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/Sources/qss/main.ico">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Sources/qss/test.qrc">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Sources/qss/test.qrc" />
     <entry file="file://$PROJECT_DIR$/Sources/qss/qss.qrc">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Application/LSRMSingle.spec">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="70" column="14" selection-start-line="70" selection-start-column="14" selection-end-line="70" selection-end-column="14" />
-          <folding>
-            <element signature="e#39#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/LSRMSingle.spec" />
     <entry file="file://$PROJECT_DIR$/Sources/qss/main.qrc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
@@ -815,13 +847,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Sources/ImagesRes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73359">
-          <caret line="3861" lean-forward="true" selection-start-line="3861" selection-end-line="3861" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/Sources/ImagesRes.py" />
     <entry file="file://$PROJECT_DIR$/loadbig/img_from_rect.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -841,40 +867,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UILayer/MainWindowPk/MainToolBar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Documents/Document.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="234" column="44" selection-start-line="234" selection-start-column="44" selection-end-line="234" selection-end-column="44" />
-          <folding>
-            <element signature="e#179#197#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://E:/Python36/Lib/site-packages/PIL/Image.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="2069" selection-start-line="2069" selection-end-line="2069" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UILayer/MainWindowPk/MainWindow.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="641" column="28" selection-start-line="641" selection-start-column="28" selection-end-line="641" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://E:/Python36/Lib/site-packages/PIL/Image.py" />
     <entry file="file://$PROJECT_DIR$/UILayer/CustomWidget/Thumbnail.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="178">
@@ -889,12 +882,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Application/LSRMSingle.py">
+    <entry file="file://$PROJECT_DIR$/UILayer/MainWindowPk/MainWindow.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
+        <state relative-caret-position="11742">
+          <caret line="641" column="28" selection-start-line="641" selection-start-column="28" selection-end-line="641" selection-end-column="28" />
           <folding>
-            <element signature="e#182#192#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -903,6 +896,87 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UILayer/MainWindowPk/MainToolBar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="30" column="24" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
+          <folding>
+            <element signature="e#182#203#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UILayer/CustomWidget/PropertyManager/PropertyBrowser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="397">
+          <caret line="410" column="29" selection-start-line="410" selection-start-column="29" selection-end-line="410" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Documents/MarkData.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="176" column="35" selection-start-line="176" selection-start-column="35" selection-end-line="176" selection-end-column="35" />
+          <folding>
+            <element signature="e#179#200#0" expanded="true" />
+            <element signature="e#455#1412#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UILayer/Workbench/BorderItem.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="442" column="68" selection-start-line="442" selection-start-column="68" selection-end-line="442" selection-end-column="68" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#567#6469#0" />
+            <element signature="e#6509#11792#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://E:/python3.6.8/Lib/tokenize.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="215">
+          <caret line="451" selection-start-line="451" selection-end-line="451" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/LSRMSingle.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="e#182#192#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/loadbig/slide_helper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataDisplay/PolygonalChart.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Documents/Document.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="208">
+          <caret line="337" column="15" selection-start-line="337" selection-start-column="15" selection-end-line="337" selection-end-column="15" />
+          <folding>
+            <element signature="e#179#197#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

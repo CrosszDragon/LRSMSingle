@@ -27,10 +27,10 @@ from UILayer.CustomWidget.Thumbnail import Thumbnail
 from Documents.ProjectDocument import ProjectDocument
 from Manager.MarkItemManager import MarkItemManager
 from Algorithm.AIAlgorithm.AiDetect import detect_one
-from loadbig.load_big_graphicsview import LoadIMGraphicsView
-from loadbig.util import is_img_big
-from loadbig.slide_helper import SlideHelper
-from loadbig.img_from_rect import ImgFromRect
+# from loadbig.load_big_graphicsview import LoadIMGraphicsView
+# from loadbig.util import is_img_big
+# from loadbig.slide_helper import SlideHelper
+# from loadbig.img_from_rect import ImgFromRect
 
 
 class Document(QWidget, ProjectDocument):
@@ -73,15 +73,15 @@ class Document(QWidget, ProjectDocument):
         # # 创建场景
         self._workbench_scene.setObjectName("workbench_scene")
 
-        self._is_big_img = is_img_big(image_path)
-        if self._is_big_img:
-            self.workbench_view = LoadIMGraphicsView(self._mark_item_manager, gadget, toolbar_gadget, eraser_size,
-                                                     image_path, self._workbench_scene, parent=self)
-        else:
-            self.workbench_view = GraphicsViewTest(self._mark_item_manager, gadget,
-                                                   toolbar_gadget, eraser_size, parent=self)
-            # 把场景添加到视图中
-            self.workbench_view.setScene(self._workbench_scene)
+        self._is_big_img = False
+        # if self._is_big_img:
+        #     self.workbench_view = LoadIMGraphicsView(self._mark_item_manager, gadget, toolbar_gadget, eraser_size,
+        #                                              image_path, self._workbench_scene, parent=self)
+        # else:
+        self.workbench_view = GraphicsViewTest(self._mark_item_manager, gadget,
+                                               toolbar_gadget, eraser_size, parent=self)
+        # 把场景添加到视图中
+        self.workbench_view.setScene(self._workbench_scene)
 
         self.workbench_view.setObjectName("workbench_view")
         self.workbench_view.setContentsMargins(0, 0, 0, 0)
@@ -335,10 +335,11 @@ class Document(QWidget, ProjectDocument):
 
         rect = item.rectangle()
         if self.is_big_img:
-            slide_helper = SlideHelper(self.project().image_path)
-            image_from_rect = ImgFromRect(rect, slide_helper)
-            image_from_rect = image_from_rect.area_img
-            return image_from_rect
+            """"""
+            # slide_helper = SlideHelper(self.project().image_path)
+            # image_from_rect = ImgFromRect(rect, slide_helper)
+            # image_from_rect = image_from_rect.area_img
+            # return image_from_rect
         else:
 
             rect_sub_image = self._image.copy(rect)

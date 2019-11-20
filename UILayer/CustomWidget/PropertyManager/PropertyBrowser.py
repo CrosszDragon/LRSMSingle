@@ -145,6 +145,11 @@ class MarkItemBrowser(QtTreePropertyBrowser):
         self.fill_manager.valueChangedSignal.connect(self.fill_changed)
         self.fill_manager.setValue(self.fill, self.__mark_item.fill)
 
+        self.clarity_manager = QtBoolPropertyManager(self)
+        self.clarity = self.clarity_manager.addProperty('透明')
+        self.clarity_manager.valueChangedSignal.connect(self.clarity_changed)
+        self.clarity_manager.setValue(self.clarity, self.__mark_item.clarity)
+
         self.__create_project_name(self.__mark_item.item_name)
         self.__create_person_name(self.__mark_item.get_person_names())
         # self.__create_date(self.__mark_item.date)
@@ -244,6 +249,7 @@ class MarkItemBrowser(QtTreePropertyBrowser):
         browser.setFactoryForManager(self.visibility_manager, bool_fictory)
         browser.setFactoryForManager(self.lockablility_manager, bool_fictory)
         browser.setFactoryForManager(self.fill_manager, bool_fictory)
+        browser.setFactoryForManager(self.clarity_manager, bool_fictory)
 
         browser.addProperty(self.project_name)
         browser.addProperty(self.person_name_group)
@@ -252,6 +258,7 @@ class MarkItemBrowser(QtTreePropertyBrowser):
         browser.addProperty(self.visibility)
         browser.addProperty(self.lockablility)
         browser.addProperty(self.fill)
+        browser.addProperty(self.clarity)
 
     def mark_item_name_changed(self, _property, value):
         self.__mark_item.item_name = value
@@ -399,6 +406,9 @@ class MarkItemBrowser(QtTreePropertyBrowser):
 
     def fill_changed(self, item, value):
         self.__mark_item.fill = value
+
+    def clarity_changed(self, item, value):
+        self.__mark_item.clarity = value
 
     def mark_type_changed(self):
 

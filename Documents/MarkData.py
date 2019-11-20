@@ -69,7 +69,7 @@ class MarkItem(ProjectObject):
     fill_changed = pyqtSignal()
 
     def __init__(self, persons: list, item_name, outline_path=None, visible=True, locked=False,
-                 mark_type=None, color=None, fill=True, parent=None):
+                 mark_type=None, color=None, fill=True, clarity=True, parent=None):
         super(MarkItem, self).__init__(persons, visible=visible, locked=locked, parent=parent)
         """名字要变成唯一的"""
 
@@ -81,6 +81,7 @@ class MarkItem(ProjectObject):
         self._mark_type = mark_type if mark_type else [0, 0, 0, '']
 
         self._fill = fill
+        self._clarity = clarity
         self._browser = MarkItemBrowser(self)
 
     @property
@@ -166,6 +167,14 @@ class MarkItem(ProjectObject):
 
         except IndexError as e:
             print("from_item_to_string error: ", e)
+
+    @property
+    def clarity(self):
+        return self._clarity
+
+    @clarity.setter
+    def clarity(self, new_clarity):
+        self._clarity = new_clarity
 
     @property
     def fill(self):
