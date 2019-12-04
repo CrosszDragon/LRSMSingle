@@ -12,6 +12,8 @@ from UILayer.MainWindowPk.MainToolBar import ToolsToolBar
 from Manager.ActionManager import ActionManager
 from Manager.Id import Id
 
+from Algorithm.Sharpen import curve_sharpen_path
+
 
 class BorderItem(QGraphicsObject):
 
@@ -45,7 +47,7 @@ class BorderItem(QGraphicsObject):
     def is_empty(self):
         return self._item_path.isEmpty()
 
-    def get_path(self):
+    def get_path(self) -> QPainterPath:
         return self._item_path
 
     def get_scene_path(self):
@@ -127,6 +129,9 @@ class BorderItem(QGraphicsObject):
         return self._item_path.boundingRect().adjusted(0, 0, 2, 2)
 
     def paint(self, painter: QPainter, option, widget=None) -> None:
+
+        brush = QBrush(QColor(0, 0, 255, 60))
+        painter.fillPath(self._item_path, brush)
 
         self._pen.setColor(Qt.white)
         self._pen.setStyle(Qt.SolidLine)
@@ -387,11 +392,33 @@ class OutlineItem(BorderItem):
         self._mark_item.visible_changed.connect(self.visible_changed)
         self._mark_item.fill_changed.connect(self.update)
         self._mark_item.mark_item_color_changed.connect(self.update)
+        self.context_menu = self._create_context_menu()
         self.setSelected(True)
         self._selected = False
 
     def __del__(self):
         del self._mark_item
+
+    def _create_context_menu(self) -> QMenu:
+        menu = QMenu(self.parentWidget())
+
+        sharpen_menu = menu.addMenu("锐化")
+        self.linear_sharpen_action = create_action(sharpen_menu, "线性锐化")
+        self.quadratic_sharpen_action = create_action(sharpen_menu, "二次锐化")
+        self.linear_sharpen_action.setData("linear")
+        self.linear_sharpen_action.triggered.connect(self.sharpen)
+        self.quadratic_sharpen_action.setData("quadratic")
+        self.quadratic_sharpen_action.triggered.connect(self.sharpen)
+        add_actions(sharpen_menu, (self.linear_sharpen_action, self.quadratic_sharpen_action))
+        return menu
+
+    def contextMenuEvent(self, event: 'QGraphicsSceneContextMenuEvent') -> None:
+        self.context_menu.exec_(event.screenPos())
+
+    def sharpen(self):
+        kind = self.sender().data()
+        self._mark_item.set_outline(curve_sharpen_path(self._mark_item.get_outline(),kind))
+        print(kind)
 
     @property
     def selected(self):

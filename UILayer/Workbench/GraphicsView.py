@@ -1,13 +1,14 @@
 import time
-
-from PyQt5.QtCore import pyqtSignal, QPoint, Qt
+from numpy import multiply
+from PyQt5.QtCore import pyqtSignal, QPoint, Qt, QPointF
 from PyQt5.QtGui import QTransform, QPainter, QMouseEvent, QKeyEvent, \
     QWheelEvent, QImage, QPixmap, QCursor, QPainterPath
-from PyQt5.QtWidgets import QGraphicsView
+from PyQt5.QtWidgets import QGraphicsView, QMessageBox
 
 from UILayer.Workbench.BorderItem import SelectionItem, BorderItem, OutlineItem
 from UILayer.MainWindowPk.MainToolBar import ToolsToolBar
 from Manager.MarkItemManager import MarkItemManager
+from CommonHelpers.Utils import sorted_points, convex_hull
 
 
 class GraphicsView(QGraphicsView):
@@ -339,10 +340,15 @@ class GraphicsViewTest(GraphicsView):
 
     def counter_polygon_path(self, pos=None):
         new_path = QPainterPath(QPoint(0, 0))
-        for point in self.polygon_points:
-            new_path.lineTo(point)
+        temp_pos_list = list(self.polygon_points)
         if pos:
-            new_path.lineTo(self.border.mapFromScene(self.mapToScene(pos)))
+            temp_pos_list.append(self.border.mapFromScene(self.mapToScene(pos)))
+            temp_pos_list = convex_hull(temp_pos_list)
+        for point in temp_pos_list:
+            new_path.lineTo(point)
+        # if pos:
+        #     new_path.lineTo(self.border.mapFromScene(self.mapToScene(pos)))
+        new_path.closeSubpath()
         return new_path
 
     def created_border(self):
@@ -363,21 +369,17 @@ class GraphicsViewTest(GraphicsView):
         return False
 
     def created_polygon(self):
-        path = self.counter_polygon_path()
         self.polygon_points = []
-        path.closeSubpath()
-        self.border.set_item_path_by_path(path=path)
         self.created_border()
 
     def creating_polygon(self, pos: QPoint):
         try:
             if self.is_creating_polygon and self.border:
                 self.polygon_points.append(self.border.mapFromScene(self.mapToScene(pos)))
-                if self.auto_detect_polygon_path_close():
-                    self.created_polygon()
-                else:
-                    path = self.counter_polygon_path()
-                    self.border.set_item_path_by_path(path=path)
+                self.polygon_points = convex_hull(self.polygon_points)
+
+                path = self.counter_polygon_path().simplified()
+                self.border.set_item_path_by_path(path=path)
             else:
                 self.is_creating_polygon = True
                 self.border = SelectionItem(self.mapToScene(pos), self.scene(), self.transform().m11(),
@@ -392,6 +394,19 @@ class GraphicsViewTest(GraphicsView):
         eraser_area = SelectionItem(pos, path=path, view_scale=1, scene=self.scene())
         eraser_area.setVisible(False)
         self.eraser_action_signal.emit(eraser_area)
+
+    def mouseDoubleClickEvent(self, event: QMouseEvent) -> None:
+        if self.is_creating_polygon:
+            if self.border.get_path().elementCount() >= 3:
+                try:
+                    self.created_polygon()
+                except Exception as e:
+                    print(e)
+            else:
+                QMessageBox.critical(self.parentWidget(),
+                                     "多边形选择框错误",
+                                     "当前多边形选择框还未闭合！！",
+                                     QMessageBox.Ok)
 
     def mousePressEvent(self, event: QMouseEvent) -> None:
         """
@@ -481,6 +496,9 @@ class GraphicsViewTest(GraphicsView):
         if self.gadget == ToolsToolBar.BrowserImageTool:
             self.setCursor(Qt.OpenHandCursor)
 
+        if self.is_creating_polygon:
+            self.creating_polygon(event.pos())
+
         if self.is_mouse_pressed:
             if not self.has_moving_mouse:
                 self.click_signal.emit(event)
@@ -500,11 +518,6 @@ class GraphicsViewTest(GraphicsView):
             self.temp_gadget = self.gadget
             self.set_gadget(ToolsToolBar.MoveImageTool)
             self._is_move = True
-        if event.key() == Qt.Key_Shift and self.is_creating_polygon:
-            try:
-                self.created_polygon()
-            except Exception as e:
-                print(e)
 
     def keyReleaseEvent(self, event: QKeyEvent) -> None:
         if event.key() == Qt.Key_Space:
@@ -518,3 +531,19 @@ class GraphicsViewTest(GraphicsView):
                 self.border = None
             elif self.border:
                 self.border.set_item_path_by_path(self.counter_polygon_path())
+
+
+if __name__ == '__main__':
+    """"""
+    import numpy as np
+    import math
+
+
+    def angle_between(point1: np.ndarray, point2: np.ndarray):
+        """"""
+        # Lx = np.sqrt()
+
+    p1 = np.array([[10, -1], [-1, -1]])
+    print((np.arctan2(p1[:, 1], p1[:, 0]) * 360 / 2 / np.pi + 360) % 360)
+
+
