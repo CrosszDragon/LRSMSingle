@@ -82,6 +82,9 @@ class MainWindow(QMainWindow, MainWindowUI):
 
         self._show_no_editor_widget()
 
+        with open("../Sources/qss/qss/psblack.qss", "r") as f:
+            self.setStyleSheet(f.read())
+
     def _init_style(self):
         file = QFile(os.path.join(os.getcwd(), "other/qss/lightblue.qss"))
         if file.open(QFile.ReadOnly):
@@ -646,8 +649,8 @@ class MainWindow(QMainWindow, MainWindowUI):
                 self, "导出tif", current_doc.get_project_name(),
                 "Images (*.tif)", self.window_state_data.recent_projects[0]
             )
-            print("---------- dir name: ", os.path.dirname(path))
-            print("---------- base name: ", os.path.basename(path))
+            # print("---------- dir name: ", os.path.dirname(path))
+            # print("---------- base name: ", os.path.basename(path))
             if os.path.exists(os.path.dirname(path)) and os.path.basename(path):
                 _progress = Progress()
                 _progress.setHidden(True)

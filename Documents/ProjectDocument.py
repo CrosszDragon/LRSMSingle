@@ -79,6 +79,7 @@ class ProjectDocument(QObject):
             self._workbench_scene.addItem(self._pixmap_item)
 
 
+
 class FileOpenFailException(Exception):
 
     def __init__(self, file_name):

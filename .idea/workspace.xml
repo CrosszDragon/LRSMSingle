@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0562d30-6635-4c9b-a37c-ed1821e05bcd" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Algorithm/Sharpen.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CommonHelpers/Utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/CommonHelpers/Utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UILayer/Workbench/BorderItem.py" beforeDir="false" afterPath="$PROJECT_DIR$/UILayer/Workbench/BorderItem.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UILayer/Workbench/GraphicsView.py" beforeDir="false" afterPath="$PROJECT_DIR$/UILayer/Workbench/GraphicsView.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Documents/ProjectDocument.py" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/ProjectDocument.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UILayer/MainWindowPk/MainWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/UILayer/MainWindowPk/MainWindow.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,30 +29,43 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Application/LSRMSingle.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="12" column="42" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DataDisplay/PolygonalChart.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Documents/Document.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="452" column="54" selection-start-line="452" selection-start-column="54" selection-end-line="452" selection-end-column="54" />
+            <state relative-caret-position="1141">
+              <caret line="73" column="22" lean-forward="true" selection-start-line="73" selection-start-column="22" selection-end-line="73" selection-end-column="22" />
               <folding>
                 <element signature="e#179#197#0" expanded="true" />
+                <element signature="e#5049#6224#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Documents/ProjectDocument.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="40">
+              <caret line="67" column="23" selection-start-line="67" selection-start-column="23" selection-end-line="67" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UILayer/CustomWidget/Thumbnail.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1408">
+              <caret line="74" column="33" selection-start-line="74" selection-start-column="33" selection-end-line="74" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UILayer/MainWindowPk/MainToolBar.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="22">
+              <caret line="320" column="45" selection-start-line="320" selection-start-column="45" selection-end-line="320" selection-end-column="45" />
+              <folding>
+                <element signature="e#182#203#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -63,25 +74,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UILayer/Workbench/GraphicsView.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1045">
-              <caret line="2" column="55" lean-forward="true" selection-start-line="2" selection-start-column="55" selection-end-line="2" selection-end-column="55" />
-              <folding>
-                <element signature="e#464#7512#0" />
-                <element signature="e#8183#9285#0" />
-                <element signature="e#10563#11334#0" />
-                <element signature="e#15043#15351#0" />
-                <element signature="e#15364#15689#0" />
-                <element signature="e#17304#18327#0" />
-              </folding>
+            <state relative-caret-position="44">
+              <caret line="2" column="55" selection-start-line="2" selection-start-column="55" selection-end-line="2" selection-end-column="55" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CommonHelpers/Utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="153" column="16" selection-start-line="153" selection-start-column="16" selection-end-line="153" selection-end-column="16" />
+            <state relative-caret-position="3190">
+              <caret line="148" selection-start-line="148" selection-end-line="148" />
             </state>
           </provider>
         </entry>
@@ -89,8 +92,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Documents/MarkData.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="115">
-              <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+            <state relative-caret-position="7326">
+              <caret line="336" selection-start-line="336" selection-end-line="336" />
+              <folding>
+                <element signature="e#179#200#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UILayer/MainWindowPk/MainWindow.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="612">
+              <caret line="81" selection-start-line="81" selection-end-line="81" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -98,7 +116,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UILayer/Workbench/BorderItem.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
+            <state relative-caret-position="8910">
               <caret line="419" column="30" selection-start-line="419" selection-start-column="30" selection-end-line="419" selection-end-column="30" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
@@ -110,8 +128,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Algorithm/Sharpen.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="28" column="19" lean-forward="true" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
+            <state relative-caret-position="572">
+              <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
               <folding>
                 <element signature="e#155#173#0" expanded="true" />
               </folding>
@@ -130,8 +148,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>.py',</find>
-      <find>woodland_outline_action</find>
       <find>recent_project_</find>
       <find>MainWindow</find>
       <find>Icons/22x22/(.*)png</find>
@@ -160,6 +176,8 @@
       <find>]</find>
       <find>click</find>
       <find>print</find>
+      <find>_splitter1</find>
+      <find>_workbench_scene</find>
     </findStrings>
     <replaceStrings>
       <replace>MainWindow</replace>
@@ -198,7 +216,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/UILayer/CustomWidget/ColorButton.py" />
         <option value="$PROJECT_DIR$/WindowStyle/Preferences.py" />
         <option value="$PROJECT_DIR$/UILayer/CustomWidget/PreferncesWidget/prefrencesUi.py" />
         <option value="$PROJECT_DIR$/UILayer/CustomWidget/PreferncesWidget/PreferencesDialog.py" />
@@ -216,7 +233,6 @@
         <option value="$PROJECT_DIR$/WindowStyle/LrsmProxyStyle.py" />
         <option value="$PROJECT_DIR$/UILayer/CustomWidget/ProjectTreeDockWidget.py" />
         <option value="$PROJECT_DIR$/UILayer/CustomWidget/ProjectTreeDockWidget.py" />
-        <option value="$PROJECT_DIR$/Documents/ProjectDocument.py" />
         <option value="$PROJECT_DIR$/Algorithm/__init__.py" />
         <option value="$PROJECT_DIR$/DataDisplay/PieChart.py" />
         <option value="$PROJECT_DIR$/Application/App.py" />
@@ -236,7 +252,6 @@
         <option value="$PROJECT_DIR$/Application/ImagesRes.py" />
         <option value="$PROJECT_DIR$/UILayer/MainWindowPk/MainToolBar.py" />
         <option value="$PROJECT_DIR$/UILayer/MainWindowPk/MainToolBar.py" />
-        <option value="$PROJECT_DIR$/UILayer/MainWindowPk/MainWindow.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/Sources/ImagesRes.qrc" />
         <option value="$PROJECT_DIR$/UILayer/CustomWidget/PropertyManager/PropertyBrowser.py" />
@@ -249,21 +264,23 @@
         <option value="$PROJECT_DIR$/CommonHelpers/Utils.py" />
         <option value="$PROJECT_DIR$/Documents/MarkData.py" />
         <option value="$PROJECT_DIR$/UILayer/Workbench/GraphicsView.py" />
+        <option value="$PROJECT_DIR$/UILayer/MainWindowPk/MainWindow.py" />
+        <option value="E:/python3.6.8/Lib/site-packages/PyQt5-stubs/__init__.pyi" />
+        <option value="$PROJECT_DIR$/Documents/ProjectDocument.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="376" />
-    <option name="y" value="256" />
-    <option name="width" value="1204" />
-    <option name="height" value="737" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="65" />
+    <option name="y" value="81" />
+    <option name="width" value="1763" />
+    <option name="height" value="984" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -294,7 +311,31 @@
             <path>
               <item name="LSRMSingle" type="b2602c69:ProjectViewProjectNode" />
               <item name="LRSMSingle" type="462c0819:PsiDirectoryNode" />
+              <item name="Sources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LSRMSingle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LRSMSingle" type="462c0819:PsiDirectoryNode" />
+              <item name="Sources" type="462c0819:PsiDirectoryNode" />
+              <item name="qss" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LSRMSingle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LRSMSingle" type="462c0819:PsiDirectoryNode" />
+              <item name="Sources" type="462c0819:PsiDirectoryNode" />
+              <item name="qss" type="462c0819:PsiDirectoryNode" />
+              <item name="qss" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LSRMSingle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LRSMSingle" type="462c0819:PsiDirectoryNode" />
               <item name="UILayer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="LSRMSingle" type="b2602c69:ProjectViewProjectNode" />
+              <item name="LRSMSingle" type="462c0819:PsiDirectoryNode" />
+              <item name="UILayer" type="462c0819:PsiDirectoryNode" />
+              <item name="CustomWidget" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="LSRMSingle" type="b2602c69:ProjectViewProjectNode" />
@@ -311,6 +352,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -327,7 +369,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -534,6 +576,12 @@
       <workItem from="1574218261501" duration="4131000" />
       <workItem from="1574227305413" duration="2133000" />
       <workItem from="1575358769430" duration="17768000" />
+      <workItem from="1576631324089" duration="2111000" />
+      <workItem from="1578139274078" duration="74000" />
+      <workItem from="1578663573065" duration="978000" />
+      <workItem from="1578748729084" duration="2290000" />
+      <workItem from="1578981422505" duration="768000" />
+      <workItem from="1585208818722" duration="638000" />
     </task>
     <task id="LOCAL-00001" summary="删除一些多余的代码，添加了视图管理和首选项弹出窗口">
       <created>1563637600172</created>
@@ -567,7 +615,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="684702000" />
+    <option name="totallyTimeSpent" value="691561000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -579,12 +627,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="33" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="33" width="1550" height="838" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Structure" order="0" sideWeight="0.502907" side_tool="true" weight="0.20996094" />
       <window_info id="Favorites" order="1" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49709302" visible="true" weight="0.17627347" />
+      <window_info active="true" content_ui="combo" id="Project" order="2" sideWeight="0.49709302" visible="true" weight="0.18565683" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.4250871" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.044444446" />
@@ -653,7 +701,7 @@
     <option name="LAST_COMMIT_MESSAGE" value="修改一些bug，把主要图标、图片资源转为QT的qrc格式使用" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/LSRMSingle$LSRMSingle.coverage" NAME="LSRMSingle Coverage Results" MODIFIED="1575378508692" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Application" />
+    <SUITE FILE_PATH="coverage/LSRMSingle$LSRMSingle.coverage" NAME="LSRMSingle Coverage Results" MODIFIED="1578664367676" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Application" />
     <SUITE FILE_PATH="coverage/LSRMSingleVersion3$MainWindow__1_.coverage" NAME="MainWindow (1) Coverage Results" MODIFIED="1563628104987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/UILayer/MainWindowPk" />
     <SUITE FILE_PATH="coverage/LSRMSingalVersion3$ProjectStream.coverage" NAME="ProjectStream Coverage Results" MODIFIED="1562397801143" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="D:/学习文件/python_learning/用于集成/侯" />
     <SUITE FILE_PATH="coverage/LSRMSingalVersion3$AiDetect.coverage" NAME="AiDetect Coverage Results" MODIFIED="1562684081676" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Algorithm/AIAlgorithm" />
@@ -680,20 +728,6 @@
     <SUITE FILE_PATH="coverage/LSRMSingalVersion3$StyleHelper.coverage" NAME="StyleHelper Coverage Results" MODIFIED="1563543131855" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/WindowStyle" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Algorithm/doubleArea_distinguish.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="120" lean-forward="true" selection-start-line="120" selection-end-line="120" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Algorithm/AIAlgorithm/AiDetect.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="22" column="22" lean-forward="true" selection-start-line="22" selection-start-column="22" selection-end-line="22" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../Workspace/MainWindow.spec" />
     <entry file="file://$PROJECT_DIR$/../Workspace/UILayer/MainWindow/MainWindowUi.py" />
     <entry file="file://$PROJECT_DIR$/Application/six.py" />
@@ -764,27 +798,10 @@
       </provider>
     </entry>
     <entry file="file://E:/Python36/Lib/site-packages/PIL/Image.py" />
-    <entry file="file://$PROJECT_DIR$/UILayer/CustomWidget/Thumbnail.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="74" column="33" lean-forward="true" selection-start-line="74" selection-start-column="33" selection-end-line="74" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
           <caret line="4" column="6" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UILayer/MainWindowPk/MainToolBar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="30" column="24" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
-          <folding>
-            <element signature="e#182#203#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -814,13 +831,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Application/LSRMSingle.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="42" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/UILayer/CustomWidget/PropertyManager/PropertyBrowser.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="618">
@@ -842,13 +852,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DataDisplay/PolygonalChart.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/UILayer/MainWindowPk/MainWindowUi.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
@@ -864,26 +867,6 @@
         <state relative-caret-position="-2186" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Documents/Document.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="452" column="54" selection-start-line="452" selection-start-column="54" selection-end-line="452" selection-end-column="54" />
-          <folding>
-            <element signature="e#179#197#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UILayer/MainWindowPk/MainWindow.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1329">
-          <caret line="641" column="28" selection-start-line="641" selection-start-column="28" selection-end-line="641" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://E:/python3.6.8/Lib/enum.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-4971">
@@ -894,13 +877,6 @@
     <entry file="file://E:/python3.6.8/Lib/ntpath.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-12085" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Documents/MarkData.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="115">
-          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/2and3/time.pyi">
@@ -948,34 +924,64 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UILayer/Workbench/GraphicsView.py">
+    <entry file="file://E:/python3.6.8/Lib/site-packages/PyQt5-stubs/__init__.pyi">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1045">
-          <caret line="2" column="55" lean-forward="true" selection-start-line="2" selection-start-column="55" selection-end-line="2" selection-end-column="55" />
+        <state relative-caret-position="110">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application/LSRMSingle.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" column="42" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DataDisplay/PolygonalChart.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
           <folding>
-            <element signature="e#464#7512#0" />
-            <element signature="e#8183#9285#0" />
-            <element signature="e#10563#11334#0" />
-            <element signature="e#15043#15351#0" />
-            <element signature="e#15364#15689#0" />
-            <element signature="e#17304#18327#0" />
+            <element signature="e#184#194#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Algorithm/Sharpen.py">
+    <entry file="file://$PROJECT_DIR$/UILayer/CustomWidget/Thumbnail.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
-          <caret line="28" column="19" lean-forward="true" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
+        <state relative-caret-position="1408">
+          <caret line="74" column="33" selection-start-line="74" selection-start-column="33" selection-end-line="74" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UILayer/Workbench/GraphicsView.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" column="55" selection-start-line="2" selection-start-column="55" selection-end-line="2" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CommonHelpers/Utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3190">
+          <caret line="148" selection-start-line="148" selection-end-line="148" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Documents/MarkData.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7326">
+          <caret line="336" selection-start-line="336" selection-end-line="336" />
           <folding>
-            <element signature="e#155#173#0" expanded="true" />
+            <element signature="e#179#200#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/UILayer/Workbench/BorderItem.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
+        <state relative-caret-position="8910">
           <caret line="419" column="30" selection-start-line="419" selection-start-column="30" selection-end-line="419" selection-end-column="30" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
@@ -983,10 +989,51 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CommonHelpers/Utils.py">
+    <entry file="file://$PROJECT_DIR$/Algorithm/Sharpen.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="153" column="16" selection-start-line="153" selection-start-column="16" selection-end-line="153" selection-end-column="16" />
+        <state relative-caret-position="572">
+          <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
+          <folding>
+            <element signature="e#155#173#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UILayer/MainWindowPk/MainToolBar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="320" column="45" selection-start-line="320" selection-start-column="45" selection-end-line="320" selection-end-column="45" />
+          <folding>
+            <element signature="e#182#203#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UILayer/MainWindowPk/MainWindow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="81" selection-start-line="81" selection-end-line="81" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Documents/Document.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1141">
+          <caret line="73" column="22" lean-forward="true" selection-start-line="73" selection-start-column="22" selection-end-line="73" selection-end-column="22" />
+          <folding>
+            <element signature="e#179#197#0" expanded="true" />
+            <element signature="e#5049#6224#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Documents/ProjectDocument.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="67" column="23" selection-start-line="67" selection-start-column="23" selection-end-line="67" selection-end-column="25" />
         </state>
       </provider>
     </entry>

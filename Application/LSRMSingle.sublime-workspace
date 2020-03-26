@@ -1,0 +1,232 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"win",
+				"win_test〔function〕"
+			],
+			[
+				"ex",
+				"exit〔function〕"
+			],
+			[
+				"Q",
+				"QtWidget"
+			],
+			[
+				"pa",
+				"path_list〔variable〕"
+			],
+			[
+				"if",
+				"ifmain\tif __name__ == '__main__'"
+			],
+			[
+				"Py",
+				"PyQt5〔module〕"
+			],
+			[
+				"ma",
+				"math.h\tstandard header"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: InstallPackage",
+				"Package Control: Install Package"
+			],
+			[
+				"PC",
+				"Install Package Control"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 608.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/F/视频/老友记.Friends.S01-S10.BluRay.X264.AAC.720p.SDHF.LZ/简介.txt",
+		"/C/Users/h2958/AppData/Roaming/Sublime Text 3/Packages/User/SublimeCodeIntel.sublime-settings",
+		"/C/Users/h2958/AppData/Roaming/Sublime Text 3/Packages/User/Default (Windows).sublime-keymap",
+		"/C/Users/h2958/AppData/Roaming/Sublime Text 3/Packages/User/Package Control.sublime-settings",
+		"/G/temp/D/软件工程/大一下 C++/C++实验文件/导数/导数/standarFun.h",
+		"/G/temp/D/软件工程/大一下 C++/C++实验文件/导数/导数/basicDer.cpp",
+		"/E/PS CS6 绿色/AdobePhotoshopCS6Portable/!)使用必读.txt",
+		"/F/浏览器脚本/关于限速的解决方法.txt",
+		"/F/视频/老友记.Friends.S01-S10.BluRay.X264.AAC.720p.SDHF.LZ/老友记.jpg",
+		"/C/Windows/System32/config/DEFAULT",
+		"/D/test.c",
+		"/F/视频/Frozen.2013.REPACK.720p.BluRay.DD5.1.x264-LolHD.chs.srt",
+		"/D/计算机注册表备份.reg",
+		"/D/注册表.reg",
+		"/D/零碎的笔记/我的账号.xmind",
+		"/D/python_learning/Projects/CythonLearn/BaseUsage1/dot_cython.cp36-win_amd64.pyd",
+		"/D/python_learning/Projects/CythonLearn/BaseUsage1/dot_cython.pyx",
+		"/E/Anaconda3/conda-meta/console_shortcut-0.1.1-3.json",
+		"/E/Anaconda3/conda-meta/powershell_shortcut-0.0.1-2.json",
+		"/C/Users/h2958/.jupyter/migrated",
+		"/E/Anaconda3/conda-meta/jupyter_client-5.3.3-py37_1.json",
+		"/E/Anaconda3/conda-meta/jupyter-1.0.0-py37_7.json",
+		"/E/Anaconda3/conda-meta/jupyterlab-1.1.4-pyhf63ae98_0.json",
+		"/E/Anaconda3/conda-meta/jupyter_core-4.5.0-py_0.json",
+		"/C/Users/h2958/.jupyter/nbconfig/notebook.json",
+		"/E/OpenVPN/jp394.nordvpn.com.udp.ovpn",
+		"/E/PyCharm 2019.1/bin/jetbrains-agent.jar",
+		"/D/重装系统后要安装的软件.txt"
+	],
+	"find":
+	{
+		"height": 51.2
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 37.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "Packages/Python/Python.sublime-build",
+	"project": "LSRMSingle.sublime-project",
+	"replace":
+	{
+		"height": 70.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 234.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
